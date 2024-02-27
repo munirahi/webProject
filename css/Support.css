@@ -1,0 +1,49 @@
+*{  font-family: sans-serif;}
+.faq h1 {
+    position:relative;
+    text-align: center;
+    padding: 2cm;
+    color: rgb(23, 58, 118);
+
+}
+.faq h2{
+    position:relative;
+    text-align: center;
+    color: rgb(23, 58, 118);
+}
+.questions li{
+    position:relative;
+    font-size: medium;
+    text-align: center;
+    color:white;
+        font-weight: bolder;
+
+}
+.box{
+    
+    background: rgb(23, 58, 118);
+    padding: 20px 20px;
+    font-size: medium;
+    border-radius: 8px;
+  margin: 30px;;
+}
+.questions label{
+  position: relative;
+ 
+}
+.cql{
+    color:rgb(228, 199, 11); 
+}.cqi{
+    color:white; 
+}
+
+
+body{
+  
+   
+    background-image: url(../images/bg-image.png);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+
+   }
