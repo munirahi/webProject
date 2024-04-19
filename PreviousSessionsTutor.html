@@ -5,7 +5,7 @@
     <title>Tutor sessions</title>
     <link rel="stylesheet" href="css/footer.css" />
     <link rel="stylesheet" type="text/css" href="css/sidebar-tutor.css" />
-    <link rel="stylesheet" type="text/css" href="css/PreviousSessionsTutor.css"/>
+    <link rel="stylesheet" type="text/css" href="css/PreviousSessions.css"/>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -23,51 +23,53 @@
     crossorigin="anonymous"
   ></script>
   <body>
+       
     <header id="header">
-      <div id="header-div">
-        <nav class="fixed-top" id="main-nav">
+      <div id="header div">
+      <nav class="fixed-top" id="main-nav">
           <ul id="ul1">
-            <li>
-              <img
-                src="images/linguistBlueAndWhite.jpg"
-                alt="LINGUIST logo"
-                id="logo-img"
-              />
-            </li>
-            <li class="list1-item">
-              <a href="tutor_Home_page.html" class="list1-item">Home</a>
-            </li>
-            <li class="list1-item"><a href="SESSionTutor.html">Sessions</a></li>
-            <li class="list1-item"><a href="tutorReq.html">Requests</a></li>
-            <li class="list1-item">
-              <a href="toturRate.html">Rate and Review</a>
-            </li>
-            <li class="list1-item">
-              <a href="SupportsPartner.html">Support</a>
-            </li>
-          </ul>
-          <ul id="ul2">
-            <li id="acnt li">
+            <li id="disabled"><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img" ></li>
+            <li class="list1-item"><a href="HomePageLearner.html" class="list1-item">Home</a></li>
+            <li class="acnt li">
               <nav id="account-nav">
-                <img src="images/account.jfif" id="account-img" />
+                <a id="dropbtn">Sessions</a>
                 <ul>
                   <li class="account-list">
-                    <a href="EditProfileP.html"><div class="circle"></div> Edit Profile</a>
+                    <a href="SESSionTutor.html"  ><div class="circle"></div>
+                      View current and upcoming sesssions</a
+                    >
                   </li>
-
                   <li class="account-list">
-                    <a href="#"
+                    <a href="PreviousSessionsTutor.html"
                       ><div class="circle"></div>
-                      Log Out</a
+                      View Previous sessions </a
                     >
                   </li>
                 </ul>
               </nav>
             </li>
+            
+            <li class="list1-item"><a href="learnerRequest2.html">Requests</a></li>
+            <li class="list1-item"><a href="RateAndReview.html">Rate and Review</a></li>
+            <li class="list1-item"><a href="Supports.html">Support</a></li>
           </ul>
-        </nav>
-      </div>
-    </header>
+          <ul id="ul2">
+              <li id="acnt li">
+                  <nav id="account-nav"><img src="images/account.jfif" id="account-img">
+                      <ul>
+                          <li class="account-list"><a href="#"><div class="circle"></div>View Account</a></li>
+                          <li class="account-list"><a href="#"><div class="circle"></div>Edit Account</a></li>
+                          <li class="account-list"><a href="#"><div class="circle"></div>Delete Account</a></li>
+                          <li class="account-list"><a href="#"><div class="circle"></div>Log Out</a></li>
+                      </ul>
+  
+                  </nav>
+              </li>
+          </ul>
+      </nav>
+  </div>
+   </header>
+    
 
     <section class="center">
 
