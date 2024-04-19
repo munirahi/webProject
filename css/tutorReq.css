@@ -16,30 +16,20 @@ main{
 
 .new-request_div, .past-request_div{
     background-color: #173A76;
-    width: 100%;
+    width: 93%;
     padding: 20px;
-    margin: 10px;
-    margin-left: 1px;
+    /* margin: 10px;
+    margin-left: 1px; */
     border-radius: 30px;
-    overflow: hidden;
+    /* overflow: hidden; */
     color: #ffffff;
+    margin: auto;
     
 }
 
 .past-request_div{
   margin-bottom: 20px;
   margin-top: 20px;
-}
-
-.input-box{
-    padding: 2px;
-    border-radius: 8xp;
-    width: 160px;
-    height: 30px;
-}
-
-form{
-    margin-bottom: 15px;
 }
 
 
@@ -92,8 +82,9 @@ form{
   .result{
     background-color: #2E4D83;
     border-radius: 10px;
-    overflow-x: auto;
-    white-space: nowrap;
+    max-height: 520px;
+    overflow: scroll;
+    /* white-space: nowrap; */
   }
   .result::-webkit-scrollbar{
     width: 0.5rem;
@@ -109,6 +100,14 @@ form{
     visibility: visible;
 }
   
+/* .new-request_div::-webkit-scrollbar{
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.new-request_div:hover::-webkit-scrollbar-thumb{  
+  visibility: visible;
+} */
 
    #result-header{
     margin-top: 20px;
@@ -117,18 +116,20 @@ form{
 
   
 
-  .accept-req-btn button, .reject-req-btn button{
-    background-color: #CDB309;
+  .accept-req-btn button, .reject-req-btn button, .req-details button{
+    background-color: rgb(228, 199, 11);
     border: none;
     padding: 5px;
     border-radius: 20px;
     width: 100px;
-    margin: auto;
+    /* color: #ffffff; */
+    /* margin: auto; */
   }
 
-  .accept-req-btn, .reject-req-btn{
+  .accept-req-btn, .reject-req-btn, .req-details{
     display: inline-block;
     text-align: center;
+    
   }
 
   .accept-req-btn button{
@@ -147,10 +148,23 @@ form{
     background-color: rgb(121, 58, 58);
   }
 
-  .req-options{
-    margin-left: 50px;
-    margin-bottom: 15px;
+  .req-details button:hover{
+    background-color: #CDB309 ;
   }
+
+  .req-options{
+    margin-left: 90px;
+    margin-bottom: 15px;
+    /* margin: auto; */
+  }
+
+  /* .req-details {
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } */
 
   .specifications-div{
     margin: 10px;
