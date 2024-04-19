@@ -1,10 +1,9 @@
 
-
     main{
         padding: 50px;
         padding-top: 90px;
         background-color: #d9d9d9;
-        background-image: url(bb.png);
+        background-image: url(../images/bb.png);
         background-size: cover;
         
     }
@@ -76,8 +75,8 @@
 
     .result_carousel{
         padding: 50px 0;
-        overflow-x: auto;
-        white-space: wrap;
+        /* overflow-x: auto;
+        white-space: wrap; */
         display: inline-block;
         
       }
@@ -124,8 +123,11 @@
       .result{
         background-color: #2E4D83;
         border-radius: 5px;
-        overflow-x: auto;
-        white-space: nowrap;
+        overflow: scroll;
+        width: 92%;
+        max-height: 490px;
+        margin: auto;
+        /* white-space: nowrap; */
       }
 
       .result::-webkit-scrollbar{
@@ -136,7 +138,7 @@
     .result::-webkit-scrollbar-thumb{
         border-radius: 5rem;
         background-color:rgba(217, 217, 217, 0.678) ;
-        visibility: hidden;
+        visibility: visible;
     }
     .result:hover::-webkit-scrollbar-thumb{  
         visibility: visible;
@@ -170,7 +172,7 @@
         /*flex: 1;*/
         background-color: #173A76;
         width: 27%;
-        height: 450px;
+        height: 700px;
         border-radius: 10px;
         padding: 20px;
         
@@ -184,7 +186,7 @@
     .inner-status{
         background-color: #2E4D83;
         border-radius: 10px;
-        height: 375px;
+        height: 625px;
         overflow-y: auto;
         overflow-x: hidden;
     }
@@ -192,17 +194,18 @@
     .inner-status::-webkit-scrollbar{
         width: 0.5rem;
         height: 0.5rem;
+        visibility: visible;
     }
     
     .inner-status::-webkit-scrollbar-thumb{
         border-radius: 5rem;
         background-color:rgba(217, 217, 217, 0.678) ;
-        visibility: hidden;
-    }
-    .inner-status:hover::-webkit-scrollbar-thumb{
-        
         visibility: visible;
     }
+    /* .inner-status::-webkit-scrollbar-thumb{
+        
+        visibility: visible;
+    } */
 
     
 
