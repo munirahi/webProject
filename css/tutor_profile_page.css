@@ -1,0 +1,38 @@
+body{
+    background-image:  url(../images/bg-image.png);
+    background-repeat: no-repeat;
+background-attachment: fixed;
+background-position: center;
+background-size: cover;
+
+}
+
+.main-body-conteniar{
+    align-content: center;
+    background-color: #ffffff00;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 100px;
+    
+    }
+.main-body-content{
+    background-color: #ffffff8e;
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.1);
+}
+#image-of-tutor{
+    width: 20rem; /* Adjust image size as needed */
+    height: 20rem; /* Adjust image size as needed */
+    border-radius: 50%; /* Make the image round */
+    margin-bottom: 10px;
+}
+.main-body-content section{
+    align-items: center;
+    margin: 50px;
+}
