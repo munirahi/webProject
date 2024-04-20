@@ -4,6 +4,7 @@ body{
 background-attachment: fixed;
 background-position: center;
 background-size: cover;
+color: #173A76;
 
 }
 
@@ -36,3 +37,18 @@ background-size: cover;
     align-items: center;
     margin: 50px;
 }
+.Contact_tutor .fas{
+    font-size: 1.4375rem;
+    background: #2E4D83;
+    height: 45px;
+    width: 45px;
+    line-height: 45px;
+    text-align: center;
+    border-radius: 50%;
+    transition: 0.3s;
+    cursor: pointer;
+    color: #d9d9d9 ;
+  }
+  .Contact_tutor .fas:hover{
+    background: #CDB309;
+  }
