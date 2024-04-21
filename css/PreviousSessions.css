@@ -431,3 +431,47 @@ h3 {
 .cancel-btn:hover {
   background-color: rgb(121, 58, 58);
 }
+
+
+
+/*rating*/
+.rating{
+  margin: 7px;
+  margin-left: 60px;
+}
+
+.post-btn{
+text-align: center;
+align-items: center;
+background-color: rgba(228, 199, 11, 0.466);
+border-radius: 20px;
+padding: 10px;
+text-decoration: none;
+color: #ffffff;
+width: 50%;
+border: none;
+margin: 7px;
+  margin-left: 50px;
+
+}
+
+.rating__star {
+  cursor: pointer;
+  color: #dabd18b2;
+}
+.textarea{
+  height: 100px;
+  width: 100%;
+  overflow: hidden;
+}
+.textarea {
+  height: 100%;
+  width: 90%;
+  outline: none;
+  padding: 10px;
+  font-size: 17px;
+  resize: none;
+  margin-left: 15px;
+
+}
+
