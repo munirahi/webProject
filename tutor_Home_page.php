@@ -17,12 +17,51 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+<?php 
+DEFINE('DB_user','root');
+DEFINE('DB_PSWD','');
+DEFINE('DB_HOST','localhost');
+DEFINE('DB_NAME','linguist');
+
+if(!$conn = mysqli_connect(DB_HOST,DB_user,DB_PSWD,DB_NAME)){
+  
+  die("connection failed. ");
+}
+ 
+
+  if(!mysqli_select_db($conn,DB_NAME)){
+    
+    echo '<script>console.log(" no db!"); </script>'; 
+
+    die("could not open the ".DB_NAME."database");
+  }
+
+?>
+    
   </head>
   <script
     src="https://kit.fontawesome.com/5a18e3112f.js"
     crossorigin="anonymous"
   ></script>
   <body>
+
+  <?php
+  
+// Get today's date
+$today = date("Y-m-d");
+
+$sql = "SELECT * FROM session WHERE Date= '$today'";
+$Result = mysqli_query($conn,$sql);
+$ResultCheck = mysqli_num_rows($Result);
+
+if($ResultCheck > 0) {
+
+
+} else {
+  echo '<script>console.log("not good!"); </script>'; 
+}
+
+?>
     <header id="header">
       <div id="header-div">
         <nav class="fixed-top" id="main-nav">
@@ -39,9 +78,6 @@
             </li>
             <li class="list1-item"><a href="SESSionTutor.html">Sessions</a></li>
             <li class="list1-item"><a href="tutorReq.html">Requests</a></li>
-            <li class="list1-item">
-              <a href="toturRate.html">Rate and Review</a>
-            </li>
             <li class="list1-item">
               <a href="SupportsPartner.html">Support</a>
             </li>
@@ -132,10 +168,12 @@
 
       <section class="center">
         <section class="sessions">
-          <section class="current-sessions">
+          <section name="current-sessions" class="current-sessions">
             <h3>Today's Sessions</h3>
 
             <section class="Today-sessions">
+
+
               <div class="current-sessions-card">
                 <div class="carousel-cell">
                   <img
@@ -162,6 +200,41 @@
                   </div>
                 </div>
               </div>
+
+                  <?php
+
+                          while($row = mysqli_fetch_array($Result)) {
+                            $learnerId = $row['L_id'];
+                            $learnerQuery = "SELECT Firstname,Lastname FROM learner WHERE id = '$learnerId'";
+                            $learnerResult = mysqli_query($conn, $learnerQuery);
+                            if ($learnerResult) {
+                              // Fetch the learner's name from the result set
+                              $learnerRow = mysqli_fetch_assoc($learnerResult);}
+                            ?>
+                             <div class="current-sessions-card">
+                <div class="carousel-cell">
+                  <img
+                    class="current-session-img"
+                    src="images/maleIcon3.png"
+                    alt="current-session"
+                  />
+                           <?php echo '<script>console.log(" good!"); </script>'; ?>
+                             <div class="card-inner">
+                             <h4><strong><?php echo $learnerRow['Firstname'].' '.  $learnerRow['Lastname']?></strong></h4>
+                           <section class="incard-elements-sessions">
+                           <p class="language"><?php echo $row['language'] ?></p>
+                           <p class="level"><?php echo $row['level'] ?></p>
+                            <p class="duration"><?php echo $row['Duration']?> </p>
+                          </section>
+                           <a class="enter-btn-current" href="#">Join</a>
+                          </div>
+                </div>
+                             </div>
+                            <?php
+                          }
+                      ?>
+
+
               <div class="current-sessions-card">
                 <div class="carousel-cell">
                   <img

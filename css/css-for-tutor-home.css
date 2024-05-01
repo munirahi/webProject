@@ -233,7 +233,7 @@ text-decoration: none;
 color: #173A76;
 width: 100%;
 }
-.enter-btn-current:hover{
+.enter-btn-current{
     background-color: rgb(82, 123, 82);
     color: #ffffff;
 }

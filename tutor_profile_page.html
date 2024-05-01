@@ -4,6 +4,8 @@
         <link rel="stylesheet" href="header_folder/headerPartner.css">
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/tutor_profile_page.css">
+        
+        <link rel="stylesheet" href="css/learnerRequest2.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
     </head>
@@ -74,22 +76,69 @@
                 <section>
                     <h1>Reviews</h1>
                 </section>
-        </div>
+                <h2>Book a Session</h2>
+               <form>
+                <fieldset>
+                    <div class="fieldset-container">
+                    <div class="select-container">
+                        <label>Language<br>
+                            <div class="selectWrapper">
+                                <select class="input-box" name="Language">  
+                                    <option></option>
+                                    <option>English</option>
+                                    <option>Spanish</option>
+                                    <option>French</option>
+                                    <option>Arabic</option>
+                                </select>
+                            </div>
+                        </label>
+
+                        <label name="level">Level<br>
+                            <div class="selectWrapper">
+                                <select class="input-box" name="level">
+                                    <option></option>
+                                    <option>Beginner</option>
+                                    <option>Intermediate</option>
+                                    <option>Advanced</option>
+                                </select>
+                            </div>
+                        </label>
+
+                        <label>Duration<br>
+                            <div class="selectWrapper">
+                                <select class="input-box" name="Duration">
+                                    <option></option>
+                                    <option>10 Minutes</option>
+                                    <option>20 Minutes</option>
+                                    <option>30 Minutes</option>
+                                    <option>60 Minutes</option>
+                                </select>
+                            </div>
+                        </label>
+
+                        <label>Date and Time<br>
+                            <div class="selectWrapper">
+                                <input class="input-box" type="datetime-local">
+                            </div>
+                        </label>
+                    </div>
+                    <div class="btn-container">
+                        <button class="selectWrapper" id="go-btn">Go!</button>
+                    </div>
+                </div>
+                </fieldset>
+            </form> 
+
+                
+
+
 
         </div>
-        
 
 
-
-
-
-
-
-
-
-
-
-
+  
+  
+        </div>
         <footer>
             <div class="main-content">
                 <div class="left box">
@@ -151,5 +200,13 @@
                 </section>
               </div>
         </footer>
+      
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery CDN -->
+<script src="js/tutors.js"></script>
+
+
+
+       
     </body>
 </html>
