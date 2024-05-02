@@ -15,6 +15,31 @@ body{
     background-size: cover;
     
 }
+.success-message{
+  color: green; /* Green for success */
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid green;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  position: relative; /* Enable positioning */
+  top: -20px; /* Move up slightly */
+  left: 10%; /* Center horizontally */
+  
+}
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+}
+span #error{
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+}
 #ul1{
     list-style: none;
     margin: 0px;
@@ -133,6 +158,7 @@ li a{
 
 
 .main{
+    
     position: relative;
     margin-top: 120px;
     margin-left: 500px;
@@ -143,10 +169,10 @@ li a{
     padding: 20px;
     background-color:rgb(23, 58, 118);
     border-radius: 30px;
-    margin-top: 20px;
-   margin-bottom: 150px;
+    margin-top: 10px;
+   margin-bottom: 170px;
     width: 500px ;
-    height: 1010px ;
+    height: 1255px ;
     text-align: center;
   
 
