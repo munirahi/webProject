@@ -1,3 +1,20 @@
+<?php 
+// if(!isset($_SESSION['user_id'])){
+// header("Location: php/login.php");
+
+
+// }
+session_start(); // Start the session
+
+// Check if the user is not logged in
+if (!isset($_SESSION['user_id'])) {
+    // Redirect the user to the login page
+    header("Location: php/login.php");
+    exit(); // Stop further execution
+}
+
+include("php/tutorsInfo.php");
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -61,6 +78,9 @@ if($ResultCheck > 0) {
   echo '<script>console.log("not good!"); </script>'; 
 }
 
+// $sqltutor = 
+
+
 ?>
     <header id="header">
       <div id="header-div">
@@ -112,8 +132,9 @@ if($ResultCheck > 0) {
         <div class="sidebar-card">
           <div class="card-body-profile">
             <img src="images/femaleIcon2.png" alt="Profile Picture" />
-            <h2>Gloria Harold</h2>
-            <p id="bio">English is easy, start today!</p>
+            <!-- <h2>Gloria Harold</h2> -->
+            <h2><?php echo $firstname . ' ' . $lastname ?> </h2>
+            <p id="bio"><?php echo $bio ?></p>
           </div>
 
           <div class="card-body">
@@ -121,18 +142,18 @@ if($ResultCheck > 0) {
               <li id="hours">
                 <i class="fa-solid fa-clock"></i>
                 <span>Total Hours of Teaching</span>
-                <span>100</span>
+                <span><?php echo $totalHours ?></span>
               </li>
               <li id="earnings">
                 <i class="fa-solid fa-money-bill-wave"></i>
                 <span>Total Earnings</span>
-                <span>$1000</span>
+                <span>$<?php echo '1000'?></span>
               </li>
               <li id="Rating">
                 <a href="toturRate.html" id="rating-anchor">
                   <i class="fa-solid fa-star"></i>
                   <span>Rating</span>
-                  <span>4.5 (500 Ratings)</span>
+                  <span><?php echo $averageRating .'('. $totalReviews .'Ratings)'?></span>
                 </a>
               </li>
               <li id="Languages">
@@ -167,7 +188,7 @@ if($ResultCheck > 0) {
       </aside>
 
       <section class="center">
-        <section class="sessions">
+        <section class="sessions-day">
           <section name="current-sessions" class="current-sessions">
             <h3>Today's Sessions</h3>
 
@@ -205,28 +226,53 @@ if($ResultCheck > 0) {
 
                           while($row = mysqli_fetch_array($Result)) {
                             $learnerId = $row['L_id'];
-                            $learnerQuery = "SELECT Firstname,Lastname FROM learner WHERE id = '$learnerId'";
+                            $learnerQuery = "SELECT Firstname,Lastname,image FROM learner WHERE id = '$learnerId'";
                             $learnerResult = mysqli_query($conn, $learnerQuery);
                             if ($learnerResult) {
                               // Fetch the learner's name from the result set
                               $learnerRow = mysqli_fetch_assoc($learnerResult);}
+                              $sessionStartTime = strtotime($row['Time']);
+                              $sessionDuration = $row['Duration'];
+                          
+                              // Get the current time
+                              $currentTime = time();
+                          
+                              // Calculate the end time of the session
+                              $sessionEndTime = $sessionStartTime + ($sessionDuration * 60); // Convert duration to seconds
+                          
+                              // Check if the session has started and has not ended yet
+                              if ($currentTime >= $sessionStartTime && $currentTime < $sessionEndTime) {
+                                  // Session is ongoing, display "Join"
+                                  $buttonText = "Join";
+                                  $Button_color="enter-btn-current";
+                              } elseif ($currentTime < $sessionStartTime) {
+                                  // Session has not started yet, display the start time
+                                  $buttonText = date("h:i A", $sessionStartTime);  // Format the start time as desired
+                                  
+                                  $Button_color="enter-btn";
+                              } else {
+                                  // Session has ended, display something else or hide the button
+                                  $buttonText = "Session ended";
+                                  $Button_color="enter-btn-done" ;
+                              }
                             ?>
                              <div class="current-sessions-card">
                 <div class="carousel-cell">
                   <img
                     class="current-session-img"
-                    src="images/maleIcon3.png"
+                    src=<?php echo  $learnerRow['image']?>
                     alt="current-session"
-                  />
+                  />    <!-- <?php echo  $learnerRow['image']?> "images/femaleIcon3.png" -->
                            <?php echo '<script>console.log(" good!"); </script>'; ?>
                              <div class="card-inner">
                              <h4><strong><?php echo $learnerRow['Firstname'].' '.  $learnerRow['Lastname']?></strong></h4>
                            <section class="incard-elements-sessions">
                            <p class="language"><?php echo $row['language'] ?></p>
                            <p class="level"><?php echo $row['level'] ?></p>
-                            <p class="duration"><?php echo $row['Duration']?> </p>
+                           <p class="time"><?php echo $row['Time']  ?>
+                            <p class="duration"><?php echo $row['Duration']?> Minutes</p>
                           </section>
-                           <a class="enter-btn-current" href="#">Join</a>
+                           <a class="<?php echo $Button_color ?>" href="#" ><?php echo $buttonText ?></a>
                           </div>
                 </div>
                              </div>
@@ -648,3 +694,6 @@ if($ResultCheck > 0) {
     </footer>
   </body>
 </html>
+<?php
+mysqli_close($conn);
+?>

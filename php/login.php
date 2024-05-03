@@ -33,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($password === $rowPartner['password']) {
             echo "<h1>Login Successful - partner!</h1>";
             $_SESSION['user_id'] = $rowPartner['ID'];
+            header('Location: ../tutor_Home_page.php');
             // header("Location: singup.html"); 
              exit(); 
         } else {
@@ -59,7 +60,7 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log in</title>
-    <link rel="stylesheet" href="css/loginStyle.css">
+    <link rel="stylesheet" href="../css/loginStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
