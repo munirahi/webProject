@@ -11,7 +11,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST["password"];
     $city = $_POST["city"];
     $location = $_POST["location"];
-   $image=$_POST["image"];
+    
+    
+    $fileName = $_FILES["image"]["name"];
+    $fileSize = $_FILES["image"]["size"];
+    $tmpName = $_FILES["image"]["tmp_name"];
+
+    $validImageExtension = ['jpg', 'jpeg', 'png'];
+    $imageExtension = explode('.', $fileName);
+    $imageExtension = strtolower(end($imageExtension));
+    if ( !in_array($imageExtension, $validImageExtension) ){
+      echo
+      "
+      <script>
+        alert('Invalid Image Extension');
+      </script>
+      ";
+    }
+    else if($fileSize > 1000000){
+      echo
+      "
+      <script>
+        alert('Image Size Is Too Large');
+      </script>
+      ";
+    }
+    else{
+        
+        $newImageName = $fileName;
+        $destination = 'images/' . $newImageName;
+       
+      move_uploaded_file($tmpName, $destination);
+    }
+
+
+
+
     // Validate 
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -24,13 +59,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         /* add condition to identify user */
 
 
+       
         $sql_check = "SELECT * FROM learner WHERE email='$email' AND ID != 2";
         $result_check = mysqli_query($conn, $sql_check); 
         if (mysqli_num_rows($result_check) > 0) {
             $error = " Email already exists. Please choose a different email.";
           }else{
 
-        $sql = "UPDATE learner SET Firstname='$firstname', Lastname='$lastname', email='$email', password='$password', city='$city', location='$location',image='image' WHERE ID=2";
+         
+  
+
+        $sql = "UPDATE learner SET Firstname='$firstname', Lastname='$lastname', email='$email', password='$password', city='$city', location='$location',image='$newImageName' WHERE ID=2";
         
         if (mysqli_query($conn, $sql)) {
             $success = true;
@@ -79,11 +118,15 @@ if (mysqli_num_rows($result) > 0) {
     $city = $user['city'];
     $location = $user['location'];
     $image=$user["image"];
+  
+
 } else {
     $error= "Error retrieving user data.";
 }
 
 mysqli_close($conn);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -248,7 +291,7 @@ mysqli_close($conn);
  ?>
        <h3> Account / Edit profile</h3>
 
-    <form class="edit-learner" method="POST" >
+    <form class="edit-learner" method="POST" enctype="multipart/form-data" >
         <h2>Edit Profile</h2>
 
            
@@ -257,16 +300,10 @@ mysqli_close($conn);
         <div class="wrapper">
                    
           <div class="image">
-          <?php
-    if (!empty($user["image"])) {
-      // Assuming the image is stored in a folder named 'uploads' within your project directory
-      echo "<img src='uploads/" . $user["image"] . "' alt='Profile Picture' id='preview' >";
-    } else {
-      echo "<img src='images/blank-profile-picture-973460_960_720.png' alt='Uplaod pic' id ='preview'>";
-    }
-  ?>
-         <!-- <img src="images/blank-profile-picture-973460_960_720.png" alt="Uplaod pic">  -->
-          <input type="file" accept="Image/jpeg, Image/png, Image/jpg" id="file-choose" name ='image' value="<?php echo $image; ?>">
+          
+       <img src="images/<?php echo $newImageName; ?>" alt="image available" id= "preview" >
+      
+          <input type="file" accept="Image/jpeg, Image/png, Image/jpg" id="file-choose" name ="image">
            </div>
            <h3>Uplaod Picture</h3> <!-- update -->
            <span class="error-message" id="error"></span>
