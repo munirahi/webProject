@@ -17,7 +17,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $education=$_POST["education"];
     $experience=$_POST["experience"];
     $bio = $_POST["bio"];
-    $image=$_POST["image"];
+     
+    $fileName = $_FILES["image"]["name"];
+    $fileSize = $_FILES["image"]["size"];
+    $tmpName = $_FILES["image"]["tmp_name"];
+
+    $validImageExtension = ['jpg', 'jpeg', 'png'];
+    $imageExtension = explode('.', $fileName);
+    $imageExtension = strtolower(end($imageExtension));
+    if ( !in_array($imageExtension, $validImageExtension) ){
+      echo
+      "
+      <script>
+        alert('Invalid Image Extension');
+      </script>
+      ";
+    }
+    else if($fileSize > 1000000){
+      echo
+      "
+      <script>
+        alert('Image Size Is Too Large');
+      </script>
+      ";
+    }
+    else{
+        
+        $newImageName = $fileName;
+        $destination = 'images/' . $newImageName;
+       
+      move_uploaded_file($tmpName, $destination);
+    }
+
 
     // Validate 
     if (mysqli_connect_errno()) {
@@ -37,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = " Email already exists. Please choose a different email.";
       }else{
 
-        $sql = "UPDATE tutor SET Firstname='$firstname', Lastname='$lastname', Email='$email', password='$password',age='$age',gender='$gender',PhoneNumber='$phonenum' ,city='$city',profLevel='$profLevel',bio='$bio',experience='$experience',eduction='$education',PP='$image'  WHERE ID=1";
+        $sql = "UPDATE tutor SET Firstname='$firstname', Lastname='$lastname', Email='$email', password='$password',age='$age',gender='$gender',PhoneNumber='$phonenum' ,city='$city',profLevel='$profLevel',bio='$bio',experience='$experience',eduction='$education',PP='$newImageName'  WHERE ID=1";
         
         if (mysqli_query($conn, $sql)) {
             $success = true;
@@ -301,7 +332,7 @@ function validatePhone(phoneNumber) {
       }
     ?>
        <h3> Account / Edit profile</h3>
-    <form class="edit-learner" method="POST" >
+    <form class="edit-learner" method="POST" enctype="multipart/form-data">
 
 
         <h2>Edit Profile</h2>
@@ -309,7 +340,7 @@ function validatePhone(phoneNumber) {
         <div class="wrapper">
                    
             <div class="image">
-            <img src="<?php echo $imageSrc; ?>" alt="Uplaod pic" id="preview">
+            <img src="images/<?php echo $newImageName; ?>" alt="Uplaod pic" id="preview">
             <input type="file" accept="Image/jpeg, Image/png, Image/jpg" id="file-choose" name="image">
              </div>
              <h3>Change Picture</h3> <!-- update -->
@@ -347,6 +378,14 @@ function validatePhone(phoneNumber) {
         <option value="intermediate" <?php if ($profLevel == 'intermediate') echo 'selected'; ?>>Intermediate</option>
         <option value="advanced" <?php if ($profLevel == 'advanced') echo 'selected'; ?> >Advanced</option>
         </select>
+       
+        <label for="language">Languages </label> <br><br><br>
+        <div class="language-container">
+            <input type="checkbox"  name="languages[]" value="english"> English
+            <input type="checkbox" name="languages[]" value="spanish"> Spanish 
+            <input type="checkbox" name="languages[]" value="french"> French 
+            <input type="checkbox" name="languages[]" value="arabic"> Arabic </div>
+   
             <label for="education">Education</label>
             <textarea rows="2" class="input-field" id="education" name="education" > <?php echo $education; ?></textarea>
             <label for="experience">Experience</label>
