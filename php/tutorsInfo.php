@@ -17,7 +17,7 @@ $user_id = $_SESSION['user_id'];
 $sql = "SELECT * FROM tutor WHERE ID = '$user_id';";
 $result = mysqli_query($conn, $sql);
 $tutorsSessionsQuery = "SELECT * FROM session WHERE T_id = '$user_id';";
-$tutorReviewsQuery ="SELECT stars FROM review WHERE P_ID  = '$user_id';";
+$tutorReviewsQuery ="SELECT starts FROM review WHERE P_ID  = '$user_id';";
 // Execute the query
 $tutorsSessionsResult = mysqli_query($conn, $tutorsSessionsQuery);
 $tutorReviewsResult = mysqli_query($conn, $tutorReviewsQuery);

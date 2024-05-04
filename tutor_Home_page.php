@@ -390,7 +390,7 @@ continue;
                           }
                         } else {
                           echo '<script>console.log("not good!"); </script>'; 
-                          echo '<h2>you have no sesstions for Today</h2>';
+                          echo '<h2 class="light">you have no sesstions for Today</h2>';
                         }
                       ?>
                        <?php

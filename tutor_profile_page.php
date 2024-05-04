@@ -1,42 +1,55 @@
 <?php
+include('php/connection.php');
 
 // Check if the P_id query parameter is set
 if(isset($_GET['ID'])) {
-    // Get the selected language
-    $selectedTutor = $_GET['ID'];
-    // Use the selected id to customize the content
-    echo "<h1>Welcome to the tutor profile page for $selectedTutor ID!</h1>";
-  
-    $sqlT = "SELECT * FROM tutor WHERE ID = ?";
-   
+    // Get the selected tutor ID
+    $selectedTutorId = $_GET['ID'];
     
-    $result =  mysqli_query($conn, $sqlT);
-
+    // Prepare the SQL query
+    $sqlT = "SELECT * FROM tutor WHERE ID = ?";
+    
+    // Prepare the statement
+    $stmt = mysqli_prepare($conn, $sqlT);
+    
+    // Bind the parameter to the placeholder
+    mysqli_stmt_bind_param($stmt, "i", $selectedTutorId);
+    
+    // Execute the statement
+    mysqli_stmt_execute($stmt);
+    
+    // Get the result
+    $result = mysqli_stmt_get_result($stmt);
+    
     // Check if there are rows returned
     if(mysqli_num_rows($result) > 0) {
         // Fetch the data as an associative array
         $tutorData = mysqli_fetch_assoc($result);
-       $email = $tutorData['Email'];
-       $image = $tutorData['image'];
-       $firstname = $tutorData['Firstname'];
-       $lastname = $tutorData['Lastname'];
-       $age = $tutorData['age'];
-       $gender = $tutorData['gender'];
-       $password = $tutorData['password'];
-       $phoneNumber = $tutorData['PhoneNumber'];
-       $city = $tutorData['city'];
-       $bio = $tutorData['bio'];
-       $experience = $tutorData['experience'];
-       $education = $tutorData['education'];
-    
+        
+        // Access the fetched data
+        $email = $tutorData['Email'];
+        $image = $tutorData['image'];
+        $firstname = $tutorData['Firstname'];
+        $lastname = $tutorData['Lastname'];
+        $age = $tutorData['age'];
+        $gender = $tutorData['gender'];
+        $password = $tutorData['password'];
+        $phoneNumber = $tutorData['PhoneNumber'];
+        $city = $tutorData['city'];
+        $bio = $tutorData['bio'];
+        $experience = $tutorData['experience'];
+        $education = $tutorData['eduction'];
     } else {
         echo "No tutor found with ID: $selectedTutorId";
     }
 
+    // Close the statement
+    mysqli_stmt_close($stmt);
 } else {
     // Default content if no id is selected
     echo "<h1>Welcome to the tutor profile page!</h1>";
 }
+
 ?>
 
 
@@ -98,13 +111,13 @@ if(isset($_GET['ID'])) {
                 </section>
                 <section class="Contact_tutor">
                     <h1>Contact</h1>
-                    <div>
+                    <div class= "Contact_tutor_div">
                             <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?>
                             <span class="fas fa-envelope"></span>
                           </a>
                     </div>
 
-                    <div>
+                    <div class= "Contact_tutor_div">
                     <a href="tel:<?php echo $phoneNumber; ?>"><?php echo $phoneNumber; ?>
                             <span class="fas fa-phone-alt"></span>
                           </a>
@@ -118,7 +131,7 @@ if(isset($_GET['ID'])) {
                 </section>
         
                 <section>
-                    <h1>eduction</h1>
+                    <h1>education</h1>
                     <?php echo $education?>
                 </section>
                 <section>

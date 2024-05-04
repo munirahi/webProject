@@ -198,3 +198,20 @@ width: 100%;
 border-radius: 0%;
 align-items:baseline;
   }
+
+  .Contact_tutor_div {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-bottom: 10px; /* Adjust margin as needed */
+}
+
+.Contact_tutor_div a {
+    text-decoration: none;
+    color: #173A76; 
+    display: flex; /* Ensure anchor element is displayed as flex */
+    align-items: center; /* Align items vertically */
+}
+
+.Contact_tutor_div a .fas {
+    margin-left: 5px; /* Adjust margin as needed */
+}
