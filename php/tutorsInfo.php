@@ -17,7 +17,7 @@ $user_id = $_SESSION['user_id'];
 $sql = "SELECT * FROM tutor WHERE ID = '$user_id';";
 $result = mysqli_query($conn, $sql);
 $tutorsSessionsQuery = "SELECT * FROM session WHERE T_id = '$user_id';";
-$tutorReviewsQuery ="SELECT * FROM review WHERE P_ID  = '$user_id';";
+$tutorReviewsQuery ="SELECT starts FROM review WHERE P_ID  = '$user_id';";
 // Execute the query
 $tutorsSessionsResult = mysqli_query($conn, $tutorsSessionsQuery);
 $tutorReviewsResult = mysqli_query($conn, $tutorReviewsQuery);
@@ -38,7 +38,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     $bio = $row['bio'];
     $experience = $row['experience'];
     $eduction = $row['eduction'];
-    
+    $image=$row["image"];
 
 
 } else {
@@ -60,7 +60,7 @@ if (mysqli_num_rows($tutorReviewsResult) > 0) {
     // Loop through each session record
     while ($ReviewsRow = mysqli_fetch_assoc($tutorsSessionsResult)) {
         // Add the duration of the session to the total hours
-        $totalStars += $ReviewsRow['stars'];
+        $totalStars += $ReviewsRow['starts'];
         $totalReviews++;
     }
     if ($totalReviews > 0) {

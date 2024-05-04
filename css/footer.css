@@ -174,7 +174,9 @@ yellow in dark background :#CDB309
   .bottom section a:hover{
     text-decoration: underline;
   }
-
+a .text{
+  color: #d9d9d9;
+}
   .find-more{
 text-decoration: none;
 color: #CDB309;
