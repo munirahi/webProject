@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Edit Times</title>
+        <title>Edit Request</title>
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="header_folder/headerLearner.css">
         <link rel="stylesheet" href="css/tutorAvailableTimes.css">
@@ -96,6 +96,7 @@
     <script >
     document.addEventListener("DOMContentLoaded", function () {
     const currentDate = new Date();
+    const currentDay = currentDate.getDate();
     let selectedDate = null; // Track the currently selected date
     let selectedTimes = {}; // Track the selected times for each date
     const currentMonth = currentDate.getMonth();
@@ -103,11 +104,11 @@
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
-
     document.getElementById("current-month-year").textContent = monthNames[currentMonth] + " " + currentYear;
 
+
     const datesContainer = document.getElementById("dates");
-    datesContainer.innerHTML = ""; // Clear existing content
+    const appointmentHoursContainer = document.getElementById("appointment-hours");
 
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
@@ -122,7 +123,7 @@
         const dateElement = document.createElement("span");
         dateElement.textContent = i;
         dateElement.classList.add("date");
-
+        // Add click event listener to dates
         dateElement.addEventListener("click", function () {
             // Toggle selected class on the date element
             if (selectedDate !== this) {
@@ -139,58 +140,56 @@
                 generateAppointmentHours(i);
             }
         });
-
         datesContainer.appendChild(dateElement);
     }
-});
 
-// Generate appointment hours
-function generateAppointmentHours(day) {
-    // Retrieve the previously selected times for the current date (if any)
-    const selectedTimesForDay = selectedTimes[day] || [];
+    // Generate appointment hours
+    function generateAppointmentHours(day) {
+        // Retrieve the previously selected times for the current date (if any)
+        const selectedTimesForDay = selectedTimes[day] || [];
 
-    const appointmentHoursContainer = document.getElementById("appointment-hours");
-    appointmentHoursContainer.innerHTML = ""; // Clear existing content
+        appointmentHoursContainer.innerHTML = ""; // Clear existing content
 
-    for (let hour = 8; hour <= 19; hour++) {
-        const appointmentHour = document.createElement("span");
-        appointmentHour.textContent = `${hour}:00 - ${hour + 1}:00`;
-        appointmentHour.classList.add("appointment-hour");
+        for (let hour = 8; hour <= 19; hour++) {
+            const appointmentHour = document.createElement("span");
+            appointmentHour.textContent = `${hour}:00 - ${hour + 1}:00`;
+            appointmentHour.classList.add("appointment-hour");
 
-        // Check if this hour is already selected for the current date
-        if (selectedTimesForDay.includes(hour)) {
-            appointmentHour.classList.add("selected");
+            // Check if this hour is already selected for the current date
+            if (selectedTimesForDay.includes(hour)) {
+                appointmentHour.classList.add("selected");
+            }
+
+            // Add click event listener to toggle selection
+            appointmentHour.addEventListener("click", function () {
+                // Toggle selected class on the appointment hour element
+                this.classList.toggle("selected");
+
+                // Update selectedTimes object based on the current selection
+                if (!selectedTimes[day]) {
+                    selectedTimes[day] = [];
+                }
+                const index = selectedTimes[day].indexOf(hour);
+                if (index === -1) {
+                    selectedTimes[day].push(hour);
+                } else {
+                    selectedTimes[day].splice(index, 1);
+                }
+
+                // Highlight the date if at least one time is selected
+                const dateElement = selectedDate;
+                if (Object.keys(selectedTimes[day]).length > 0) {
+                    dateElement.classList.add("selected");
+                } else {
+                    dateElement.classList.remove("selected");
+                }
+            });
+
+            // Append the appointment hour to the container
+            appointmentHoursContainer.appendChild(appointmentHour);
         }
-
-        // Add click event listener to toggle selection
-        appointmentHour.addEventListener("click", function () {
-            // Toggle selected class on the appointment hour element
-            this.classList.toggle("selected");
-
-            // Update selectedTimes object based on the current selection
-            if (!selectedTimes[day]) {
-                selectedTimes[day] = [];
-            }
-            const index = selectedTimes[day].indexOf(hour);
-            if (index === -1) {
-                selectedTimes[day].push(hour);
-            } else {
-                selectedTimes[day].splice(index, 1);
-            }
-
-            // Highlight the date if at least one time is selected
-            const dateElement = selectedDate;
-            if (Object.keys(selectedTimes[day]).length > 0) {
-                dateElement.classList.add("selected");
-            } else {
-                dateElement.classList.remove("selected");
-            }
-        });
-
-        // Append the appointment hour to the container
-        appointmentHoursContainer.appendChild(appointmentHour);
     }
-}
+});
 
 
  // Handle form submission
