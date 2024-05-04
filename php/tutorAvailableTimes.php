@@ -1,4 +1,4 @@
- <?php
+<?php
     DEFINE('DB_USER','root');
     DEFINE('DB_PSWD','');
     DEFINE('DB_HOST','localhost:4306');
@@ -9,12 +9,14 @@
 
     if(!mysqli_select_db($conn, DB_NAME))
         die("Could not open the ".DB_NAME." database.");
+
+  session_start();
 ?> 
 
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Edit Request</title>
+        <title>Edit Times</title>
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="header_folder/headerLearner.css">
         <link rel="stylesheet" href="css/tutorAvailableTimes.css">
@@ -94,11 +96,13 @@
     </main>
     <!-- src="js/calendarForTutor.js" -->
     <script >
+      let selectedDate = null; // Track the currently selected date
+    let selectedTimes = {}; // Track the selected times for each date
+
     document.addEventListener("DOMContentLoaded", function () {
     const currentDate = new Date();
     const currentDay = currentDate.getDate();
-    let selectedDate = null; // Track the currently selected date
-    let selectedTimes = {}; // Track the selected times for each date
+    
     const currentMonth = currentDate.getMonth();
     const currentYear = currentDate.getFullYear();
     const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -193,53 +197,69 @@
 
 
  // Handle form submission
- document.getElementById("save-btn").addEventListener("click", function () {
-                // Convert selectedTimes array to JSON string
-                const jsonData = JSON.stringify(selectedTimes);
+document.getElementById("save-btn").addEventListener("click", function () {
+    // Convert selectedTimes array to JSON string
+    const jsonData = JSON.stringify(selectedTimes);
 
-                // Create a form element
-                const form = document.createElement("form");
-                form.method = "post";
-                form.action = "";
+    // Log the jsonData variable to the console
+    console.log(jsonData);
 
-                // Create a hidden input field to store JSON data
-                const input = document.createElement("input");
-                input.type = "hidden";
-                input.name = "jsondata";
-                input.value = jsonData;
+    // Create a form element
+    const form = document.createElement("form");
+    form.method = "post";
+    form.action = "";
 
-                // Append the input field to the form
-                form.appendChild(input);
+    // Create a hidden input field to store JSON data
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "jsondata";
+    input.value = jsonData;
 
-                // Append the form to the document body
-                document.body.appendChild(form);
+    // Append the input field to the form
+    form.appendChild(input);
 
-                // Submit the form
-                form.submit();
-            });
+    // Append the form to the document body
+    document.body.appendChild(form);
+
+    // Submit the form
+    form.submit();
+});
+
 </script>
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check if the JSON data is sent
-    if (isset($_POST['jsondata'])) {
-        // Decode the JSON data into a PHP array
-        $selectedTimes = json_decode($_POST['jsondata']);
+  // Check if the JSON data is sent
+  if (isset($_POST['jsondata'])) {
+      // Decode the JSON data into a PHP array
+      $selectedTimes = json_decode($_POST['jsondata']);
 
-        // Check if decoding was successful
-        if ($selectedTimes !== null) {
-            // Access the selected appointment times
-            foreach ($selectedTimes as $time) {
-                // Process each appointment time as needed
-                echo "<div>Selected appointment time: $time</div>";
-            }
-        } else {
-            echo "Error decoding JSON data.";
-        }
-    } else {
-        echo "No JSON data received.";
-    }
-}
+      // Check if decoding was successful
+      if ($selectedTimes !== null) {
+          // Access the selected appointment times
+          foreach ($selectedTimes as $date => $times) {
+              foreach ($times as $time) {
+                  // Insert each appointment time into the database
+                  $ID = $_SESSION['user_id'];
+                  $sql = "INSERT INTO available_times (P_ID, Time, Date, availability) VALUES ('$ID','$time', '$date', 'true')";
+                  $result = mysqli_query($conn, $sql);
+                  if ($result === TRUE) {
+                      echo "<div>Appointment time '$time' for date '$date' inserted successfully.</div>";
+                  } else {
+                      echo "Error: " . $sql . "<br>" . $conn->error;
+                  }
+              }
+          }
+      } else {
+          echo "Error decoding JSON data.";
+      }
+  } else {
+      echo "No JSON data received.";
+  }
+}else echo 'hiiiiiiiiiiiiii1';
+
+// Close the database connection
+$conn->close();
 ?>
 
          <footer>
