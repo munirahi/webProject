@@ -29,13 +29,13 @@ body{
   
 }
 .error-message {
-  color: red;
+  color: rgb(198, 37, 37);
   font-weight: bold;
   margin-bottom: 10px;
   display: block;
 }
 span #error{
-  color: red;
+  color: rgb(198, 37, 37);;
   font-weight: bold;
   margin-bottom: 10px;
   display: block;
@@ -164,7 +164,18 @@ li a{
     margin-left: 500px;
     
 }
+.language-container {
+    display: flex;
+    justify-content: flex-start;     
+    gap: 10px;
+    padding-left: 20px; 
+    font-size: 14px;
+}
+.language-container input[type="checkbox"] {
 
+    margin-right: 5px;
+    
+}
 .edit-learner{
     padding: 20px;
     background-color:rgb(23, 58, 118);
@@ -172,7 +183,7 @@ li a{
     margin-top: 10px;
    margin-bottom: 170px;
     width: 500px ;
-    height: 1255px ;
+    height: 1290px ;
     text-align: center;
   
 
@@ -260,7 +271,7 @@ select{
     border: 0;
     outline: none;
     margin: 10px;
-    margin-top: 40px;
+    margin-top: 20px;
     padding:8px 15px;
     border-radius: 20px;
     color: whitesmoke;
