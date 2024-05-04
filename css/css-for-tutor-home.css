@@ -303,7 +303,7 @@ width: 100%;
     display: flex;
 color: #173A76;
 font-weight: 500;
-flex-wrap: wrap;
+flex-wrap: inherit;
 
 }
 
