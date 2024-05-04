@@ -1,3 +1,48 @@
+<?php
+
+// Check if the P_id query parameter is set
+if(isset($_GET['ID'])) {
+    // Get the selected language
+    $selectedTutor = $_GET['ID'];
+    // Use the selected id to customize the content
+    echo "<h1>Welcome to the tutor profile page for $selectedTutor ID!</h1>";
+  
+    $sqlT = "SELECT * FROM tutor WHERE ID = ?";
+   
+    
+    $result =  mysqli_query($conn, $sqlT);
+
+    // Check if there are rows returned
+    if(mysqli_num_rows($result) > 0) {
+        // Fetch the data as an associative array
+        $tutorData = mysqli_fetch_assoc($result);
+       $email = $tutorData['Email'];
+       $image = $tutorData['image'];
+       $firstname = $tutorData['Firstname'];
+       $lastname = $tutorData['Lastname'];
+       $age = $tutorData['age'];
+       $gender = $tutorData['gender'];
+       $password = $tutorData['password'];
+       $phoneNumber = $tutorData['PhoneNumber'];
+       $city = $tutorData['city'];
+       $bio = $tutorData['bio'];
+       $experience = $tutorData['experience'];
+       $education = $tutorData['education'];
+    
+    } else {
+        echo "No tutor found with ID: $selectedTutorId";
+    }
+
+} else {
+    // Default content if no id is selected
+    echo "<h1>Welcome to the tutor profile page!</h1>";
+}
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -43,38 +88,46 @@
             <div  class="main-body-content">
                 <section class="pp-for-tutor">
                     
-                        <img id = "image-of-tutor"src="images/femaleIcon2.png" alt="Profile Picture">
-                        <h2>Gloria Harold</h2>
+                        <img id = "image-of-tutor"src="images/<?php echo  $image?>" alt="Profile Picture">
+                        <h2><?php echo $firstname.' '.  $lastname ?></h2>
                     
                 </section>
                 <section>
                     <h1>bio</h1>
-                    <p id="bio">English is easy, start today!</p>
+                    <p id="bio"><?php echo $bio; ?></p>
                 </section>
                 <section class="Contact_tutor">
                     <h1>Contact</h1>
-                    <a href="mailto:content@linguist.com">
-                    <span class="fas fa-phone-alt"></span>
-                  </a>
-                    <span class="fas fa-envelope" href="mailto:content@linguist.com" ></span>
-                    
+                    <div>
+                            <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?>
+                            <span class="fas fa-envelope"></span>
+                          </a>
+                    </div>
+
+                    <div>
+                    <a href="tel:<?php echo $phoneNumber; ?>"><?php echo $phoneNumber; ?>
+                            <span class="fas fa-phone-alt"></span>
+                          </a>
+                    </div>
+<!-- 
                     <div class="email">
                       <span class="fas fa-envelope"></span>
                       <span class="text"><a href="mailto:content@linguist.com">content@linguist.com</a>
                         </span>
-                    </div>
+                     </div> -->
                 </section>
-                <section>
-                  <h1>about me</h1>
-                </section>
+        
                 <section>
                     <h1>eduction</h1>
+                    <?php echo $education?>
                 </section>
                 <section>
                     <h1>experiences</h1>
+                    <?php echo $experience?>
                 </section>
                 <section>
                     <h1>Reviews</h1>
+
                 </section>
                 <h2>Book a Session</h2>
                <form>
