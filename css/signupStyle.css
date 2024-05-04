@@ -137,7 +137,7 @@ body{
 .input-field{
     width: 100%;
     padding: 10px 0;
-    margin: 5px 0;
+    margin: 3px 0;
    
     border-left: 0;
     border-right: 0;
@@ -145,11 +145,32 @@ body{
     border-bottom: 1px solid #999;
     outline: none;
     background: transparent;
-    font-size: small;
+    font-size: x-small;
 
 }
+/* not working */
+#pLevel{
+    margin-top: 10px;
+}
+.error-message{
+    color: rgb(198, 37, 37);
+    font-weight: bold;
+    display: block;
+}
+
 select{
     color: #999; /* update */
+}
+h5{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #999; 
+   font-size:smaller; 
+}
+.language-container{
+    color: #999; 
+    
+   font-size:x-small;
 }
 
 .submit-btn{
@@ -157,7 +178,7 @@ select{
     padding: 10px 30px;
     cursor: pointer;
     display: block;
-    margin: 12% auto;
+    margin: 5% auto;
     background: rgb(228, 199, 11);
     border: 0;
     outline: none;
