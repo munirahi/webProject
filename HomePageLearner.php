@@ -110,12 +110,11 @@ continue;
 }
           echo '<div class="request-card">';
           echo '<div class="learner-info">';
-          // Output learner's profile picture
-          echo '<img src="images/' . $learnerRow['image'] . '" alt="profile Picture" />';
+          echo '<img src="images/' . $learnRow['image'] . '" alt="profile Picture" />';
 
           echo '<div class="day">';
           // Output learner's name
-          echo '<h5><strong>' . $learnerRow['Firstname'].' '.  $learnerRow['Lastname'] . '</strong></h5>';
+          echo '<h5><strong>' . $learnRow['Firstname'].' '.  $learnRow['Lastname'] . '</strong></h5>';
           // Output the day of the session
           echo '<p class="day-of-upcoming-sessions">' . $dayOfWeek . '</p>';
           echo '</div></div>';
@@ -124,9 +123,6 @@ continue;
           $flagImage =getFlagImage($row['language']);
           echo '<p class="language"><img class="flag" src="' . $flagImage . '" alt="language image" />' . $row['language'] . '</p>';
           
-
-          // $flagImage = '<script>getFlagImage("' . $row['language'] . '")</script>' ;
-          // echo '<p class="language"><img class="flag" src="' . $flagImage . '" alt="language image" />' . $row['language'] . '</p>';
           echo '<p class="level">' . $row['level'] . '</p>';
           echo '<p class="type"> '.  date("h:i A", strtotime($row['Time'])). '</p>';
           echo '<p class="duration">' . $row['Duration'] . ' Minutes</p>';
