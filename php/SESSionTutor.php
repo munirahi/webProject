@@ -125,7 +125,7 @@ function deleteSession(sessionId) {
     </header>
 <?php
 include 'connection.php'; // Make sure your database connection settings are correct
-
+//a
 
 // Current Sessions: Active sessions with today's date and time
 $sql_current = "

@@ -19,5 +19,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sessionID'])) {
     mysqli_close($conn);
 } else {
     echo "No session ID provided.";
-}
+}//a
 ?>
