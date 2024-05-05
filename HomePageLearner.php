@@ -23,43 +23,7 @@ include("learnerhp.php");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link rel="stylesheet" href="header_folder/headerPartner.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <?php 
-DEFINE('DB_user','root');
-DEFINE('DB_PSWD','');
-DEFINE('DB_HOST','localhost');
-DEFINE('DB_NAME','linguist');
-
-if(!$conn = mysqli_connect(DB_HOST,DB_user,DB_PSWD,DB_NAME)){
-  
-  die("connection failed. ");
-}
-
-  if(!mysqli_select_db($conn,DB_NAME)){
-    
-    echo '<script>console.log(" no db!"); </script>'; 
-
-    die("could not open the ".DB_NAME."database");
-  }
-  function getFlagImage($language) {
-    // Define a map of language names to flag image directories
-    $languageFlags = array(
-        "French" => "france.png",
-        "German" => "germanyy.png",
-        "English" => "united-states.png",
-        "Arabic" => "flag.png"
-    );
-
-    // Check if the provided language is in the map
-    if (array_key_exists($language, $languageFlags)) {
-        // Return the corresponding flag image directory
-        return "images/" . $languageFlags[$language];
-    } else {
-        // If the language is not found, return a default flag image
-        return "images/default-flag.png";
-    }
-}
-
-?>
+ 
 </head>
 <!-- Rest of your HTML content -->
 <script src="https://kit.fontawesome.com/5a18e3112f.js" crossorigin="anonymous"></script>
@@ -110,11 +74,12 @@ continue;
 }
           echo '<div class="request-card">';
           echo '<div class="learner-info">';
+          // Output learner's profile picture
           echo '<img src="images/' . $learnRow['image'] . '" alt="profile Picture" />';
 
           echo '<div class="day">';
           // Output learner's name
-          echo '<h5><strong>' . $learnRow['Firstname'].' '.  $learnRow['Lastname'] . '</strong></h5>';
+          echo '<h5><strong>' . $learnerRow['Firstname'].' '.  $learnerRow['Lastname'] . '</strong></h5>';
           // Output the day of the session
           echo '<p class="day-of-upcoming-sessions">' . $dayOfWeek . '</p>';
           echo '</div></div>';
@@ -123,6 +88,9 @@ continue;
           $flagImage =getFlagImage($row['language']);
           echo '<p class="language"><img class="flag" src="' . $flagImage . '" alt="language image" />' . $row['language'] . '</p>';
           
+
+          // $flagImage = '<script>getFlagImage("' . $row['language'] . '")</script>' ;
+          // echo '<p class="language"><img class="flag" src="' . $flagImage . '" alt="language image" />' . $row['language'] . '</p>';
           echo '<p class="level">' . $row['level'] . '</p>';
           echo '<p class="type"> '.  date("h:i A", strtotime($row['Time'])). '</p>';
           echo '<p class="duration">' . $row['Duration'] . ' Minutes</p>';
@@ -255,7 +223,7 @@ continue;
         while ($row = mysqli_fetch_assoc($result)) {
          
             $lrearnerId = $row['learner_id'];
-            $lQuery = "SELECT Firstname, Lastname, image FROM swssion WHERE L_id = '$learnerId'";
+            $lQuery = "SELECT Firstname, Lastname, image FROM session WHERE L_id = '$learnerId'";
             $lResult = mysqli_query($conn, $lQuery);
             $lRow = mysqli_fetch_assoc($lResult);
 
@@ -288,8 +256,7 @@ continue;
               
                <div class="current-sessions-card">
   <div class="carousel-cell">
-    <img
-     < class="current-session-img">
+    <img class="current-session-img">
        <a href="SESSionTutor.html"> <button class="view-more-button">View All Sessions</button></a>
      </class>
 
@@ -304,7 +271,7 @@ continue;
                             <div class="request-card">
                               <div class="learner-info">
                               <?php
-                              $query = "SELECT * FROM Review WHERE star >= 4";
+                              $query = "SELECT * FROM review WHERE star >= 4";
   $result = mysqli_query($ccon, $query);
 
   // Check if there are any recommended partners
