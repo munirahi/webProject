@@ -1,14 +1,11 @@
 <?php
 session_start(); // Start the session
-header("Cache-Control: no-cache, no-store, must-revalidate");
-header("Pragma: no-cache");
-header("Expires: 0");
-// Check if the user is not logged in
 if (!isset($_SESSION['user_id'])) {
-    // Redirect the user to the login page
-    header("Location:login.php");
-    exit(); // Stop further execution
-  }
+  header("Location: login.php");
+  exit();
+}
+
+
 include("learnerhp.php");
 
 ?>
@@ -25,39 +22,16 @@ include("learnerhp.php");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
  
 </head>
-<!-- Rest of your HTML content -->
 <script src="https://kit.fontawesome.com/5a18e3112f.js" crossorigin="anonymous"></script>
 <body>
-  <?php
-
-  $today = date("Y-m-d");
-  $user_id = $_SESSION['user_id'];
-  $sql = "SELECT * FROM session WHERE T_id='$user_id' AND Date= '$today'";  $Result = mysqli_query($ccon, $sql);
-  $ResultCheck = mysqli_num_rows($Result);
-  
-  if($ResultCheck > 0) {
-    while ($row = mysqli_fetch_assoc($Result)) {
-            $sessionId = $row['session_id'];
-      $sessionName = $row['session_name'];
-      echo "Session ID: " . $sessionId . "<br>";
-      echo "Session Name: " . $sessionName . "<br>";
-      echo "<br>";
-  }
-} else {
-  echo "No se found.";
-}
-
-//mysqli_close($ccon);
-?>
-
-
+ 
 <?php
 function displayThisWeekSessions() {
   include("php/connection.php");
 $currentDate = date('Y-m-d');
 $endDate = date('Y-m-d', strtotime('+7 days'));
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT * FROM session WHERE T_id='$user_id' AND Date BETWEEN '$currentDate' AND '$endDate';";
+$sql = "SELECT * FROM session WHERE L_id='$user_id' AND Date BETWEEN '$currentDate' AND '$endDate';";
 $weeksesstions = mysqli_query($ccon,$sql);
   if (mysqli_num_rows($weeksesstions) > 0) {
        while ($row = mysqli_fetch_assoc($weeksesstions)) {
@@ -65,7 +39,6 @@ $weeksesstions = mysqli_query($ccon,$sql);
         $sql_learner = "SELECT * FROM tutor WHERE  id = '$tutorId';";
         $learnThisWeek = mysqli_query($ccon, $sql_learner);
         if ($learnThisWeek) {
-          // Fetch the learner's name from the result set
           $learnRow = mysqli_fetch_assoc($learnThisWeek);}
         $dayOfWeek = date('l', strtotime($row['Date']));
 if($currentDate == $row['Date']){
@@ -366,7 +339,7 @@ continue;
           <span class="far fa-copyright"></span><span> 2024 All rights reserved.</span>
         </section>
       </div>
-      
+    
     </footer>
 </body>
 
