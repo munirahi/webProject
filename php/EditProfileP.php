@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("connection.php");
 
 
@@ -17,7 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $education=$_POST["education"];
     $experience=$_POST["experience"];
     $bio = $_POST["bio"];
-     
+  
+
+    if (!empty($_FILES["image"]["name"])) {
     $fileName = $_FILES["image"]["name"];
     $fileSize = $_FILES["image"]["size"];
     $tmpName = $_FILES["image"]["tmp_name"];
@@ -48,28 +51,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
        
       move_uploaded_file($tmpName, $destination);
     }
+  }
 
-
-    // Validate 
-    if (mysqli_connect_errno()) {
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        exit();
-    }
 
    
     if (isset($_POST['save'])) {
         //validate email and pass
         /* add condition to identify user */
 
-        $sql_check = "SELECT * FROM tutor WHERE Email='$email' AND ID != 1";
+      
+
+        $sql_check = "SELECT * FROM tutor WHERE Email='$email' AND ID != $_SESSION['user_id'] ";
       $result_check = mysqli_query($conn, $sql_check);
+  
+      $selected_languages = []; // Store selected languages from checkboxes
+      foreach ($_POST['languages'] as $language) {
+          $selected_languages[] = $language;
+      }
+
+      $sql_languages = "DELETE FROM tutor_languages WHERE P_ID= $_SESSION['user_id'] "; // Delete existing languages
+      mysqli_query($conn, $sql_languages);
+
+      // Insert selected languages into tutor_languages table
+      foreach ($selected_languages as $language) {
+          $sql_insert_language = "INSERT INTO tutor_languages (P_ID, Language) VALUES ($_SESSION['user_id'] , '$language')";
+          mysqli_query($conn, $sql_insert_language);
+      }
+    
 
       if (mysqli_num_rows($result_check) > 0) {
         $error = " Email already exists. Please choose a different email.";
       }else{
 
-        $sql = "UPDATE tutor SET Firstname='$firstname', Lastname='$lastname', Email='$email', password='$password',age='$age',gender='$gender',PhoneNumber='$phonenum' ,city='$city',profLevel='$profLevel',bio='$bio',experience='$experience',eduction='$education',PP='$newImageName'  WHERE ID=1";
-        
+        $sql = "UPDATE tutor SET Firstname='$firstname', Lastname='$lastname', Email='$email', password='$password',age='$age',gender='$gender',PhoneNumber='$phonenum' ,city='$city',profLevel='$profLevel',bio='$bio',experience='$experience',eduction='$education' ";
+           // Update PP field only if a new image was uploaded
+           if (!empty($_FILES["image"]["name"])) {
+            $sql .= ", PP='$newImageName'";
+        }
+
+        $sql .= " WHERE ID=$_SESSION['user_id']";
+
         if (mysqli_query($conn, $sql)) {
             $success = true;
             $successM="Profile updated successfully!";
@@ -87,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $education=$_POST["education"];
             $experience=$_POST["experience"];
             $bio = $_POST["bio"];
-            $image=$_POST["image"];
+            $newImageName=$_POST["image"];
         } else {
             
             echo "Update failed: " . mysqli_error($conn);
@@ -95,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     } else if (isset($_POST['delete']) && $_POST['confirm_delete'] === "yes" ) {
-        $sql = "DELETE FROM tutor WHERE ID=1"; // Replace with your actual delete query
+        $sql = "DELETE FROM tutor WHERE ID=$_SESSION['user_id']"; // Replace with your actual delete query
     if (mysqli_query($conn, $sql)) {
       echo "Account deleted successfully.";
       // Redirect user to a relevant page (e.g., login)
@@ -108,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 /* retrieve user ID from session/cookie */
-$user_id = 1;
+$user_id = $_SESSION['user_id'] ;
 $sql = "SELECT * FROM tutor WHERE ID='$user_id'";
 $result = mysqli_query($conn, $sql);
 
@@ -126,8 +147,21 @@ if (mysqli_num_rows($result) > 0) {
     $phonenum = $user["PhoneNumber"];
     $profLevel = $user["profLevel"];
     $bio = $user["bio"];
-    $image=$user["PP"];
-    $imageSrc = 'data:image/jpeg;base64,' . base64_encode($image);
+    $newImageName=$user["PP"];
+      // Prepare checkbox values based on user's languages
+      $sql_languages = "SELECT Language FROM tutor_languages WHERE P_ID= $_SESSION['user_id'] ";
+      $result_languages = mysqli_query($conn, $sql_languages);
+  $languages = [];
+  while ($row = mysqli_fetch_assoc($result_languages)) {
+      $languages[] = $row['Language'];
+  }
+  $checked_languages = array_fill_keys($languages, 'checked');
+    // Validate 
+    if (mysqli_connect_errno()) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        exit();
+    }
+   
     
 } else {
     echo "Error retrieving user data.";

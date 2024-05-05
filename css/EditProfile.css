@@ -6,6 +6,7 @@
     
     
 }
+
 body{
    background-color: #F8F9FA;
     justify-content: center;
@@ -17,7 +18,7 @@ body{
    
 }
 .error-message {
-  color: red;
+  color: rgb(198, 37, 37);
   font-weight: bold;
   margin-bottom: 10px;
   display: block;
@@ -83,8 +84,27 @@ li a{
 #ul1 li a:hover{
   color: rgb(144, 155, 164);
 }
+label{
+    margin-top: 10px;
+   position: relative;
+   float: left;
+   font-size: small;
+   left:10px;
+   color: #999; /* update */
+    
+
+}
 
 
+
+.input-field{
+    width: 450px;
+    height: 25px;
+    padding: 0;
+    margin: 10px;
+    margin-bottom: 15px;
+    background: linear-gradient(rgb(74, 108, 168), rgb(159, 172, 196));
+}
 
 #main-nav{
   background-color:#2E4D83/*rgb(23,58,118)*/;
@@ -171,7 +191,7 @@ border-radius: 100%;
     margin-top: 20px;
    margin-bottom: 150px;
     width: 500px ;
-    height: 750px ;
+    height: 790px ;
     text-align: center;
   
 
@@ -250,7 +270,7 @@ input{
     border: 0;
     outline: none;
     margin: 10px;
-    margin-top: 40px;
+    margin-top: 20px;
     padding:8px 15px;
     border-radius: 20px;
     color: whitesmoke;
@@ -442,3 +462,4 @@ color: #CDB309;
     margin: 5px 0;
   }
 }
+
