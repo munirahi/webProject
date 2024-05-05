@@ -1,4 +1,4 @@
-<?php
+ <?php
     DEFINE('DB_USER','root');
     DEFINE('DB_PSWD','');
     DEFINE('DB_HOST','localhost:4306');
@@ -193,7 +193,41 @@
             appointmentHoursContainer.appendChild(appointmentHour);
         }
     }
+
+    // document.querySelectorAll(".appointment-hour").forEach(hour => {
+    //     // Check if the time exists in the database
+    //     if (
+    //         <?php
+    //         if (isset($existingTimes)) {
+    //             echo "true";
+    //         } else {
+    //             echo "false";
+    //         }
+    //         ?>
+    //     ) {
+    //         // Get the day and time for the current appointment hour
+    //         // const day = hour.getAttribute("data-day");
+    //         // const time = parseInt(hour.getAttribute("data-time"));
+
+    //         // Check if the time exists for the current day in the database
+    //         if (
+    //             <?php
+    //             if (isset($existingTimes)) {
+    //                 foreach ($existingTimes as $date => $times) {
+    //                     foreach ($times as $dbTime) {
+    //                         echo "(day == '$date' && time == $dbTime) || ";
+    //                     }
+    //                 }
+    //             }
+    //             ?>
+    //         ) {
+    //             // Highlight the appointment hour
+    //             hour.classList.add("selected");
+    //         }
+    //     }
+    // });
 });
+
 
 
  // Handle form submission
@@ -234,6 +268,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       // Decode the JSON data into a PHP array
       $selectedTimes = json_decode($_POST['jsondata']);
 
+       // Loop through the updated data and update the database accordingly
+    foreach ($selectedTimes as $date => $times) {
+      // First, delete existing records for the date
+      $sql_delete = "DELETE FROM available_times WHERE Date = '$date'";
+      $conn->query($sql_delete);
+    }
+
       // Check if decoding was successful
       if ($selectedTimes !== null) {
           // Access the selected appointment times
@@ -256,7 +297,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
       echo "No JSON data received.";
   }
-}else echo 'hiiiiiiiiiiiiii1';
+
+//   $sql = "SELECT * FROM available_times";
+// $result = mysqli_query($conn, $sql);
+
+// if ($result) {
+//     $existingTimes = [];
+//     while ($row = mysqli_fetch_assoc($result)) {
+//         $existingTimes[$row['Date']][] = $row['Time'];
+//     }
+// } else {
+//     echo "Error fetching existing appointment times: " . mysqli_error($conn);
+// }
+}
+// else echo 'hiiiiiiiiiiiiii1';
+
+
 
 // Close the database connection
 $conn->close();
