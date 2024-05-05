@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Insert user data into respective table
         if ($formType === "learner") {
             $location = mysqli_real_escape_string($conn, $_POST["location"]) ;
-            if (!empty($_FILES["image"]["name"])) {
+            if (!empty($_FILES["limage"]["name"])) {
             $fileName = $_FILES["limage"]["name"];
             $fileSize = $_FILES["limage"]["size"];
             $tmpName = $_FILES["limage"]["tmp_name"];
@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $professionlev= $_POST["profLevel"];
             
 
-            if (!empty($_FILES["image"]["name"])) {
+            if (!empty($_FILES["pimage"]["name"])) {
             $fileName = $_FILES["pimage"]["name"];
             $fileSize = $_FILES["pimage"]["size"];
             $tmpName = $_FILES["pimage"]["tmp_name"];
@@ -123,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
 
 
-            $sql = "INSERT INTO tutor (Email ,PP, Firstname, Lastname,age, gender, password, PhoneNumber, city,profLevel ,bio)
+            $sql = "INSERT INTO tutor (Email ,image, Firstname, Lastname,age, gender, password, PhoneNumber, city,profLevel ,bio)
                     VALUES ('$email', '$newImageName','$firstname', '$lastname', '$age','$gender','$password', '$phonenum', '$city', '$professionlev','$bio')";
            
 
