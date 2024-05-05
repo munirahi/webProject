@@ -9,7 +9,7 @@
 
     if(!mysqli_select_db($conn, DB_NAME))
         die("Could not open the ".DB_NAME." database.");
-    else
+   
     session_start();
 ?>
 <!DOCTYPE html>
@@ -165,109 +165,50 @@
             <div class="status-div inner-div">
                 <h5>Requests Status</h5>
                 <div class="inner-status">
-                    <?php
+                   
+        <?php
 
-$sql = "SELECT * FROM request,tutor where L_ID='" .$_SESSION['user_id']. "' AND P_ID = tutor.ID" ; 
-$result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0) { // $result=="false"
-    while($row = mysqli_fetch_assoc($result)) {
+$sql2 = "SELECT * FROM request,tutor where L_ID='" .$_SESSION['user_id']. "' AND P_ID = tutor.ID" ; 
+$result2 = mysqli_query($conn, $sql2);
+if (mysqli_num_rows($result2) > 0) { // $result=="false"
+    while($row2 = mysqli_fetch_assoc($result2)) {
 
-        if(!$row["Status"] == "Pending"){
+        if($row2["Status"] == "accepted" || $row2["Status"] == "rejected"){
    
                echo     '<div class="status-cell">
                         <div class="acc-info">
                             <img src="images/maleIcon3.png" alt="account image">
                             <div class="status-info">
-                               <h6><i class="fa-solid fa-user"></i> '.$row['Firstname']. " "  .$row['Lastname'].'</h6>
-                               <h6 class="status" id="'.$row['Status'].'">'.$row['Status'].'</h6>
+                               <h6><i class="fa-solid fa-user"></i> '.$row2['Firstname']. " "  .$row2['Lastname'].'</h6>
+                               <h6 class="status" id="'.$row2['Status'].'">'.$row2['Status'].'</h6>
                                <button class="edit" id="disabled">Edit</button>
                                 <button class="cancel" id="disabled">Cancel</button>
                             </div>
                            </div>
                     </div>';
 
-    } else{
+    } elseif($row2["Status"] == "pending"){
+        $status = $row2["Status"];
         echo     '<div class="status-cell">
         <div class="acc-info">
             <img src="images/maleIcon3.png" alt="account image">
             <div class="status-info">
-               <h6><i class="fa-solid fa-user"></i> '.$row['Firstname']. " "  .$row['Lastname'].'</h6>
-               <h6 class="status" id="'.$row['Status'].'">'.$row['Status'].'</h6>
+               <h6><i class="fa-solid fa-user"></i> '.$row2['Firstname']. " "  .$row2['Lastname'].'</h6>
+               <h6 class="status" id="pending">'.$row2['Status'].'</h6>
                <button class="edit" >Edit</button>
                 <button class="cancel" >Cancel</button>
             </div>
            </div>
     </div>';
-    }
+    }else echo 'no result2';
 
 
-}}
+}}else echo 'no result';
+
 
                 ?>
 
-                    <!-- <div class="status-cell">
-                        <div class="acc-info">
-                         <img src="images/femaleIcon2.png" alt="account image">
-                         <div class="status-info">
-                            <h6><i class="fa-solid fa-user"></i> Nina Grace</h6>
-                            <h6 class="status" id="pending">Pending</h6>
-                            <a href="EditRequest.php"><button class="edit">Edit</button></a>
-                          
-                                <button class="cancel">Cancel</button>
-                         </div>
-                        </div>
-                    </div>
-
-                    <div class="status-cell">
-                        <div class="acc-info">
-                            <img src="images/femaleIcon3.png" alt="account image">
-                            <div class="status-info">
-                               <h6><i class="fa-solid fa-user"></i> Cath Roberts</h6>
-                               <h6 class="status"id="rejected">Rejected</h6>
-                               <button class="edit"id="disabled">Edit</button>
-                                <button class="cancel "id="disabled">Cancel</button>
-                            </div>
-                           </div>  
-                    </div>
-
-                    <div class="status-cell">
-                        <div class="acc-info">
-                            <img src="images/maleIcon.png" alt="account image">
-                            <div class="status-info">
-                               <h6><i class="fa-solid fa-user"></i> Mason Bell</h6>
-                               <h6 class="status"id="pending">Pending</h6>
-                               
-                            <a href="EditRequest.html"><button class="edit">Edit</button></a>
-                                <button class="cancel">Cancel</button>
-                            </div>
-                           </div>  
-                    </div>
-
-                    <div class="status-cell">
-                        <div class="acc-info">
-                            <img src="images/maleIcon2.png" alt="account image">
-                            <div class="status-info">
-                               <h6><i class="fa-solid fa-user"></i> Drew Lawrence</h6>
-                               <h6 class="status"id="pending">Pending</h6>
-                              
-                            <a href="EditRequest.html"><button class="edit">Edit</button></a>
-                                <button class="cancel">Cancel</button>
-                            </div>
-                           </div>  
-                    </div>
-
-                    <div class="status-cell">
-                        <div class="acc-info">
-                            <img src="images/femaleIcon3.png" alt="account image">
-                            <div class="status-info">
-                               <h6><i class="fa-solid fa-user"></i> Rosanna Howard</h6>
-                               <h6 class="status" id="pending">Pending</h6>
-                               
-                            <a href="EditRequest.html"><button class="edit">Edit</button></a>
-                                <button class="cancel">Cancel</button>
-                        </div>  
-                    </div> -->
-
+                   
                     
 
                 </div>
