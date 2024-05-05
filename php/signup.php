@@ -12,17 +12,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // Common user data
 
-        $firstname = $_POST["Firstname"];
-        $lastname = $_POST["Lastname"];
-        $email = $_POST["email"];
-        $password = $_POST["password"];
-        $city = $_POST["city"];
+        $firstname = mysqli_real_escape_string($conn,$_POST["Firstname"]);
+        $lastname = mysqli_real_escape_string($conn,$_POST["Lastname"]);
+        $email = mysqli_real_escape_string($conn, $_POST["email"]) ;
+        $password = mysqli_real_escape_string($conn, $_POST["password"]) ;
+        $city = mysqli_real_escape_string($conn,$_POST["city"]);
         
         
         
         // Insert user data into respective table
         if ($formType === "learner") {
-            $location = $_POST["location"];
+            $location = mysqli_real_escape_string($conn, $_POST["location"]) ;
             if (!empty($_FILES["image"]["name"])) {
             $fileName = $_FILES["limage"]["name"];
             $fileSize = $_FILES["limage"]["size"];
@@ -70,11 +70,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     //redirect
         }
         } elseif ($formType === "partner") {
-            $age = $_POST["age"];
+            $age = mysqli_real_escape_string($conn, $_POST["age"]);
             $gender = $_POST["Gender"];
-            $phonenum = $_POST["phonenum"];
-            $bio = $_POST["bio"];
-            $professionlev=$_POST["profLevel"];
+            $phonenum = mysqli_real_escape_string($conn, $_POST["phonenum"]);
+            $bio = mysqli_real_escape_string($conn, $_POST["bio"]);
+            $professionlev= $_POST["profLevel"];
             
 
             if (!empty($_FILES["image"]["name"])) {
@@ -131,13 +131,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     
         }
     }
+    
         if (empty($error) && empty($errorP)) {
           
             
 
         if (mysqli_query($conn, $sql)) {
-            $tutorId = mysqli_insert_id($conn); // Retrieve the ID of the newly inserted tutor
-
+            $Id = mysqli_insert_id($conn); // Retrieve the ID of the newly inserted tutor
+            if ($formType === "partner") {
             // Inserting languages into tutor_languages table
             if (isset($_POST['languages'])) {
                 
@@ -145,15 +146,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 foreach ($languages as $language) {
                     
                     $language = mysqli_real_escape_string($conn, $language);
-                    $sql = "INSERT INTO tutor_languages (P_ID, Language) VALUES ('$tutorId', '$language')";
+                    $sql = "INSERT INTO tutor_languages (P_ID, Language) VALUES ('$Id', '$language')";
                     mysqli_query($conn, $sql);
                 }
             }
           
-           // $_SESSION['user_id']= 
-            //header("Location: .php");
-            //exit();
+            $_SESSION['user_id']= $Id ;
+            header("Location: ../tutor_Home_page.php");
+            exit();
+           // echo "New record created successfully";
+        }elseif($formType === "learner"){
+          // $_SESSION['user_id']= $Id ;
+           // header("Location: .php");
+           // exit();
             echo "New record created successfully";
+        }
+    
         } else {
             
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -164,6 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 
 <html>
 <head> 
