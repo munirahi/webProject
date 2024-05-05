@@ -58,16 +58,15 @@ $currentDate = date('Y-m-d');
 $endDate = date('Y-m-d', strtotime('+7 days'));
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT * FROM session WHERE T_id='$user_id' AND Date BETWEEN '$currentDate' AND '$endDate';";
-$weeksesstions = mysqli_query($conn,$sql);
+$weeksesstions = mysqli_query($ccon,$sql);
   if (mysqli_num_rows($weeksesstions) > 0) {
        while ($row = mysqli_fetch_assoc($weeksesstions)) {
-        $tutorId = $row['L_id'];
+        $tutorId = $row['T_id'];
         $sql_learner = "SELECT * FROM tutor WHERE  id = '$tutorId';";
-        $learnThisWeek = mysqli_query($conn, $sql_learner);
+        $learnThisWeek = mysqli_query($ccon, $sql_learner);
         if ($learnThisWeek) {
           // Fetch the learner's name from the result set
           $learnRow = mysqli_fetch_assoc($learnThisWeek);}
-
         $dayOfWeek = date('l', strtotime($row['Date']));
 if($currentDate == $row['Date']){
 continue;
@@ -79,7 +78,7 @@ continue;
 
           echo '<div class="day">';
           // Output learner's name
-          echo '<h5><strong>' . $learnerRow['Firstname'].' '.  $learnerRow['Lastname'] . '</strong></h5>';
+          echo '<h5><strong>' . $learnRow['Firstname'].' '.  $learnRow['Lastname'] . '</strong></h5>';
           // Output the day of the session
           echo '<p class="day-of-upcoming-sessions">' . $dayOfWeek . '</p>';
           echo '</div></div>';
