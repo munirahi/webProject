@@ -579,7 +579,7 @@ continue;
         </section>
 
 
-        <section class="new-requests-container">
+        <!-- <section class="new-requests-container">
           <h3>New Requests</h3>
           <br />
           <section class="requests">
@@ -653,7 +653,7 @@ continue;
             
             </div>
               
-          </section>
+          </section> -->
 
 
 
@@ -726,19 +726,19 @@ continue;
               </section>
             </div>
             <div class="request-card">
-              <div class="learner-info">
-                <img src="images/maleIcon.png" alt="profile Picture" />
-                <h5><strong>Dylan Mark</strong></h5>
-              </div>
+                      <div class="learner-info">
+                        <img src="images/maleIcon.png" alt="profile Picture" />
+                        <h5><strong>Dylan Mark</strong></h5>
+                      </div>
 
-              <section class="incard-elements">
-                <p class="language">
-                  <img class="flag" src="images/france.png" alt="French" />
-                  English
-                </p>
-                <p class="level">Intermediate</p>
-                <p class="type">Session</p>
-                <p class="duration">60 Minutes</p>
+                      <section class="incard-elements">
+                        <p class="language">
+                          <img class="flag" src="images/france.png" alt="French" />
+                          English
+                        </p>
+                        <p class="level">Intermediate</p>
+                        <p class="type">Session</p>
+                        <p class="duration">60 Minutes</p>
               </section>
             </div>
             <div class="request-card">
@@ -757,14 +757,28 @@ continue;
                 <p class="duration">60 Minutes</p>
               </section>
             </div> -->
-          </section><!-- end of requests -->
+          <!-- </section> end of requests 
           <a href="tutorReq.html">
             <button class="view-more-button">View All Requests</button></a
           >
-        </section> <!-- end of requests cotainer -->
+        </section>  end of requests cotainer 
       </section>
-    </section>
+    </section> -->
 
+                <section class="new-requests-container">
+                    <h3>Newest Requests </h3>
+                    <br>
+                    <section class="requests">
+                        
+                      <?php getClosestDateRequests(); ?>
+                       
+                    </section>
+                    <a href="tutorReq.html"> <button class="view-more-button">View All Requests</button></a>
+
+                </section>
+
+                </section>
+            </section>
     <footer>
       <div class="main-content">
         <div class="left box">

@@ -80,6 +80,100 @@ if ($tutorsLagsResult && mysqli_num_rows($tutorsLagsResult) > 0) {
         $tutorLanguages[] = $tutorsLags['Language'];
     }
 }
+// find newest requests 
+
+// $sqlForreq = "SELECT * FROM request WHERE Status='Pending' And P_ID = '$user_id';";
+// $resultForreq = mysqli_query($conn, $sqlForreq);
+
+// include('flag.php');
+
+// Function to retrieve requests with the closest date to the current date
+function getClosestDateRequests() {
+    $user_id = $_SESSION['user_id'];
+    include("connection.php");
+    $sqlForClosestDate = "SELECT * FROM request WHERE Status='Pending' AND P_ID = '$user_id' ORDER BY Date ASC LIMIT 5;";
+    $resultForClosestDate = mysqli_query($conn, $sqlForClosestDate);
+
+    // Check if there are rows returned
+    if(mysqli_num_rows($resultForClosestDate) > 0) {
+        
+        // Loop through the results and display each request
+        while($row = mysqli_fetch_assoc($resultForClosestDate)) {
+
+            $learner_id = $row['L_ID'];
+            $sqlLearner = "SELECT * FROM learner WHERE ID = '$learner_id'";
+            $resultLearner = mysqli_query($conn, $sqlLearner);
+            if(mysqli_num_rows($resultLearner) > 0) {
+                $learnerData = mysqli_fetch_assoc($resultLearner);
+                $learner_name = $learnerData['Firstname'] . ' ' . $learnerData['Lastname'];
+                $lImage = $learnerData['image'];
+            } else {
+                $learner_name = "Unknown"; // Default value if learner is not found
+            }
+
+            echo '<div class="request-card">';
+            echo '<div class="learner-info">';
+            echo '<img src="images/'.$lImage.'" alt="profile Picture">';
+            echo '<h5><strong>'.$learner_name.'</strong></h5>';
+            echo '</div>';
+
+            echo '<section class="incard-elements">';
+            // Display request details getFlagImage($row['language']);
+            echo '<p class="language"><img class="flag" src="'.getFlagImage($row['Language']).'" alt="flag">'.$row['Language'].'</p>'; 
+            echo '<p class="level">'. $row['Level']. '</p>'; 
+            echo '<p class="Date">' . $row['Date'] . '</p>'; 
+            echo '<p class="duration">'.$row['Duration'].' Minutes</p>'; 
+            echo '</section>';
+            
+            echo '</div>';
+        }
+        
+    } else {
+        echo "No pending requests found.";
+    }
+}
+
+// Function to retrieve all pending requests
+function getAllPendingRequests($conn, $user_id) {
+    $sqlForAllPending = "SELECT * FROM request WHERE Status='Pending' AND P_ID = '$user_id';";
+    $resultForAllPending = mysqli_query($conn, $sqlForAllPending);
+
+    // Check if there are rows returned
+    if(mysqli_num_rows($resultForAllPending) > 0) {
+          // Loop through the results and display each request
+          while($row = mysqli_fetch_assoc($resultForAllPending)) {
+
+            $learner_id = $row['L_ID'];
+            $sqlLearner = "SELECT * FROM learner WHERE ID = '$learner_id'";
+            $resultLearner = mysqli_query($conn, $sqlLearner);
+            if(mysqli_num_rows($resultLearner) > 0) {
+                $learnerData = mysqli_fetch_assoc($resultLearner);
+                $learner_name = $learnerData['Firstname'] . ' ' . $learnerData['Lastname'];
+                $lImage = $learnerData['image'];
+            } else {
+                $learner_name = "Unknown"; 
+            }
+
+            echo '<div class="request-card">';
+            echo '<div class="learner-info">';
+            echo '<img src="images/'.$lImage.'" alt="profile Picture">';
+            echo '<h5><strong>'.$learner_name.'</strong></h5>'; 
+            echo '</div>';
+            
+            echo '<section class="incard-elements">';
+            // Display request details getFlagImage($row['language']);
+            echo '<p class="language"><img class="flag" src="'.getFlagImage($row['language']).'" alt="flag">'.$row['Language'].'</p>'; 
+            echo '<p class="level">'. $row['Level']. '</p>'; 
+            echo '<p class="Date">' . $row['Date'] . '</p>'; 
+            echo '<p class="duration">'.$row['Duration'].' Minutes</p>'; 
+            echo '</section>';
+            
+            echo '</div>';}
+    } else {
+        echo "No pending requests found.";
+    }
+}
+
 // Close the database connection
 mysqli_close($conn);
 ?>
