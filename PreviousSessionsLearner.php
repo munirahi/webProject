@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="css/footer.css" />
     <link rel="stylesheet" type="text/css" href="css/sidebar-tutor.css" />
     <link rel="stylesheet" type="text/css" href="css/PreviousSessionsTutor.css"/>
+    <link rel="stylesheet" type="text/css" href="css/SessionLearner.css"/>
+    <link rel="stylesheet" type="text/css" href="css/PreviousSessionsTutor.css"/>
+
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -100,11 +104,12 @@
                   <i class="rating__star far fa-star"></i>
                 </div>
                 <div class="textarea">
-                  <textarea cols="21" placeholder="Describe your experience.."></textarea>
+                  <form action="save_feedback.php" method="POST">
+                    <textarea name="description" cols="21" placeholder="Describe your experience.."></textarea>
+                    <input type="hidden" name="rating" id="rating-value" value="0">
+                    <button class="post-btn" type="submit">Post</button>
+                  </form>
                 </div>
-                <form action="PreviousSessionsLearner.html">
-                  <button class="post-btn" submit>Post</button>
-                </form>
               </div>
 
             </div>
@@ -134,11 +139,12 @@
                   <i class="rating__star far fa-star"></i>
                 </div>
                 <div class="textarea">
-                  <textarea cols="21" placeholder="Describe your experience.."></textarea>
+                  <form action="save_feedback.php" method="POST">
+                    <textarea name="description" cols="21" placeholder="Describe your experience.."></textarea>
+                    <input type="hidden" name="rating" id="rating-value" value="0">
+                    <button class="post-btn" type="submit">Post</button>
+                  </form>
                 </div>
-                <form action="PreviousSessionsLearner.html">
-                  <button class="post-btn" submit>Post</button>
-                </form>
               </div>
 
             </div>
@@ -168,11 +174,12 @@
                   <i class="rating__star far fa-star"></i>
                 </div>
                 <div class="textarea">
-                  <textarea cols="21" placeholder="Describe your experience.."></textarea>
+                  <form action="save_feedback.php" method="POST">
+                    <textarea name="description" cols="21" placeholder="Describe your experience.."></textarea>
+                    <input type="hidden" name="rating" id="rating-value" value="0">
+                    <button class="post-btn" type="submit">Post</button>
+                  </form>
                 </div>
-                <form action="PreviousSessionsLearner.html">
-                  <button class="post-btn" submit>Post</button>
-                </form>
               </div>
 
             </div>
@@ -202,12 +209,12 @@
                     <i class="rating__star far fa-star"></i>
                   </div>
                   <div class="textarea">
-                    <textarea cols="21" placeholder="Describe your experience.."></textarea>
+                    <form action="save_feedback.php" method="POST">
+                      <textarea name="description" cols="21" placeholder="Describe your experience.."></textarea>
+                      <input type="hidden" name="rating" id="rating-value" value="0">
+                      <button class="post-btn" type="submit">Post</button>
+                    </form>
                   </div>
-                  <form action="PreviousSessionsLearner.html">
-                    <button class="post-btn" submit>Post</button>
-                  
-                  </form>
                 </div>
 
               </div>
@@ -227,22 +234,23 @@
                   <p class="duration">60 Minutes</p>
                 </section>
                 <div class="item">
-                  <div class="rating">
-                    <i class="rating__star far fa-star"></i>
-                    <i class="rating__star far fa-star"></i>
-                    <i class="rating__star far fa-star"></i>
-                    <i class="rating__star far fa-star"></i>
-                    <i class="rating__star far fa-star"></i>
-                  </div>
-                  <div class="textarea">
-                    <textarea cols="21" placeholder="Describe your experience.."></textarea>
-                  </div>
-                  <form action="PreviousSessionsLearner.html">
-                    <button class="post-btn" submit>Post</button>
-                  </form>
-                </div>
+  <div class="rating">
+    <i class="rating__star far fa-star"></i>
+    <i class="rating__star far fa-star"></i>
+    <i class="rating__star far fa-star"></i>
+    <i class="rating__star far fa-star"></i>
+    <i class="rating__star far fa-star"></i>
+  </div>
+  <div class="textarea">
+    <form action="save_feedback.php" method="POST">
+      <textarea name="description" cols="21" placeholder="Describe your experience.."></textarea>
+      <input type="hidden" name="rating" id="rating-value" value="0">
+      <button class="post-btn" type="submit">Post</button>
+    </form>
+  </div>
+</div>
 
-              </div>
+              
   
               <div class="request-card">
                 <div class="learner-info">
@@ -268,13 +276,13 @@
                     <i class="rating__star far fa-star"></i>
                   </div>
                   <div class="textarea">
-                    <textarea cols="21" placeholder="Describe your experience.."></textarea>
+                    <form action="save_feedback.php" method="POST">
+                      <textarea name="description" cols="21" placeholder="Describe your experience.."></textarea>
+                      <input type="hidden" name="rating" id="rating-value" value="0">
+                      <button class="post-btn" type="submit">Post</button>
+                    </form>
                   </div>
-                  <form action="PreviousSessionsLearner.html">
-                    <button class="post-btn" submit>Post</button>
-                  </form>
                 </div>
-
               </div>
               
           </section>
