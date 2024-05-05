@@ -9,10 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lastname = $_POST["lastname"];
     $email = $_POST["email"];
     $password = $_POST["password"];
+    $profLevel = $_POST["profLevel"];
     $city = $_POST["city"];
     $location = $_POST["location"];
     
-    
+    if (!empty($_FILES["image"]["name"])) {
     $fileName = $_FILES["image"]["name"];
     $fileSize = $_FILES["image"]["size"];
     $tmpName = $_FILES["image"]["tmp_name"];
@@ -39,12 +40,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     else{
         
         $newImageName = $fileName;
-        $destination = 'images/' . $newImageName;
+        $destination = 'uploads/' . $newImageName;
        
       move_uploaded_file($tmpName, $destination);
     }
 
-
+    }
 
 
     // Validate 
@@ -69,8 +70,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          
   
 
-        $sql = "UPDATE learner SET Firstname='$firstname', Lastname='$lastname', email='$email', password='$password', city='$city', location='$location',image='$newImageName' WHERE ID=2";
-        
+        $sql = "UPDATE learner SET Firstname='$firstname', Lastname='$lastname', email='$email', password='$password', city='$city', location='$location',profLevel='$profLevel' ";
+        if (!empty($_FILES["image"]["name"])) {
+            $sql .= ", image='$newImageName'";
+        }
+
+        $sql .= " WHERE ID=2";
         if (mysqli_query($conn, $sql)) {
             $success = true;
             $successM="Profile updated successfully!";
@@ -81,9 +86,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lastname = $_POST["lastname"];
             $email = $_POST["email"];
             $password = $_POST["password"];
+            $profLevel = $_POST["profLevel"];
             $city = $_POST["city"];
             $location = $_POST["location"];
-            $image=$_POST["image"];
+            $newImageName=$_POST["image"];
         } else {
             
             echo "Update failed: " . mysqli_error($conn);
@@ -115,9 +121,10 @@ if (mysqli_num_rows($result) > 0) {
     $lastname = $user['Lastname'];
     $email = $user['email'];
     $password = $user['password'];
+    $profLevel = $user["profLevel"];
     $city = $user['city'];
     $location = $user['location'];
-    $image=$user["image"];
+    $newImageName=$user["image"];
   
 
 } else {
@@ -323,6 +330,12 @@ echo "<script>document.getElementById('error').textContent = '$error';</script>"
             <input type="text" id="email" name="email" value="<?php echo $email; ?>"> <!-- type email?-->
             <label for="password">Password</label>
             <input type="text" id="password" name="password" value="<?php echo $password; ?>" >
+          <label for="profLevel">Profession Level</label>
+            <select name="profLevel" class="input-field" required>
+        <option value="beginner" <?php if ($profLevel == 'beginner') echo 'selected'; ?> >Beginner</option>
+        <option value="intermediate" <?php if ($profLevel == 'intermediate') echo 'selected'; ?>>Intermediate</option>
+        <option value="advanced" <?php if ($profLevel == 'advanced') echo 'selected'; ?> >Advanced</option>
+        </select>
             <label for="city">City</label>
             <input type="text" id="city" name="city" value="<?php echo $city; ?>"> <!-- choices?-->
             <label for="location">Location</label>
