@@ -94,12 +94,12 @@ $sql = "SELECT * FROM session WHERE T_id='$user_id' AND Date= '$today'";
 $Result = mysqli_query($conn,$sql);
 $ResultCheck = mysqli_num_rows($Result);
 
-if($ResultCheck > 0) {
+// if($ResultCheck > 0) {
+  //SESSionTutor.php
 
-
-} else {
-  echo '<script>console.log("not good!"); </script>'; 
-}
+// } else {
+//   echo '<script>console.log("not good!"); </script>'; 
+// }
 ?>
 <?php
 // Function to display this week's sessions
@@ -181,7 +181,7 @@ continue;
             <li class="list1-item">
               <a href="tutor_Home_page.html" class="list1-item">Home</a>
             </li>
-            <li class="list1-item"><a href="SESSionTutor.html">Sessions</a></li>
+            <li class="list1-item"><a href="php/SESSionTutor.php">Sessions</a></li>
             <li class="list1-item"><a href="tutorReq.html">Requests</a></li>
             <li class="list1-item">
               <a href="SupportsPartner.html">Support</a>
@@ -243,7 +243,7 @@ continue;
               </li>
               <li id="Languages">
                 <span>Teaching Languages</span>
-                <span>English, Spanish, French</span>
+                <span> <?php displayLanguages(); ?></span>
               </li>
               <li id="Cultural backgrounds">
                 <span>Cultural backgrounds</span>
@@ -279,33 +279,7 @@ continue;
 
             <section class="Today-sessions">
 
-                   <!-- 
-              <div class="current-sessions-card">
-                <div class="carousel-cell">
-                  <img
-                    class="current-session-img"
-                    src="images/maleIcon3.png"
-                    alt="current-session"
-                  />
-                  <div class="card-inner">
-                    <h4><strong>Andrew Paul</strong></h4>
-                    <section class="incard-elements-sessions">
-                      <p class="language">
-                        <img
-                          class="flag"
-                          src="images/france.png"
-                          alt="French"
-                        />
-                        French
-                      </p>
-                      <p class="level">Beginner</p>
-                      <p class="type">Discussion</p>
-                      <p class="duration">10 Minutes</p>
-                    </section>
-                    <a class="enter-btn-current" href="#">Join</a>
-                  </div>
-                </div>
-              </div> -->
+      
 
                   <?php
                  
@@ -417,87 +391,6 @@ continue;
            </div>
         <?php endforeach;} ?>
 
-
-              <!-- <div class="current-sessions-card">
-                <div class="carousel-cell">
-                  <img
-                    class="current-session-img"
-                    src="images/femaleIcon3.png"
-                    alt="current-session"
-                  />
-                  <div class="card-inner">
-                    <h4><strong>Olivia Andrew </strong></h4>
-                    <section class="incard-elements-sessions">
-                      <p class="language">
-                        <img
-                          class="flag"
-                          src="images/france.png"
-                          alt=" French"
-                        />
-                        French
-                      </p>
-                      <p class="level">Advanced</p>
-                      <p class="type">Session</p>
-                      <p class="duration">20 Minutes</p>
-                    </section>
-                    <a class="enter-btn" href="#">3:30 PM</a>
-                  </div>
-                </div>
-              </div> -->
-              <!-- <div class="current-sessions-card">
-                <div class="carousel-cell">
-                  <img
-                    class="current-session-img"
-                    src="images/maleIcon.png"
-                    alt="current-session"
-                  />
-                  <div class="card-inner">
-                    <h4><strong>Larry Scott</strong></h4>
-                    <section class="incard-elements-sessions">
-                      <p class="language">
-                        <img
-                          class="flag"
-                          src="images/france.png"
-                          alt=" French"
-                        />
-                        French
-                      </p>
-                      <p class="level">Advanced</p>
-                      <p class="type">Session</p>
-                      <p class="duration">30 Minutes</p>
-                    </section>
-                    <a class="enter-btn" href="#">5:30 PM</a>
-                  </div>
-                </div>
-              </div> -->
-              <!-- <div class="current-sessions-card">
-                <div class="carousel-cell">
-                  <img
-                    class="current-session-img"
-                    src="images/maleIcon2.png"
-                    alt="current-session"
-                  />
-                  <div class="card-inner">
-                    <h4><strong>Keith Walter</strong></h4>
-                    <section class="incard-elements-sessions">
-                      <p class="language">
-                        <img
-                          class="flag"
-                          src="images/france.png"
-                          alt="French"
-                        />
-                        French
-                      </p>
-                      <p class="level">Advanced</p>
-                      <p class="type">Session</p>
-                      <p class="duration">30 Minutes</p>
-                    </section>
-                    <a class="enter-btn" href="#">6:00 PM</a>
-                  </div>
-                </div>
-              </div> -->
-
-
             </section>
           </section>
           <!--  -->
@@ -507,70 +400,8 @@ continue;
           <h3>This Week's Sessions</h3>
           <br />
           <section class="week-sesstoin">
-          <?php displayThisWeekSessions(); ?>
-            <!-- <div class="request-card">
-              <div class="learner-info">
-                <img src="images/maleIcon2.png" alt="profile Picture" />
-
-                <div class="day">
-                  <h5><strong>Tom Jefry</strong></h5>
-                  <p class="day-of-upcoming-sesstions">Tomrrow</p>
-                </div>
-              </div>
-
-              <section class="incard-elements">
-                <p class="language">
-                  <img class="flag" src="images/france.png" alt="French" />
-                  French
-                </p>
-                <p class="level">Beginner</p>
-                <p class="type">Session</p>
-                <p class="duration">30 Minutes</p>
-              </section>
-            </div>
-            <div class="request-card">
-              <div class="learner-info">
-                <img src="images/femaleIcon2.png" alt="profile Picture" />
-
-                <div class="day">
-                  <h5><strong>Amy Ralph</strong></h5>
-                  <p class="day-of-upcoming-sesstions">Tomrrow</p>
-                </div>
-              </div>
-
-              <section class="incard-elements">
-                <p class="language">
-                  <img class="flag" src="images/france.png" alt="French" />
-                  French
-                </p>
-                <p class="level">Advanced</p>
-                <p class="type">Session</p>
-                <p class="duration">30 Minutes</p>
-              </section>
-            </div> -->
-
-            <!-- <div class="request-card">
-              <div class="learner-info">
-                <img src="images/maleIcon3.png" alt="profile Picture" />
-
-                <div class="day">
-                  <h5><strong>Jeff Duff</strong></h5>
-                  <p class="day-of-upcoming-sesstions">Sunday</p>
-                </div>
-              </div>
-
-              <section class="incard-elements">
-                <p class="language">
-                  <img class="flag" src="images/france.png" alt="French" />
-                  French
-                </p>
-                <p class="level">Beginner</p>
-                <p class="type">Session</p>
-                <p class="duration">30 Minutes</p>
-              </section>
-            </div> -->
-
-
+               <?php displayThisWeekSessions(); ?>
+           
           </section>
              <br>
           <a href="SESSionTutor.html">
@@ -578,192 +409,6 @@ continue;
           >
         </section>
 
-
-        <!-- <section class="new-requests-container">
-          <h3>New Requests</h3>
-          <br />
-          <section class="requests">
-            <section class="container  px-2">
-    
-             
-              <div class="table-responsive">
-              <table class="table table-responsive table-borderless">
-                  
-                <thead>
-                  <tr class="bg-light">
-                    <th scope="col" width="5%">#</th>
-                    <th scope="col" width="20%">Date</th>
-                    <th scope="col" width="10%">Status</th>
-                    <th scope="col" width="20%">learner name</th>
-                    <th scope="col" width="20%">language</th>
-                    <th scope="col" class="text-end" width="20%"><span>Level</span></th>
-                  </tr>
-                </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>1 Oct, 21</td>
-                <td><i class="fa fa-dot-circle-o yellow"></i><span class="ms-1">Pending</span></td>
-                <td><img src="https://i.imgur.com/VKOeFyS.png" width="25"> Althan Travis</td>
-                <td><img src="images/united-states.png" width="20">English</td>
-                <td class="text-end"><span class="fw-bolder">Advanced</span> <i class="fa fa-ellipsis-h  ms-2"></i></td>
-              </tr>
-              
-              <tr>
-                <td>2</td>
-                <td>12 Oct, 21</td>
-                <td><i class="fa fa-dot-circle-o text-danger"></i><span class="ms-1">Rejected</span></td>
-                <td><img src="https://i.imgur.com/nmnmfGv.png" width="25"> Tomo arvis</td>
-                <td><img src="images/united-states.png" width="20">English</td>
-                <td class="text-end"><span class="fw-bolder">Advanced</span> <i class="fa fa-ellipsis-h  ms-2"></i></td>
-              </tr>
-              
-              
-              <tr>
-                <td>3</td>
-                <td>1 Nov, 21</td>
-                <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">Accepted</span></td>
-                <td><img src="https://i.imgur.com/VKOeFyS.png" width="25"> Althan Travis</td>
-                <td><img src="images/united-states.png" width="20">English</td>
-                <td class="text-end"><span class="fw-bolder">Beginner</span> <i class="fa fa-ellipsis-h  ms-2"></i></td>
-              </tr>
-              
-              
-              <tr>
-                
-                <td>4</td>
-                <td>19 Oct, 21</td>
-                <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">Accepted</span></td>
-                <td><img src="https://i.imgur.com/VKOeFyS.png" width="25"> Travis head</td>
-                <td><img src="images/united-states.png" width="20">English</td>
-                <td class="text-end"><span class="fw-bolder">Advanced</span> <i class="fa fa-ellipsis-h  ms-2"></i></td>
-              </tr>
-              
-              
-              <tr>
-                <td>5</td>
-                <td>1 Oct, 21</td>
-                <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">Accepted</span></td>
-                <td><img src="https://i.imgur.com/nmnmfGv.png" width="25"> Althan Travis</td>
-                <td><img src="images/united-states.png" width="20">English</td>
-                <td class="text-end"><span class="fw-bolder">Beginner</span> <i class="fa fa-ellipsis-h  ms-2"></i></td>
-              </tr>
-              </tbody>
-             </table>
-            
-            </div>
-              
-          </section> -->
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- <div class="request-card">
-              <div class="learner-info">
-                <img src="images/maleIcon3.png" alt="profile Picture" />
-                <h5><strong> Tom Jefry</strong></h5>
-              </div>
-
-              <section class="incard-elements">
-                <p class="language">
-                  <img
-                    class="flag"
-                    src="images/france.png"
-                    alt="French"
-                  />French
-                </p>
-                <p class="level">Beginner</p>
-                <p class="type">Discussion</p>
-                <p class="duration">30 Minutes</p>
-              </section>
-            </div>
-            <div class="request-card">
-              <div class="learner-info">
-                <img src="images/femaleIcon3.png" alt="profile Picture" />
-                <h5><strong>Ann Philip</strong></h5>
-              </div>
-
-              <section class="incard-elements">
-                <p class="language">
-                  <img
-                    class="flag"
-                    src="images/united-states.png"
-                    alt="united-states"
-                  />
-                  English
-                </p>
-                <p class="level">Advanced</p>
-                <p class="type">Session</p>
-                <p class="duration">60 Minutes</p>
-              </section>
-            </div>
-            <div class="request-card">
-              <div class="learner-info">
-                <img src="images/maleIcon2.png" alt="profile Picture" />
-                <h5><strong>Kevin Mark</strong></h5>
-              </div>
-
-              <section class="incard-elements">
-                <p class="language">
-                  <img
-                    class="flag"
-                    src="images/united-states.png"
-                    alt="united-states"
-                  />
-                  English
-                </p>
-                <p class="level">Beginner</p>
-                <p class="type">Session</p>
-                <p class="duration">30 Minutes</p>
-              </section>
-            </div>
-            <div class="request-card">
-                      <div class="learner-info">
-                        <img src="images/maleIcon.png" alt="profile Picture" />
-                        <h5><strong>Dylan Mark</strong></h5>
-                      </div>
-
-                      <section class="incard-elements">
-                        <p class="language">
-                          <img class="flag" src="images/france.png" alt="French" />
-                          English
-                        </p>
-                        <p class="level">Intermediate</p>
-                        <p class="type">Session</p>
-                        <p class="duration">60 Minutes</p>
-              </section>
-            </div>
-            <div class="request-card">
-              <div class="learner-info">
-                <img src="images/maleIcon2.png" alt="profile Picture" />
-                <h5><strong>Joe Judy</strong></h5>
-              </div>
-
-              <section class="incard-elements">
-                <p class="language">
-                  <img class="flag" src="images/france.png" alt="French" />
-                  English
-                </p>
-                <p class="level">Intermediate</p>
-                <p class="type">Session</p>
-                <p class="duration">60 Minutes</p>
-              </section>
-            </div> -->
-          <!-- </section> end of requests 
-          <a href="tutorReq.html">
-            <button class="view-more-button">View All Requests</button></a
-          >
-        </section>  end of requests cotainer 
-      </section>
-    </section> -->
 
                 <section class="new-requests-container">
                     <h3>Newest Requests </h3>

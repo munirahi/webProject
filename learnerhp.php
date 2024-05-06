@@ -1,7 +1,7 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
+$dbServername = "localhost";
+$dbusername = "root";
+$dbpassword = "";
 $dbname = "linguist";
 //include('linguist.sql');
 
