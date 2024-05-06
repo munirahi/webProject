@@ -142,7 +142,7 @@ if (!isset($_SESSION['user_id'])) {
     JOIN tutor t ON s.T_id = t.ID
     WHERE s.Date = CURDATE()
       AND TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) >= CURTIME()
-      AND s.Time <= CURTIME() AND L_id= $user_id 
+      AND s.Time <= CURTIME() AND s.L_id = $user_id
 ";
   $current_sessions = mysqli_query($conn, $sql_current);
 
@@ -152,7 +152,7 @@ if (!isset($_SESSION['user_id'])) {
     FROM session s
     JOIN tutor t ON s.T_id = t.ID
     WHERE s.Date > CURDATE()
-      OR (s.Date = CURDATE() AND s.Time > CURTIME()) AND L_id= $user_id 
+      OR (s.Date = CURDATE() AND s.Time > CURTIME()) AND s.L_id = $user_id
 ";
   $upcoming_sessions = mysqli_query($conn, $sql_upcoming);
 
@@ -162,7 +162,7 @@ if (!isset($_SESSION['user_id'])) {
     FROM session s
     JOIN tutor t ON s.T_id = t.ID
     WHERE s.Date < CURDATE()
-      OR (s.Date = CURDATE() AND TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) < CURTIME()) AND L_id= $user_id 
+      OR (s.Date = CURDATE() AND TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) < CURTIME()) AND s.L_id = $user_id 
 ";
   $previous_sessions = mysqli_query($conn, $sql_previous);
 
