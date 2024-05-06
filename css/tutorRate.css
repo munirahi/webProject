@@ -55,10 +55,7 @@ body{
     
     
     }
-    .week-sesstoin::-webkit-scrollbar{
-        width: 0.5rem;
-        height: 0.5rem;
-    }
+  
       .result-cell {     
         background-color: white;
         color: black;
@@ -124,15 +121,7 @@ h1{
   }
 
 
-.week-sesstoin::-webkit-scrollbar-thumb{
-    border-radius: 5rem;
-    background-color:rgba(217, 217, 217, 0.678) ;
-    visibility: hidden;
-}
-.week-sesstoin:hover::-webkit-scrollbar-thumb{
-    
-    visibility: visible;
-}
+
 
 .result-img, .name{
     display: inline-block;
@@ -148,6 +137,17 @@ h1{
     margin-top: 0px;
     color: #173A76;
     text-align: center;
+}
+.fa-solid fa-star{
+    text-align: center;
+    color:  #cdb309;
+    border-radius: 20px;
+    padding: 5px;
+    text-decoration: none;
+    color: #ffffff;
+    width: 35%;
+    border: none;
+    font-size: 12px;
 }
 
 
