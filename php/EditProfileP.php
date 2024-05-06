@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     } else if (isset($_POST['delete']) && $_POST['confirm_delete'] === "yes" ) {
-        $sql = "DELETE FROM tutor WHERE ID=$pid; // Replace with your actual delete query
+        $sql = "DELETE FROM tutor WHERE ID=$pid " ; // Replace with your actual delete query
     if (mysqli_query($conn, $sql)) {
       echo "Account deleted successfully.";
       // Redirect user to a relevant page (e.g., login)
