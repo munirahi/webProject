@@ -17,17 +17,12 @@ $user_id = $_SESSION['user_id'];
 $sql = "SELECT * FROM tutor WHERE ID = '$user_id';";
 $result = mysqli_query($conn, $sql);
 $tutorsSessionsQuery = "SELECT * FROM session WHERE T_id = '$user_id';";
-$tutorReviewsQuery ="SELECT starts FROM review WHERE P_ID  = '$user_id';";
 // Execute the query
 $tutorsSessionsResult = mysqli_query($conn, $tutorsSessionsQuery);
-$tutorReviewsResult = mysqli_query($conn, $tutorReviewsQuery);
 
-$tutorsLagsQuery ="SELECT * FROM tutor_languages WHERE P_ID = '$user_id'";
-$tutorsLagsResult=mysqli_query($conn, $tutorsLagsQuery);
 
 $totalHours = 0;
 $totalStars =0;
-$totalReviews =0;
 if ($result && mysqli_num_rows($result) > 0) {
     // Fetch the name from the result set
     $row = mysqli_fetch_assoc($result);
@@ -40,7 +35,6 @@ if ($result && mysqli_num_rows($result) > 0) {
     $eduction = $row['eduction'];
     $image=$row["image"];
 
-
 } else {
     // Handle the case where the user ID is not found in the database
     echo "<h1>Error: User not found</h1>";
@@ -51,43 +45,67 @@ if ($result && mysqli_num_rows($result) > 0) {
 if (mysqli_num_rows($tutorsSessionsResult) > 0) {
     // Loop through each session record
     while ($sessionRow = mysqli_fetch_assoc($tutorsSessionsResult)) {
-        // Add the duration of the session to the total hours
+        
         $totalHours += $sessionRow['Duration'] / 60;
     }
 
 }
+
+$totalReviews =0;
+$tutorReviewsQuery ="SELECT * FROM review WHERE P_ID  = '$user_id';";
+$tutorReviewsResult = mysqli_query($conn, $tutorReviewsQuery);
+
 if (mysqli_num_rows($tutorReviewsResult) > 0) {
-    // Loop through each session record
-    while ($ReviewsRow = mysqli_fetch_assoc($tutorsSessionsResult)) {
-        // Add the duration of the session to the total hours
+   
+    while ($ReviewsRow = mysqli_fetch_assoc($tutorReviewsResult)) {
+        
         $totalStars += $ReviewsRow['starts'];
         $totalReviews++;
     }
     if ($totalReviews > 0) {
         $averageRating = $totalStars / $totalReviews;
     } else {
-        // Handle the case where there are no reviews
-        $averageRating = 0; // or any default value you prefer
-    }
-
-}
-$tutorLanguages =array();
-
-if ($tutorsLagsResult && mysqli_num_rows($tutorsLagsResult) > 0) {
-    // Fetch the name from the result set
-    while ($tutorsLags = mysqli_fetch_assoc($tutorsLagsResult)) {
-        // Add the language to the array
-        $tutorLanguages[] = $tutorsLags['Language'];
+       
+        $averageRating = 0; 
     }
 }
-// find newest requests 
 
-// $sqlForreq = "SELECT * FROM request WHERE Status='Pending' And P_ID = '$user_id';";
-// $resultForreq = mysqli_query($conn, $sqlForreq);
 
-// include('flag.php');
 
-// Function to retrieve requests with the closest date to the current date
+function displayLanguages() {
+    $user_id = $_SESSION['user_id'];
+    include("connection.php");
+    $tutorsLagsQuery ="SELECT * FROM tutor_languages WHERE P_ID = '$user_id'";
+    $tutorsLagsResult=mysqli_query($conn, $tutorsLagsQuery);
+    $tutorLanguages =array();
+    
+    if ($tutorsLagsResult && mysqli_num_rows($tutorsLagsResult) > 0) {
+        // Fetch the name from the result set
+        while ($tutorsLags = mysqli_fetch_assoc($tutorsLagsResult)) {
+            // Add the language to the array
+            $tutorLanguages[] = $tutorsLags['Language'];
+        }
+    }
+
+
+
+    // Check if the array is not empty
+    if (!empty($tutorLanguages)) {
+
+        // Loop through each language in the array
+        foreach ($tutorLanguages as $language) {
+            // Echo the language
+            echo $language;
+
+            // If it's not the last language, add a comma and space
+            if ($language !== end($tutorLanguages)) {
+                echo ', ';
+            }
+        }
+
+        
+    }
+}
 function getClosestDateRequests() {
     $user_id = $_SESSION['user_id'];
     include("connection.php");
