@@ -21,9 +21,10 @@ include("php/ratet.php");
    
      <link rel="stylesheet" href="css/footer.css">
      <link rel="stylesheet" href="header_folder/headerPartner.css">
-     <link rel="stylesheet" href="css/tutorRate.css">
      <script src="https://kit.fontawesome.com/59189109f7.js" crossorigin="anonymous"></script>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+     <link rel="stylesheet" href="css/tutorRate.css">
+
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
       
