@@ -1,7 +1,7 @@
  <?php
     DEFINE('DB_USER','root');
     DEFINE('DB_PSWD','');
-    DEFINE('DB_HOST','localhost:3306');
+    DEFINE('DB_HOST','localhost:4306');
     DEFINE('DB_NAME','linguist');
 
     if (!$conn = mysqli_connect(DB_HOST,DB_USER,DB_PSWD))
@@ -17,9 +17,9 @@
 <html>
     <head>
         <title>Edit Times</title>
-        <link rel="stylesheet" href="../css/footer.css">
-        <link rel="stylesheet" href="../header_folder/headerLearner.css">
-        <link rel="stylesheet" href="../css/tutorAvailableTimes.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="header_folder/headerLearner.css">
+        <link rel="stylesheet" href="css/tutorAvailableTimes.css">
         <!-- <link rel="stylesheet" href="css/calendar.css"> -->
         
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
@@ -95,7 +95,27 @@
         </div>
     </main>
     <!-- src="js/calendarForTutor.js" -->
+
+    <?php
+$ID = $_SESSION['user_id'];
+$prevSelectedTimes= array();
+$sqlTimes = "SELECT * FROM available_times WHERE P_ID=$ID AND availability='true'";
+$resultTimes = mysqli_query($conn, $sqlTimes);
+if (mysqli_num_rows($resultTimes) > 0) { // $result=="false"
+    while($rowTimes = mysqli_fetch_assoc($resultTimes)) {
+      $prevSelectedTimes[$rowTimes['Date']][] = $rowTimes['Time'];
+
+    }
+  }else echo 'no available times';
+  $jsonPrevSelectedTimes = json_encode($prevSelectedTimes);
+?>
+
+
+
+
     <script >
+      var prevSelectedTimes = <?php echo $jsonPrevSelectedTimes; ?>;
+      console.log(prevSelectedTimes);
       let selectedDate = null; // Track the currently selected date
     let selectedTimes = {}; // Track the selected times for each date
 
@@ -193,6 +213,26 @@
             appointmentHoursContainer.appendChild(appointmentHour);
         }
     }
+
+    
+        // Iterate over existing dates and times to highlight them
+        Object.keys(prevSelectedTimes).forEach(day => {
+            const selectedTimesForDay = prevSelectedTimes[day];
+            // Highlight the date
+            const dateElement = document.querySelector(`.date:nth-child(${day})`);
+            if (dateElement) {
+                dateElement.classList.add("selected");
+            }
+            // Highlight the times for the date
+            selectedTimesForDay.forEach(time => {
+                const hourElement = document.querySelector(`.appointment-hour[data-day="${day}"][data-time="${time}"]`);
+                if (hourElement) {
+                    hourElement.classList.add("selected");
+                }
+            });
+        });
+
+    
 
     // document.querySelectorAll(".appointment-hour").forEach(hour => {
     //     // Check if the time exists in the database
@@ -315,8 +355,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 // Close the database connection
-$conn->close();
+//$conn->close();
 ?>
+
+
+<!-- <script>
+// PHP variable to JavaScript array
+var prevSelectedTimes = <?php //echo $jsonPrevSelectedTimes; ?>;
+console.log(prevSelectedTimes); // Check the output in the browser console
+</script> -->
 
          <footer>
           <footer>
