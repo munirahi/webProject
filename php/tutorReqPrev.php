@@ -1,7 +1,7 @@
 <?php
     DEFINE('DB_USER','root');
     DEFINE('DB_PSWD','');
-    DEFINE('DB_HOST','localhost:4306');
+    DEFINE('DB_HOST','localhost');
     DEFINE('DB_NAME','linguist');
 
     if (!$conn = mysqli_connect(DB_HOST,DB_USER,DB_PSWD))
@@ -16,9 +16,9 @@
 <html>
     <head>
         <title>Request</title>
-        <link rel="stylesheet" href="css/tutorReq.css">
-        <link rel="stylesheet" href="css/footer.css">
-        <link rel="stylesheet" href="header_folder/headerPartner.css">
+        <link rel="stylesheet" href="../css/tutorReq.css">
+        <link rel="stylesheet" href="../css/footer.css">
+        <link rel="stylesheet" href="../header_folder/headerPartner.css">
         <script src="https://kit.fontawesome.com/59189109f7.js" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         
@@ -30,9 +30,9 @@
             <div id="header-div">
             <nav class="fixed-top" id="main-nav">
                 <ul id="ul1">
-                    <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
-                    <li class="list1-item"><a href="tutor_Home_page.html" class="list1-item">Home</a></li>
-                    <li class="list1-item"><a href="SESSionTutor.html">Sessions</a></li>
+                    <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
+                    <li class="list1-item"><a href="tutor_Home_page.php" class="list1-item">Home</a></li>
+                    <li class="list1-item"><a href="SESSionTutor.php">Sessions</a></li>
                     <li class="acnt li">
             <nav id="account-nav">
               <a id="dropbtn">Requests</a>
@@ -49,16 +49,16 @@
               </ul>
             </nav>
           </li>
-                    <li class="list1-item"><a href="toturRate.html">Rate and Review</a></li>
-                    <li class="list1-item"><a href="SupportsPartner.html">Support</a></li>
+                    <li class="list1-item"><a href="toturRate.php">Rate and Review</a></li>
+                    <li class="list1-item"><a href="SupportsPartner.php">Support</a></li>
                 </ul>
                 <ul id="ul2">
 
                     <li id="acnt li">
-                        <nav id="account-nav"><img src="images/account.jfif" id="account-img">
+                        <nav id="account-nav"><img src="../images/account.jfif" id="account-img">
                             <ul>
 
-                                <li class="account-list"><a href="images/EditProfileP.html"><div class="circle"></div>Edit Profile</a></li>
+                                <li class="account-list"><a href="../images/EditProfileP.php"><div class="circle"></div>Edit Profile</a></li>
 
                                 <li class="account-list"><a href="#"><div class="circle"></div>Log Out</a></li>
                             </ul>
@@ -91,7 +91,7 @@
                       echo '<div class="result-cell">
                                                 
                       <div class="acc-info"> <!--row-->
-                          <img class="result-img" src="images/maleIcon3.png" alt="account image"> <!--column1-->
+                          <img class="result-img" src="../images/'.$row['image'].'" alt="account image"> <!--column1-->
                           <div class="more-info">
                               <h5><i class="fa-solid fa-user"></i>'.$row['Firstname']. " "  .$row['Lastname'].'</h5>
                              
@@ -102,7 +102,9 @@
                           <div class="language specifications">'.$row['Language'].'</div>
                           <div class="level specifications">'.$row['Level'].'</div>
                           <div class="duration specifications">'.$row['Duration'].'</div>
-                          <div class="dateAndTime specifications">'.$row['Time'].', '.$row['Date'].'</div>
+                          <div class="time specifications">'.date("h:i A", strtotime($row['Time'])).'</div>
+                          <div class="date specifications">'.$row['Date'].'</div>
+                     
                       </div>
                       <div class="req-final-status accepted">'.$row['Status'].'</div>
                   </div>';
