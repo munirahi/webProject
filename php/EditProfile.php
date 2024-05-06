@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
        
-        $sql_check = "SELECT * FROM learner WHERE email='$email' AND ID != $lid ";
+        $sql_check = "SELECT * FROM learner WHERE email='$email' AND ID != '$lid' ";
         $result_check = mysqli_query($conn, $sql_check); 
         if (mysqli_num_rows($result_check) > 0) {
             $error = " Email already exists. Please choose a different email.";
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql .= ", image='$newImageName'";
         }
 
-        $sql .= " WHERE ID= $lid ";
+        $sql .= " WHERE ID= '$lid' ";
         if (mysqli_query($conn, $sql)) {
             $success = true;
             $successM="Profile updated successfully!";
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     } else if (isset($_POST['delete']) && $_POST['confirm_delete'] === "yes" ) {
-        $sql = "DELETE FROM learner WHERE ID=$lid"; // Replace with your actual delete query
+        $sql = "DELETE FROM learner WHERE ID='$lid'"; // Replace with your actual delete query
     if (mysqli_query($conn, $sql)) {
       echo "Account deleted successfully.";
       // Redirect user to a relevant page (e.g., login)
