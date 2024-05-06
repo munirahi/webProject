@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 //include("php/learnerhp.php");
-include("php/tutorsInfo.php");
+include("php/learnerInfo.php");
 ?>
 <!DOCTYPE html>
 <html>
