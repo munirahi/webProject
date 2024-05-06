@@ -346,7 +346,7 @@ function validatePhone(phoneNumber) {
                     <nav id="account-nav"><img src="uploads/<?php echo $newImageName; ?>" id="account-img">
                         <ul>
                             
-                            <li class="account-list"><a href="EditProfileP.html"><div class="circle"></div>Edit Profile</a></li>
+                            <li class="account-list"><a href="EditProfileP.php"><div class="circle"></div>Edit Profile</a></li>
                             
                             <li class="account-list"><a href="logout.php"><div class="circle"></div>Log Out</a></li>
                         </ul>
