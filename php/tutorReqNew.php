@@ -88,11 +88,11 @@
                         // Check if the request status is accepted and if it's not already added to the session table
                         if ($row['Status'] == 'accepted') {
                             // Check if the request is not already added to the session table
-                            $checkSessionQuery = "SELECT * FROM session WHERE T_ID = $ID AND Date = '{$row['Date']}' AND Time = '{$row['Time']}'";
+                            $checkSessionQuery = "SELECT * FROM session WHERE T_id = $ID AND Date = '{$row['Date']}' AND Time = '{$row['Time']}'";
                             $sessionResult = mysqli_query($conn, $checkSessionQuery);
                             if(mysqli_num_rows($sessionResult) == 0) {
                                 // If the request is not already added to the session table, add it
-                                $insertSessionQuery = "INSERT INTO session (T_ID, L_ID, Date, Time, Duration, Language, Level, Price, Status) VALUES ($ID, {$row['L_ID']}, '{$row['Date']}', '{$row['Time']}', '{$row['Duration']}', '{$row['Language']}', '{$row['Level']}', '{$row['Price']}', 'accepted')";
+                                $insertSessionQuery = "INSERT INTO session (T_id, L_id, Date, Time, Duration, Language, Level, Price, Status) VALUES ($ID, {$row['L_ID']}, '{$row['Date']}', '{$row['Time']}', '{$row['Duration']}', '{$row['Language']}', '{$row['Level']}', '{$row['Price']}', 'accepted')";
                                 if(mysqli_query($conn, $insertSessionQuery)) {
                                     echo "Request added to session table successfully.";
                                 } else {
