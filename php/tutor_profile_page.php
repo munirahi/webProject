@@ -1,5 +1,5 @@
 <?php
-include('php/connection.php');
+include('connection.php');
 
 // Check if the P_id query parameter is set
 if(isset($_GET['ID'])) {
@@ -51,7 +51,7 @@ if(isset($_GET['ID'])) {
 }
 
 
-include("php/tutorsInfo.php");
+include("tutorsInfo.php");
 
 ?>
 
@@ -62,11 +62,11 @@ include("php/tutorsInfo.php");
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="header_folder/headerPartner.css">
-        <link rel="stylesheet" href="css/footer.css">
-        <link rel="stylesheet" href="css/tutor_profile_page.css">
+        <link rel="stylesheet" href="../header_folder/headerPartner.css">
+        <link rel="stylesheet" href="../css/footer.css">
+        <link rel="stylesheet" href="../css/tutor_profile_page.css">
         
-        <link rel="stylesheet" href="css/learnerRequest2.css">
+        <link rel="stylesheet" href="../css/learnerRequest2.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
         <link rel="stylesheet" href="css/tutorAvailableTimes.css">
@@ -94,7 +94,7 @@ include("php/tutorsInfo.php");
                     <ul id="ul1">
                         <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
                         <li class="list1-item"><a href="tutor_Home_page.php" class="list1-item">Home</a></li>
-                        <li class="list1-item"><a href="php/SESSionTutor.php">Sessions</a></li>
+                        <li class="list1-item"><a href="SESSionTutor.php">Sessions</a></li>
                         <li class="list1-item"><a href="tutorReq.php">Requests</a></li>
                         <li class="list1-item"><a href="toturRate.php">Rates and Reviews</a></li>
                         <li class="list1-item"><a href="SupportsPartner.php">Support</a></li>
@@ -102,7 +102,7 @@ include("php/tutorsInfo.php");
                     <ul id="ul2">
                         
                         <li id="acnt li">
-                            <nav id="account-nav"><img src="images/<?php echo  $image?>" id="account-img">
+                            <nav id="account-nav"><img src="../images/<?php echo  $image?>" id="account-img">
                                 <ul>
                                     
                                     <li class="account-list"><a href="EditProfileP.php"><div class="circle"></div>Edit Profile</a></li>
@@ -121,7 +121,7 @@ include("php/tutorsInfo.php");
             <div  class="main-body-content">
                 <section class="pp-for-tutor">
                     
-                        <img id = "image-of-tutor"src="images/<?php echo  $image?>" alt="Profile Picture">
+                        <img id = "image-of-tutor"src="../images/<?php echo  $image?>" alt="Profile Picture">
                         <h2><?php echo $firstname.' '.  $lastname ?></h2>
                     
                 </section>

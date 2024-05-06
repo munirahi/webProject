@@ -11,25 +11,25 @@ header("Expires: 0");
 // Check if the user is not logged in
 if (!isset($_SESSION['user_id'])) {
     // Redirect the user to the login page
-    header("Location: php/login.php");
+    header("Location: login.php");
     exit(); // Stop further execution
 }
 
-include("php/tutorsInfo.php");
+include("tutorsInfo.php");
 ?>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <title>Tutor Home</title>
-    <link rel="stylesheet" type="text/css" href="css/css-for-tutor-home.css" />
-    <link rel="stylesheet" href="css/footer.css" />
-    <link rel="stylesheet" type="text/css" href="css/sidebar-tutor.css" />
+    <link rel="stylesheet" type="text/css" href="../css/css-for-tutor-home.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" type="text/css" href="../css/sidebar-tutor.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
-    <link rel="stylesheet" href="header_folder/headerPartner.css" />
+    <link rel="stylesheet" href="../header_folder/headerPartner.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -68,10 +68,10 @@ if(!$conn = mysqli_connect(DB_HOST,DB_user,DB_PSWD,DB_NAME)){
     // Check if the provided language is in the map
     if (array_key_exists($language, $languageFlags)) {
         // Return the corresponding flag image directory
-        return "images/" . $languageFlags[$language];
+        return "../images/" . $languageFlags[$language];
     } else {
         // If the language is not found, return a default flag image
-        return "images/default-flag.png";
+        return "../images/default-flag.png";
     }
 }
 
@@ -105,7 +105,7 @@ $ResultCheck = mysqli_num_rows($Result);
 // Function to display this week's sessions
 function displayThisWeekSessions() {
     // Include the database connection file
-    include("php/connection.php");
+    include("connection.php");
 // Get the current date
 $currentDate = date('Y-m-d');
 
@@ -136,29 +136,26 @@ continue;
             echo '<div class="request-card">';
             echo '<div class="learner-info">';
             // Output learner's profile picture
-            echo '<img src="images/' . $learnerRow['image'] . '" alt="profile Picture" />';
+            echo '<img src="../images/' . $learnerRow['image'] . '" alt="profile Picture" />';
 
             echo '<div class="day">';
             // Output learner's name
             echo '<h5><strong>' . $learnerRow['Firstname'].' '.  $learnerRow['Lastname'] . '</strong></h5>';
-            // Output the day of the session
+          
             echo '<p class="day-of-upcoming-sessions">' . $dayOfWeek . '</p>';
             echo '</div></div>';
             echo '<section class="incard-elements">';
-            // Output session details "' . getFlagImage($row['language']) . '"
+           
             $flagImage =getFlagImage($row['language']);
             echo '<p class="language"><img class="flag" src="' . $flagImage . '" alt="language image" />' . $row['language'] . '</p>';
             
-
-            // $flagImage = '<script>getFlagImage("' . $row['language'] . '")</script>' ;
-            // echo '<p class="language"><img class="flag" src="' . $flagImage . '" alt="language image" />' . $row['language'] . '</p>';
             echo '<p class="level">' . $row['level'] . '</p>';
             echo '<p class="type"> '.  date("h:i A", strtotime($row['Time'])). '</p>';
             echo '<p class="duration">' . $row['Duration'] . ' Minutes</p>';
             echo '</section></div>';
         }
     } else {
-        // If no sessions are found, display a message
+       
         echo '<h2>No sessions scheduled for this week.</h2>';
     }
 
@@ -171,9 +168,9 @@ continue;
             <div id="header-div">
                 <nav class="fixed-top" id="main-nav">
                     <ul id="ul1">
-                        <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
+                        <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
                         <li class="list1-item"><a href="#" class="list1-item">Home</a></li>
-                        <li class="list1-item"><a href="php/SESSionTutor.php">Sessions</a></li>
+                        <li class="list1-item"><a href="SESSionTutor.php">Sessions</a></li>
                         <li class="list1-item"><a href="tutorReq.php">Requests</a></li>
                         <li class="list1-item"><a href="toturRate.php">Rates and Reviews</a></li>
                         <li class="list1-item"><a href="SupportsPartner.php">Support</a></li>
@@ -181,7 +178,7 @@ continue;
                     <ul id="ul2">
                         
                         <li id="acnt li">
-                            <nav id="account-nav"><img src="images/<?php echo  $image?>" id="account-img">
+                            <nav id="account-nav"><img src="../images/<?php echo  $image?>" id="account-img">
                                 <ul>
                                     
                                     <li class="account-list"><a href="EditProfileP.php"><div class="circle"></div>Edit Profile</a></li>
@@ -200,7 +197,7 @@ continue;
       <aside class="sidebar">
         <div class="sidebar-card">
           <div class="card-body-profile">
-            <img src="images/<?php echo $image; ?>" alt="Profile Picture" />
+            <img src="../images/<?php echo $image; ?>" alt="Profile Picture" />
             <!-- <h2>Gloria Harold</h2> -->
             <h2><?php echo $firstname . ' ' . $lastname ?> </h2>
             <p id="bio"><?php echo $bio ?></p>
@@ -231,8 +228,8 @@ continue;
               </li>
               <li id="Cultural backgrounds">
                 <span>Cultural backgrounds</span>
-                <img class="flag" src="images/flag.png" alt="KSA" />
-                <img class="flag" src="images/france.png" alt="French" />
+                <img class="flag" src="../images/flag.png" alt="KSA" />
+                <img class="flag" src="../images/france.png" alt="French" />
               </li>
               <li>
                 <span>Achievements</span>
@@ -247,7 +244,7 @@ continue;
                 <hr />
                 <i class="fa-solid fa-user"></i>
                 <!-- add icons -->
-                <a id="profile-settings" href="EditProfileP.html"
+                <a id="profile-settings" href="EditProfileP.php"
                   >Profile Settings</a
                 >
               </li>
@@ -315,7 +312,7 @@ continue;
                 <div class="carousel-cell">
                   <img
                     class="current-session-img"
-                    src="images/<?php echo  $learnerRow['image']?>"
+                    src="../images/<?php echo  $learnerRow['image']?>"
                     alt="current-session"
                   />    
                            <?php echo '<script>console.log(" good!"); </script>';
@@ -360,7 +357,7 @@ continue;
                 <div class="carousel-cell">
                   <img
                     class="current-session-img"
-                    src="images/<?php echo  $session['image']?>"
+                    src="../images/<?php echo  $session['image']?>"
                     alt="ended-session"
                   />    <div class="card-inner">
                     <h4><strong><?php echo $session['learner_name']; ?></strong></h4>
@@ -388,7 +385,7 @@ continue;
            
           </section>
              <br>
-          <a href="SESSionTutor.html">
+          <a href="SESSionTutor.php">
             <button class="view-more-button">View All Sessions</button></a
           >
         </section>
@@ -402,7 +399,7 @@ continue;
                       <?php getClosestDateRequests(); ?>
                        
                     </section>
-                    <a href="tutorReq.html"> <button class="view-more-button">View All Requests</button></a>
+                    <a href="tutorReq.php"> <button class="view-more-button">View All Requests</button></a>
 
                 </section>
 

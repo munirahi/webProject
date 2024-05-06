@@ -130,7 +130,7 @@ function getClosestDateRequests() {
 
             echo '<div class="request-card">';
             echo '<div class="learner-info">';
-            echo '<img src="images/'.$lImage.'" alt="profile Picture">';
+            echo '<img src="../images/'.$lImage.'" alt="profile Picture">';
             echo '<h5><strong>'.$learner_name.'</strong></h5>';
             echo '</div>';
 
@@ -173,7 +173,7 @@ function getAllPendingRequests($conn, $user_id) {
 
             echo '<div class="request-card">';
             echo '<div class="learner-info">';
-            echo '<img src="images/'.$lImage.'" alt="profile Picture">';
+            echo '<img src="../images/'.$lImage.'" alt="profile Picture">';
             echo '<h5><strong>'.$learner_name.'</strong></h5>'; 
             echo '</div>';
             

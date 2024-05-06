@@ -1,7 +1,7 @@
  <?php
     DEFINE('DB_USER','root');
     DEFINE('DB_PSWD','');
-    DEFINE('DB_HOST','localhost:4306');
+    DEFINE('DB_HOST','localhost');
     DEFINE('DB_NAME','linguist');
 
     if (!$conn = mysqli_connect(DB_HOST,DB_USER,DB_PSWD))
