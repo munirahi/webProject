@@ -68,18 +68,18 @@
 
     <div class="box">
    <li> <strong>
-     <a href="question3.html" class="cqi" > Why lenguest?</strong></a></li>  
+     <a href="question3.php" class="cqi" > Why lenguest?</strong></a></li>  
     <br> <br>
 </div>
 <div class="box">  
    
-  <li><strong><a href="question2.html"class="cqi" >Tips for getting started on lenguest?</strong>  </a></li> 
+  <li><strong><a href="question2.php"class="cqi" >Tips for getting started on lenguest?</strong>  </a></li> 
     <br>  <br>
 
 </div>
 <div class="box">
    
-   <li><strong> <a href="question1.html"class="cqi">how i can choose my Tutors?</strong></a></li>
+   <li><strong> <a href="question1.php"class="cqi">how i can choose my Tutors?</strong></a></li>
     <br>   <br></div>
  
     <br>
