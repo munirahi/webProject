@@ -72,7 +72,9 @@ if (!isset($_SESSION['user_id'])) {
   <link rel="stylesheet" href="../header_folder/headerPartner.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
   <link rel="stylesheet" href="../css/footer.css" />
+  <link rel="stylesheet" href="../css/Support.css" />
   <!-- icons -->
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -235,6 +237,7 @@ if (!isset($_SESSION['user_id'])) {
                           <span class="fw-bolder"><?php echo date('g:iA', strtotime($row['Time'])); ?></span>
                           <button class="cancel-btn" onclick="cancelSession(<?php echo $row['ID']; ?>);">Cancel</button>
                         </td>
+                        
                       </tr>
                     <?php } ?>
                   <?php } else { ?>
