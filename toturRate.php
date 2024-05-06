@@ -32,7 +32,36 @@ include("php/ratet.php");
        
        <title>Rates and Reviews</title>
    </head>
-
+   <header id="header">
+      <div id="header-div">
+        <nav class="fixed-top" id="main-nav">
+          <ul id="ul1">
+            <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo" id="logo-img"></li>
+            <li class="list1-item"><a href="HomePageLearner.php" class="list1-item">Home</a></li>
+            <li class="list1-item"><a href="SESSionLearner.php">Sessions</a></li>
+            <li class="list1-item"><a href="learnerRequest2.php">Requests</a></li>
+            <li class="list1-item"><a href="Supports.php">Support</a></li>
+          </ul>
+          <ul id="ul2">
+  
+            <li id="acnt li">
+            <nav id="account-nav"><img src="uploads/<?php echo $newImageName; ?>" id="account-img">
+                <ul>
+  
+                  <li class="account-list"><a href="EditProfile.html">
+                      <div class="circle"></div>Edit Profile
+                    </a></li>
+                    <li class="account-list"><a href="logout.php">
+                      <div class="circle"></div>Log Out
+                    </a></li>
+                </ul>
+  
+              </nav>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
    <body>
     <?php
 function getFlagImage($language) {
