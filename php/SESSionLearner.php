@@ -1,3 +1,21 @@
+<?php 
+// if(!isset($_SESSION['user_id'])){
+// header("Location: php/login.php");
+
+
+// }
+session_start(); // Start the session
+// Check if the user is not logged in
+if (!isset($_SESSION['user_id'])) {
+    // Redirect the user to the login page
+    header("Location:login.php");
+    exit(); // Stop further execution
+}
+else{
+  $user_id= $_SESSION['user_id'];
+}
+
+?>
 <!DOCTYPE html>
 <html>
   <!--upcoming and current sessions learner-->
@@ -74,85 +92,83 @@ function deleteSession(sessionId) {
     src="https://kit.fontawesome.com/5a18e3112f.js"
     crossorigin="anonymous"></script>
   <body>
-    <header id="header">
-      <div id="header-div">
-        <nav class="fixed-top" id="main-nav">
-          <ul id="ul1">
-            <li>
-              <img
-                src="../images/linguistBlueAndWhite.jpg"
-                alt="LINGUIST logo"
-                id="logo-img"
-              />
-            </li>
-            <li class="list1-item">
-              <a href="tutor_Home_page.html" class="list1-item">Home</a>
-            </li>
-            <li class="list1-item"><a href="SESSionTutor.html">Sessions</a></li>
-            <li class="list1-item"><a href="tutorReq.html">Requests</a></li>
-            <li class="list1-item">
-              <a href="toturRate.html">Rate and Review</a>
-            </li>
-            <li class="list1-item">
-              <a href="SupportsPartner.html">Support</a>
-            </li>
-          </ul>
-          <ul id="ul2">
+  <header id="header">
+    <div id="header-div">
+    <nav class="fixed-top" id="main-nav">
+        <ul id="ul1">
+          <li><img src="linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
+                    <li class="list1-item"><a href="../HomePageLearner.php" class="list1-item">Home</a></li>
+                    <li class="list1-item"><a href="SESSionLearner.php">Sessions</a></li>
+                    <li class="list1-item"><a href="learnerRequest2.php">Requests</a></li>
+                    <li class="list1-item"><a href="RateAndReview.php">Rate and Review</a></li>
+                    <li class="list1-item"><a href="Supports.php">Support</a></li>
+        </ul>
+        <ul id="ul2">
+            
             <li id="acnt li">
-              <nav id="account-nav">
-                <img src="../images/account.jfif" id="account-img" />
-                <ul>
-                  <li class="account-list">
-                    <a href="EditProfileP.html"
-                      ><div class="circle"></div>
-                      Edit Profile</a
-                    >
-                  </li>
+                <nav id="account-nav"><img src="uploads/<?php echo $newImageName; ?>" id="account-img">
+                    <ul>
+                        
+                        <li class="account-list"><a href="EditProfile.php"><div class="circle"></div>Edit Profile</a></li>
+                        
+                        <li class="account-list"><a href="logout.php"><div class="circle"></div>Log Out</a></li>
+                    </ul>
 
-                  <li class="account-list">
-                    <a href="#"
-                      ><div class="circle"></div>
-                      Log Out</a
-                    >
-                  </li>
-                </ul>
-              </nav>
+                </nav>
             </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+        </ul>
+    </nav>
+</div>
+ </header>
 <?php
 include 'connection.php'; // Make sure your database connection settings are correct
+function getFlagImage($language) {
+  // Define a map of language names to flag image directories
+  $languageFlags = array(
+      "French" => "france.png",
+      "German" => "germanyy.png",
+      "English" => "united-states.png",
+      "Arabic" => "flag.png"
+      // Add more language-flag mappings as needed
+  );
 
+  // Check if the provided language is in the map
+  if (array_key_exists($language, $languageFlags)) {
+      // Return the corresponding flag image directory
+      return "../images/" . $languageFlags[$language];
+  } else {
+      // If the language is not found, return a default flag image
+      return "../images/default-flag.png";
+  }
+}
 // Current Sessions: Active sessions with today's date and time
 $sql_current = "
-    SELECT s.*, t.FirstName, t.LastName
+    SELECT s.*, t.Firstname, t.Lastname, t.image
     FROM session s
     JOIN tutor t ON s.T_id = t.ID
     WHERE s.Date = CURDATE()
       AND TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) >= CURTIME()
-      AND s.Time <= CURTIME()
+      AND s.Time <= CURTIME() AND L_id= $user_id 
 ";
 $current_sessions = mysqli_query($conn, $sql_current);
 
 // Upcoming Sessions: Future sessions starting after now
 $sql_upcoming = "
-    SELECT s.*, t.FirstName, t.LastName
+    SELECT s.*, t.Firstname, t.Lastname, t.image
     FROM session s
     JOIN tutor t ON s.T_id = t.ID
     WHERE s.Date > CURDATE()
-      OR (s.Date = CURDATE() AND s.Time > CURTIME())
+      OR (s.Date = CURDATE() AND s.Time > CURTIME()) AND L_id= $user_id 
 ";
 $upcoming_sessions = mysqli_query($conn, $sql_upcoming);
 
 // Previous Sessions: Sessions that have ended
 $sql_previous = "
-    SELECT s.*, t.FirstName, t.LastName
+    SELECT s.*, t.Firstname, t.Lastname, t.image
     FROM session s
     JOIN tutor t ON s.T_id = t.ID
     WHERE s.Date < CURDATE()
-      OR (s.Date = CURDATE() AND TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) < CURTIME())
+      OR (s.Date = CURDATE() AND TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) < CURTIME()) AND L_id= $user_id 
 ";
 $previous_sessions = mysqli_query($conn, $sql_previous);
 
@@ -170,9 +186,9 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
 <?php if (mysqli_num_rows($current_sessions) > 0) { ?>
     <?php while ($row = mysqli_fetch_assoc($current_sessions)) { ?>
         <div class="carousel-cell">
-            <img class="current-session-img" src="../images/maleIcon3.png" alt="current-session"/>
+        <img class="current-session-img" src="../images/<?php echo $row['image']; ?>" alt="current-session"/>
             <div class="card-inner">
-                <h5><strong><?php echo $row['FirstName'] . ' ' . $row['LastName']; ?></strong></h5>
+                <h5><strong><?php echo $row['Firstname'] . ' ' . $row['Lastname']; ?></strong></h5>
                 <section class="incard-elements-sessions">
                     <p class="language"><?php echo $row['language']; ?></p>
                     
@@ -219,10 +235,10 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
                     <td><?php echo date('j M, Y', strtotime($row['Date'])); ?></td>
                     <td><span class="ms-1"><?php echo $row['Duration']; ?> Minutes</span></td>
                     <td>
-                        <img src="../images/maleIcon3.png" width="25" alt="Tutor"/>
-                        <?php echo $row['FirstName'] . ' ' . $row['LastName']; ?>
+                    <img src="../images/<?php echo $row['image']; ?>" width="25" alt="Tutor"/>
+                        <?php echo $row['Firstname'] . ' ' . $row['Lastname']; ?>
                     </td>
-                    <td><img src="../images/united-states.png" width="20" alt="Language"/><?php echo $row['language']; ?></td>
+                    <td><img src="<?php getFlagImage($row['language']); ?>" width="20" alt="Language"/><?php echo $row['language']; ?></td>
                     <td class="text-end">
                         <span class="fw-bolder"><?php echo date('g:iA', strtotime($row['Time'])); ?></span>
                         <button class="cancel-btn" onclick="cancelSession(<?php echo $row['ID']; ?>);">Cancel</button>
@@ -270,10 +286,10 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
                     <td><?php echo date('j M, Y', strtotime($row['Date'])); ?></td>
                     <td><span class="ms-1"><?php echo $row['Duration']; ?> Minutes</span></td>
                     <td>
-                        <img src="../images/maleIcon3.png" width="25" alt="Tutor"/>
-                        <?php echo $row['FirstName'] . ' ' . $row['LastName']; ?>
+                    <img src="../images/<?php echo $row['image']; ?>" width="25" alt="Tutor"/>
+                        <?php echo $row['Firstname'] . ' ' . $row['Lastname']; ?>
                     </td>
-                    <td><img src="../images/united-states.png" width="20" alt="Language"/><?php echo $row['language']; ?></td>
+                    <td><img src="<?php getFlagImage($row['language']); ?>" width="20" alt="Language"/><?php echo $row['language']; ?></td>
                     <td class="text-end">
                         <span class="fw-bolder"><?php echo date('g:iA', strtotime($row['Time'])); ?></span>
                         <button class="cancel-btn" onclick="deleteSession(<?php echo $row['ID']; ?>);">Delete</button>
@@ -290,9 +306,7 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
 </div>
 </section>
           </section>
-          <div class="day">
-            <a href="RateAndReview.html"><button class="rate-btn-current">Rate and Review!</button></a>
-          </div>
+          
           <!-- end of requests -->
         </section>
       </section>
