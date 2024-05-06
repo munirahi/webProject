@@ -167,51 +167,35 @@ continue;
 ?>
 
 
-    <header id="header">
-      <div id="header-div">
-        <nav class="fixed-top" id="main-nav">
-          <ul id="ul1">
-            <li>
-              <img
-                src="images/linguistBlueAndWhite.jpg"
-                alt="LINGUIST logo"
-                id="logo-img"
-              />
-            </li>
-            <li class="list1-item">
-              <a href="tutor_Home_page.html" class="list1-item">Home</a>
-            </li>
-            <li class="list1-item"><a href="php/SESSionTutor.php">Sessions</a></li>
-            <li class="list1-item"><a href="tutorReq.html">Requests</a></li>
-            <li class="list1-item">
-              <a href="SupportsPartner.html">Support</a>
-            </li>
-          </ul>
-          <ul id="ul2">
-            <li id="acnt li">
-              <nav id="account-nav">
-                <img src="images/account.jfif" id="account-img" />
-                <ul>
-                  <li class="account-list">
-                    <a href="EditProfileP.html"
-                      ><div class="circle"></div>
-                      Edit Profile</a
-                    >
-                  </li>
-
-                  <li class="account-list">
-                    <a href="#"
-                      ><div class="circle"></div>
-                      Log Out</a
-                    >
-                  </li>
-                </ul>
-              </nav>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+<header>
+            <div id="header-div">
+                <nav class="fixed-top" id="main-nav">
+                    <ul id="ul1">
+                        <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
+                        <li class="list1-item"><a href="#" class="list1-item">Home</a></li>
+                        <li class="list1-item"><a href="php/SESSionTutor.php">Sessions</a></li>
+                        <li class="list1-item"><a href="tutorReq.php">Requests</a></li>
+                        <li class="list1-item"><a href="toturRate.php">Rates and Reviews</a></li>
+                        <li class="list1-item"><a href="SupportsPartner.php">Support</a></li>
+                    </ul>
+                    <ul id="ul2">
+                        
+                        <li id="acnt li">
+                            <nav id="account-nav"><img src="images/<?php echo  $image?>" id="account-img">
+                                <ul>
+                                    
+                                    <li class="account-list"><a href="EditProfileP.php"><div class="circle"></div>Edit Profile</a></li>
+                                    
+                                    <li class="account-list"><a href="logout.php"><div class="circle"></div>Log Out</a></li>
+                                </ul>
+            
+                            </nav>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+        </header>
     <section class="continer">
       <aside class="sidebar">
         <div class="sidebar-card">
@@ -232,7 +216,7 @@ continue;
               <li id="earnings">
                 <i class="fa-solid fa-money-bill-wave"></i>
                 <span>Total Earnings</span>
-                <span>$<?php echo '1000'?></span>
+                <span>$<?php echo $totalEarnings?></span>
               </li>
               <li id="Rating">
                 <a href="toturRate.html" id="rating-anchor">

@@ -50,6 +50,9 @@ if(isset($_GET['ID'])) {
     echo "<h1>Welcome to the tutor profile page!</h1>";
 }
 
+
+include("php/tutorsInfo.php");
+
 ?>
 
 
@@ -66,6 +69,23 @@ if(isset($_GET['ID'])) {
         <link rel="stylesheet" href="css/learnerRequest2.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
+        <link rel="stylesheet" href="css/tutorAvailableTimes.css">
+        <!-- <link rel="stylesheet" href="css/calendar.css"> -->
+        
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<!-- //extras -->
+
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
+
+
     </head>
     <body>
         <header>
@@ -73,21 +93,21 @@ if(isset($_GET['ID'])) {
                 <nav class="fixed-top" id="main-nav">
                     <ul id="ul1">
                         <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
-                        <li class="list1-item"><a href="tutor_Home_page.html" class="list1-item">Home</a></li>
-                        <li class="list1-item"><a href="SESSionTutor.html">Sessions</a></li>
-                        <li class="list1-item"><a href="tutorReq.html">Requests</a></li>
-                        <li class="list1-item"><a href="toturRate.html">Rate and Review</a></li>
-                        <li class="list1-item"><a href="SupportsPartner.html">Support</a></li>
+                        <li class="list1-item"><a href="tutor_Home_page.php" class="list1-item">Home</a></li>
+                        <li class="list1-item"><a href="php/SESSionTutor.php">Sessions</a></li>
+                        <li class="list1-item"><a href="tutorReq.php">Requests</a></li>
+                        <li class="list1-item"><a href="toturRate.php">Rates and Reviews</a></li>
+                        <li class="list1-item"><a href="SupportsPartner.php">Support</a></li>
                     </ul>
                     <ul id="ul2">
                         
                         <li id="acnt li">
-                            <nav id="account-nav"><img src="images/account.jfif" id="account-img">
+                            <nav id="account-nav"><img src="images/<?php echo  $image?>" id="account-img">
                                 <ul>
                                     
-                                    <li class="account-list"><a href="EditProfileP.html"><div class="circle"></div>Edit Profile</a></li>
+                                    <li class="account-list"><a href="EditProfileP.php"><div class="circle"></div>Edit Profile</a></li>
                                     
-                                    <li class="account-list"><a href="#"><div class="circle"></div>Log Out</a></li>
+                                    <li class="account-list"><a href="logout.php"><div class="circle"></div>Log Out</a></li>
                                 </ul>
             
                             </nav>
@@ -143,7 +163,7 @@ if(isset($_GET['ID'])) {
 
                 </section>
                 <h2>Book a Session</h2>
-               <form>
+               <form method='POST' action='<?php $_SERVER['PHP_SELF'] ?>'>
                 <fieldset>
                     <div class="fieldset-container">
                     <div class="select-container">
@@ -183,7 +203,7 @@ if(isset($_GET['ID'])) {
                         </label>
 
                         <label>Date and Time<br>
-                            <div class="selectWrapper">
+                            <div class="selectWrapper" id="datetimepicker">
                                 <input class="input-box" type="datetime-local">
                             </div>
                         </label>
@@ -195,7 +215,17 @@ if(isset($_GET['ID'])) {
                 </fieldset>
             </form> 
 
-                
+            <label for="datepicker">Select Date:</label>
+<input type="text" id="datepicker" name="datepicker">
+
+<label for="available-times">Available Times:</label>
+<select id="available-times" name="available-times"></select>
+
+
+
+
+
+
 
 
 
