@@ -1,3 +1,21 @@
+<?php 
+// if(!isset($_SESSION['user_id'])){
+// header("Location: php/login.php");
+
+
+// }
+session_start(); // Start the session
+// Check if the user is not logged in
+if (!isset($_SESSION['user_id'])) {
+    // Redirect the user to the login page
+    header("Location:login.php");
+    exit(); // Stop further execution
+}
+else{
+  $user_id= $_SESSION['user_id'];
+}
+
+?>
 <!DOCTYPE html>
 <html>
   <!--upcoming and current sessions learner-->
@@ -132,7 +150,7 @@ $sql_current = "
     JOIN tutor t ON s.T_id = t.ID
     WHERE s.Date = CURDATE()
       AND TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) >= CURTIME()
-      AND s.Time <= CURTIME()
+      AND s.Time <= CURTIME() AND L_id= $user_id 
 ";
 $current_sessions = mysqli_query($conn, $sql_current);
 
@@ -142,7 +160,7 @@ $sql_upcoming = "
     FROM session s
     JOIN tutor t ON s.T_id = t.ID
     WHERE s.Date > CURDATE()
-      OR (s.Date = CURDATE() AND s.Time > CURTIME())
+      OR (s.Date = CURDATE() AND s.Time > CURTIME()) AND L_id= $user_id 
 ";
 $upcoming_sessions = mysqli_query($conn, $sql_upcoming);
 
@@ -152,7 +170,7 @@ $sql_previous = "
     FROM session s
     JOIN tutor t ON s.T_id = t.ID
     WHERE s.Date < CURDATE()
-      OR (s.Date = CURDATE() AND TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) < CURTIME())
+      OR (s.Date = CURDATE() AND TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) < CURTIME()) AND L_id= $user_id 
 ";
 $previous_sessions = mysqli_query($conn, $sql_previous);
 
