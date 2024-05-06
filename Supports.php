@@ -26,7 +26,7 @@
             <li class="list1-item"><a href="HomePageLearner.php" class="list1-item">Home</a></li>
             <li class="list1-item"><a href="SESSionLearner.php">Sessions</a></li>
             <li class="list1-item"><a href="learnerRequest2.php">Requests</a></li>
-            <li class="list1-item"><a href="Supports.html">Support</a></li>
+            <li class="list1-item"><a href="Supports.php">Support</a></li>
           </ul>
           <ul id="ul2">
   
