@@ -15,34 +15,25 @@ $dbname = "linguist";
     
     echo "Connected successfully";
     
-    
+// Get data from POST request
+$sessionID = $_POST["sessionID"];
+$text = $_POST["text"];
+$rating = $_POST["rating"];
 
-// Create a new PDO instance
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
-}
-
-// Retrieve the submitted data
-$rating = $_POST['rating'];
-$description = $_POST['description'];
-
-// Prepare and execute the SQL statement to insert the data
-$sql = "INSERT INTO feedback_table (rating, description) VALUES (:rating, :description)";
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(':rating', $rating, PDO::PARAM_INT);
-$stmt->bindParam(':description', $description, PDO::PARAM_STR);
+// Prepare and execute INSERT query
+$sql = "INSERT INTO review (sessionID, text, rating) VALUES ($sessionID, $text, $rating)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("sss", $sessionID, $text, $rating);
 $stmt->execute();
 
-// Check if the data was successfully inserted
-if ($stmt->rowCount() > 0) {
-    echo "Data saved successfully";
+// Check for successful insertion
+if ($stmt->affected_rows > 0) {
+  echo "Feedback saved successfully!";
 } else {
-    echo "Error: Data not saved";
+  echo "Error saving feedback.";
 }
 
-// Close the database connection
-$pdo = null;
+$stmt->close();
+$conn->close();
+
 ?>
