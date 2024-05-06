@@ -269,13 +269,14 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
         <tbody>
         <thead>
                     <tr class="bg-light">
-                      <th scope="col" width="5%">#</th>
-                      <th scope="col" width="20%">Date</th>
+                      <th scope="col" width="10%">#</th>
+                      <th scope="col" width="10%">Date</th>
                       <th scope="col" width="10%">Duration</th>
-                      <th scope="col" width="20%">Tutor name</th>
-                      <th scope="col" width="20%">language</th>
-                      <th scope="col" width="20%">
-                        <span>Time</span>
+                      <th scope="col" width="10%">Tutor name</th>
+                      <th scope="col" width="10%">language</th>
+                         <th scope="col" width="10%">Time</th>
+                      <th scope="col" width="10%">rate</th>
+                  
                       </th>
                     </tr>
                   </thead>
@@ -294,6 +295,11 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
                         <span class="fw-bolder"><?php echo date('g:iA', strtotime($row['Time'])); ?></span>
                         <button class="cancel-btn" onclick="deleteSession(<?php echo $row['ID']; ?>);">Delete</button>
                     </td>
+                    <td class="text-end">
+                        <span class="fw-bolder">
+                          <button class="rate-btn" onclick="RateSession(<?php echo $row['ID']; ?>)">Rate</button>
+                        </span>
+                      </td>
                 </tr> 
             <?php } ?>
             <?php } else { ?>
@@ -311,7 +317,70 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
         </section>
       </section>
       </section>
+            <script>
 
+function RateSession(sessionId) {
+      if (confirm("Let's rate this session!")) {
+        // Prompt for text and rating with clickable stars
+        let text = prompt("Enter your feedback for this session:");
+        let ratingPrompt = "Rate this session (click on a star):\n\n";
+        for (let i = 1; i <= 5; i++) {
+          ratingPrompt += `<i class="far fa-star" onclick="setRating(${i})"></i>`; // Use Font Awesome icons with click event
+        }
+        let rating = prompt(ratingPrompt);
+
+        // Function to set the rating based on clicked star
+        function executeRatings(starValue) {
+          rating = starValue; // Update the rating variable
+        }
+
+        // Validation (optional)
+        if (rating && !isNaN(rating) && rating >= 1 && rating <= 5) {
+          fetch('save_feedback.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'sessionID=' + sessionId + '&text=' + text + '&rating=' + rating
+          })
+            .then(response => response.text())
+            .then(data => {
+              alert(data);
+              location.reload(); // Reload the page to reflect changes
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              alert('There was an error saving your feedback.');
+            });
+        }
+      }}
+  const ratingContainers = document.getElementsByClassName("rating");
+
+  function executeRatings(containers) {
+    const starClassActive = "rating__star fas fa-star";
+    const starClassInactive = "rating__star far fa-star";
+
+    Array.from(containers).forEach((container) => {
+      const stars = container.getElementsByClassName("rating__star");
+
+      Array.from(stars).forEach((star) => {
+        star.onclick = () => {
+          const clickedIndex = Array.from(stars).indexOf(star);
+
+          for (let i = 0; i < stars.length; i++) {
+            if (i <= clickedIndex) {
+              stars[i].className = starClassActive;
+            } else {
+              stars[i].className = starClassInactive;
+            }
+          }
+        };
+      });
+    });
+  }
+
+  executeRatings(ratingContainers);
+</script>
     <!--Footer-->
 
     <footer>
