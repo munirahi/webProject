@@ -25,6 +25,11 @@ yellow in dark background :#CDB309
 .center.box {
   display: table-column;
 }
+.msg-nosession {
+  font-size: 15px;
+  position: relative;
+  bottom: 50%;
+}
 
 .current-sessions-container {
   display: flex;

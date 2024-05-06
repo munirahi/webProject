@@ -173,6 +173,7 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
           <section class="Today-sessions">
 <!-- Current Sessions Section -->
 <div class="current-sessions-card">
+<?php if (mysqli_num_rows($current_sessions) > 0) { ?>
     <?php while ($row = mysqli_fetch_assoc($current_sessions)) { ?>
         <div class="carousel-cell">
             <img class="current-session-img" src="../images/maleIcon3.png" alt="current-session"/>
@@ -187,6 +188,9 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
             </div>
         </div>
     <?php } ?>
+    <?php } else { ?>
+                        <p class="msg-nosession">No current sessions available.</p>
+                    <?php } ?>
 </div>
 </section>
         </section>
@@ -214,6 +218,7 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
                       </th>
                     </tr>
                   </thead>
+                  <?php if (mysqli_num_rows($upcoming_sessions) > 0) { ?>
             <?php while ($row = mysqli_fetch_assoc($upcoming_sessions)) { ?>
                 <tr>
                     <td><?php echo $row['ID']; ?></td>
@@ -230,6 +235,11 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
                     </td>
                 </tr>
             <?php } ?>
+            <?php } else { ?>
+                                    <tr>
+                                        <td colspan="6">No upcoming sessions available.</td>
+                                    </tr>
+                                <?php } ?>
         </tbody>
     </table>
 </div>
@@ -259,6 +269,7 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
                       </th>
                     </tr>
                   </thead>
+                  <?php if (mysqli_num_rows($previous_sessions) > 0) { ?>
             <?php while ($row = mysqli_fetch_assoc($previous_sessions)) { ?>
                 <tr>
                     <td><?php echo $row['ID']; ?></td>
@@ -275,6 +286,11 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
                     </td>
                 </tr> 
             <?php } ?>
+            <?php } else { ?>
+                            <tr>
+                                <td colspan="6">No previous sessions available.</td>
+                            </tr>
+                        <?php } ?>
         </tbody>
     </table>
 </div>
