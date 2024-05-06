@@ -163,7 +163,7 @@ function getFlagImage($language) {
 }
 // Current Sessions: Active sessions with today's date and time
 $sql_current = "
-    SELECT s.*, t.FirstName, t.LastName
+    SELECT s.*, t.Firstname, t.Lastname, t.image
     FROM session s
     JOIN tutor t ON s.T_id = t.ID
     WHERE s.Date = CURDATE()
@@ -174,7 +174,7 @@ $current_sessions = mysqli_query($conn, $sql_current);
 
 // Upcoming Sessions: Future sessions starting after now
 $sql_upcoming = "
-    SELECT s.*, t.FirstName, t.LastName
+    SELECT s.*, t.Firstname, t.Lastname, t.image
     FROM session s
     JOIN tutor t ON s.T_id = t.ID
     WHERE s.Date > CURDATE()
@@ -184,7 +184,7 @@ $upcoming_sessions = mysqli_query($conn, $sql_upcoming);
 
 // Previous Sessions: Sessions that have ended
 $sql_previous = "
-    SELECT s.*, t.FirstName, t.LastName
+    SELECT s.*, t.Firstname, t.Lastname, t.image
     FROM session s
     JOIN tutor t ON s.T_id = t.ID
     WHERE s.Date < CURDATE()
@@ -208,7 +208,7 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
         <div class="carousel-cell">
         <img class="current-session-img" src="../images/<?php echo $row['image']; ?>" alt="current-session"/>
             <div class="card-inner">
-                <h5><strong><?php echo $row['FirstName'] . ' ' . $row['LastName']; ?></strong></h5>
+                <h5><strong><?php echo $row['Firstname'] . ' ' . $row['Lastname']; ?></strong></h5>
                 <section class="incard-elements-sessions">
                     <p class="language"><?php echo $row['language']; ?></p>
                     
@@ -256,7 +256,7 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
                     <td><span class="ms-1"><?php echo $row['Duration']; ?> Minutes</span></td>
                     <td>
                     <img src="../images/<?php echo $row['image']; ?>" width="25" alt="Tutor"/>
-                        <?php echo $row['FirstName'] . ' ' . $row['LastName']; ?>
+                        <?php echo $row['Firstname'] . ' ' . $row['Lastname']; ?>
                     </td>
                     <td><img src="<?php getFlagImage($row['language']); ?>" width="20" alt="Language"/><?php echo $row['language']; ?></td>
                     <td class="text-end">
@@ -307,7 +307,7 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
                     <td><span class="ms-1"><?php echo $row['Duration']; ?> Minutes</span></td>
                     <td>
                     <img src="../images/<?php echo $row['image']; ?>" width="25" alt="Tutor"/>
-                        <?php echo $row['FirstName'] . ' ' . $row['LastName']; ?>
+                        <?php echo $row['Firstname'] . ' ' . $row['Lastname']; ?>
                     </td>
                     <td><img src="<?php getFlagImage($row['language']); ?>" width="20" alt="Language"/><?php echo $row['language']; ?></td>
                     <td class="text-end">
