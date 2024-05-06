@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($password === $rowPartner['password']) {
             echo "<h1>Login Successful - partner!</h1>";
             $_SESSION['user_id'] = $rowPartner['ID'];
-            header('Location: ../tutor_Home_page.php');
+            header('Location: tutor_Home_page.php');
             // header("Location: singup.html"); 
              exit(); 
         } else {

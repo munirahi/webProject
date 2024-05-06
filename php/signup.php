@@ -153,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
           
             $_SESSION['user_id']= $Id ;
-            header("Location: ../tutor_Home_page.php");
+            header("Location: tutor_Home_page.php");
             exit();
            // echo "New record created successfully";
         }elseif($formType === "learner"){
