@@ -142,7 +142,25 @@ function deleteSession(sessionId) {
     </header>
 <?php
 include 'connection.php'; // Make sure your database connection settings are correct
+function getFlagImage($language) {
+  // Define a map of language names to flag image directories
+  $languageFlags = array(
+      "French" => "france.png",
+      "German" => "germanyy.png",
+      "English" => "united-states.png",
+      "Arabic" => "flag.png"
+      // Add more language-flag mappings as needed
+  );
 
+  // Check if the provided language is in the map
+  if (array_key_exists($language, $languageFlags)) {
+      // Return the corresponding flag image directory
+      return "../images/" . $languageFlags[$language];
+  } else {
+      // If the language is not found, return a default flag image
+      return "../images/default-flag.png";
+  }
+}
 // Current Sessions: Active sessions with today's date and time
 $sql_current = "
     SELECT s.*, t.FirstName, t.LastName
@@ -188,7 +206,7 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
 <?php if (mysqli_num_rows($current_sessions) > 0) { ?>
     <?php while ($row = mysqli_fetch_assoc($current_sessions)) { ?>
         <div class="carousel-cell">
-            <img class="current-session-img" src="../images/maleIcon3.png" alt="current-session"/>
+        <img class="current-session-img" src="../images/<?php echo $row['image']; ?>" alt="current-session"/>
             <div class="card-inner">
                 <h5><strong><?php echo $row['FirstName'] . ' ' . $row['LastName']; ?></strong></h5>
                 <section class="incard-elements-sessions">
@@ -237,10 +255,10 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
                     <td><?php echo date('j M, Y', strtotime($row['Date'])); ?></td>
                     <td><span class="ms-1"><?php echo $row['Duration']; ?> Minutes</span></td>
                     <td>
-                        <img src="../images/maleIcon3.png" width="25" alt="Tutor"/>
+                    <img src="../images/<?php echo $row['image']; ?>" width="25" alt="Tutor"/>
                         <?php echo $row['FirstName'] . ' ' . $row['LastName']; ?>
                     </td>
-                    <td><img src="../images/united-states.png" width="20" alt="Language"/><?php echo $row['language']; ?></td>
+                    <td><img src="<?php getFlagImage($row['language']); ?>" width="20" alt="Language"/><?php echo $row['language']; ?></td>
                     <td class="text-end">
                         <span class="fw-bolder"><?php echo date('g:iA', strtotime($row['Time'])); ?></span>
                         <button class="cancel-btn" onclick="cancelSession(<?php echo $row['ID']; ?>);">Cancel</button>
@@ -288,10 +306,10 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
                     <td><?php echo date('j M, Y', strtotime($row['Date'])); ?></td>
                     <td><span class="ms-1"><?php echo $row['Duration']; ?> Minutes</span></td>
                     <td>
-                        <img src="../images/maleIcon3.png" width="25" alt="Tutor"/>
+                    <img src="../images/<?php echo $row['image']; ?>" width="25" alt="Tutor"/>
                         <?php echo $row['FirstName'] . ' ' . $row['LastName']; ?>
                     </td>
-                    <td><img src="../images/united-states.png" width="20" alt="Language"/><?php echo $row['language']; ?></td>
+                    <td><img src="<?php getFlagImage($row['language']); ?>" width="20" alt="Language"/><?php echo $row['language']; ?></td>
                     <td class="text-end">
                         <span class="fw-bolder"><?php echo date('g:iA', strtotime($row['Time'])); ?></span>
                         <button class="cancel-btn" onclick="deleteSession(<?php echo $row['ID']; ?>);">Delete</button>
@@ -308,9 +326,7 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
 </div>
 </section>
           </section>
-          <div class="day">
-            <a href="RateAndReview.html"><button class="rate-btn-current">Rate and Review!</button></a>
-          </div>
+          
           <!-- end of requests -->
         </section>
       </section>
