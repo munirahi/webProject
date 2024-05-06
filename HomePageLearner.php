@@ -131,7 +131,7 @@ function getFlagImage($language) {
         <ul id="ul1">
           <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo" id="logo-img"></li>
           <li class="list1-item"><a href="HomePageLearner.html" class="list1-item">Home</a></li>
-          <li class="list1-item"><a href="SESSionLearner.html">Sessions</a></li>
+          <li class="list1-item"><a href="SESSionLearner.php">Sessions</a></li>
           <li class="list1-item"><a href="learnerRequest2.html">Requests</a></li>
           <li class="list1-item"><a href="Supports.html">Support</a></li>
         </ul>
@@ -191,75 +191,20 @@ function getFlagImage($language) {
               <span>Total Hours of Studying</span>
               <span><?php echo $totalHours ?></span>
             </li>
-            <li id="earnings">
-              <i class="fa-solid fa-fire"></i></i>
-              <span>Streak</span>
-              <span><?php echo $totalHours/24 ?></span>
-              <span><?php echo "Days" ?></span>
-            </li>
-            <li id="Rating">
-              <i class="fa-solid fa-bars-progress"></i>
-
-              <span>Progress</span>
-              </a>
-              <span><?php echo $totalHours*100 ?></span>
-
-            </li>
             <li id="Languages">
               <span>Learning Languages</span>
               <?php
-              if (session_status() === PHP_SESSION_NONE) {
-                session_start(); // Start session if not already started
-              }
-            
-              // Check if user ID is present in the session
-              if (isset($_SESSION['user_id'])) {
-                $learner_id = $_SESSION['user_id'];
-            
-                // Function to retrieve learner's learning languages (using prepared statements)
-                function getLearnerLanguages($conn, $learner_id) {
-                  $sql = "SELECT Language
-                          FROM learner AS l
-                          INNER JOIN tutor_languages AS tl ON l.ID = tl.P_ID
-                          WHERE l.ID = ?"; 
-            
-                  $stmt = mysqli_prepare($conn, $sql); // Prepare the statement
-                  if (!$stmt) {
-                    die("Error preparing statement: " . mysqli_error($conn));
-                  }
-            
-                  mysqli_stmt_bind_param($stmt, "i", $learner_id); // Bind learner ID to the parameter
-                  mysqli_stmt_execute($stmt); // Execute the prepared statement
-            
-                  $result = mysqli_stmt_get_result($stmt); // Get the result set
-            
-                  if (mysqli_num_rows($result) > 0) {
-                    return $result; // Return the result set for further processing
-                  } else {
-                    return false; // No languages found, return false
-                  }
-            
-                }
-            
-                // Retrieve learner languages using the function
-                $languages = getLearnerLanguages($conn, $learner_id);
-            
-                if ($languages) {
-                  echo "<h3>Learner's Learning Languages:</h3>";
-                  echo "<ul>";
-                  while ($row = mysqli_fetch_assoc($languages)) {
-                    echo "<li>" . $row["Language"] . "</li>";
-                  }
-                  echo "</ul>";
-                } else {
-                  echo "No learning languages found for learner with ID: " . $learner_id;
-                }
-              } else {
-                echo "Please log in to see your learning languages.";
-              }
+  $learner_id = $_SESSION['user_id'];
+  $sql = "SELECT language FROM session WHERE ID = '$learner_id'";
+  $result = mysqli_query($conn, $sql);
+  if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $l = $row["language"]; 
+    echo  $l;
+  } else {
+    echo "";
+  }
 ?>
-              <span>English, Spanish, French</span>
-
             </li>
             <li id="Cultural backgrounds">
               <span>Cultural backgrounds</span>
@@ -346,16 +291,6 @@ function getFlagImage($language) {
             }
             echo '</div>';
             echo '<section class="incard-elements">';
-            
-            // Check for bio key
-            if (isset($row['bio'])) {
-              
-              echo '<div class="bio"><p>' . $r['bio'] . '</p></div>';
-            } else {
-              echo '<div class="bio"><p>No bio available.</p></div>';
-            }
-        
-            // Check for star (rating) and rate keys (assuming they exist)
             echo '<p class="rating"><i class="fa-solid fa-star"></i> ' . (isset($row['starts']) ? $row['starts'] : 'N/A') . ' <i class="fa-solid fa-dollar-sign"></i> ' . (isset($row['ReviewText']) ? $row['ReviewText'] : 'N/A') . '</p>';
             echo '</section>';
             echo '<div id="part-rec-post"><button>Post Request</button></div>';
