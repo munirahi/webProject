@@ -1,46 +1,154 @@
 <?php
-include('connection.php');
-
-$_SESSION['tutor_id']=2;
-if(isset($_SESSION['tutor_id'])) {
-  
-    $selectedTutorId = $_SESSION['tutor_id'];
-    
-  
-    $sqlT = "SELECT * FROM tutor WHERE ID = '$selectedTutorId'";
-   
-    $result =  mysqli_query($conn, $sqlT);
-    
-    if(mysqli_num_rows($result) > 0) {
-        
-        $tutorData = mysqli_fetch_assoc($result);
-        
-      
-        $email = $tutorData['Email'];
-        $image = $tutorData['image'];
-        $firstname = $tutorData['Firstname'];
-        $lastname = $tutorData['Lastname'];
-        $age = $tutorData['age'];
-        $gender = $tutorData['gender'];
-        $password = $tutorData['password'];
-        $phoneNumber = $tutorData['PhoneNumber'];
-        $city = $tutorData['city'];
-        $bio = $tutorData['bio'];
-        $experience = $tutorData['experience'];
-        $education = $tutorData['eduction'];
-    } else {
-        echo "No tutor found with ID: $selectedTutorId";
-    }
-
-  
+// include('connection.php');
+// session_start();
+// // $_SESSION['tutor_id']=2;
+// if (!isset($_SESSION['user_id'])) {
  
+//     header("Location: login.php");
+//     exit(); 
+// }else{
+//     if(isset($_POST['tutor_id'])) {
+//         $selectedTutorId =  $_POST['tutor_id'];
+
+//         $sqlT = "SELECT * FROM tutor WHERE ID = '$selectedTutorId'";
+   
+//         $result =  mysqli_query($conn, $sqlT);
+        
+//         if(mysqli_num_rows($result) > 0) {
+            
+//             $tutorData = mysqli_fetch_assoc($result);
+            
+          
+//             $email = $tutorData['Email'];
+//             $image = $tutorData['image'];
+//             $firstname = $tutorData['Firstname'];
+//             $lastname = $tutorData['Lastname'];
+//             $age = $tutorData['age'];
+//             $gender = $tutorData['gender'];
+//             $password = $tutorData['password'];
+//             $phoneNumber = $tutorData['PhoneNumber'];
+//             $city = $tutorData['city'];
+//             $bio = $tutorData['bio'];
+//             $experience = $tutorData['experience'];
+//             $education = $tutorData['eduction'];
+//         } else {
+//             echo "No tutor found with ID: $selectedTutorId";
+//         }
+//         // header('Location: tutor_profile_page.php');
+//         exit(); 
+//     } else {
+        
+//         echo "Tutor ID not provided.";
+//     }
+// }
+
+
+
+
+
+include('connection.php');
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit(); 
 } else {
-    // Default content if no id is selected
-    echo "<h1>Welcome to the tutor profile page!</h1>";
+    // Check if the form has been submitted with a tutor ID
+    if(isset($_POST['tutor_id'])) {
+        $selectedTutorId =  $_POST['tutor_id'];
+
+        // Prepare and execute the SQL query to fetch tutor information
+        $sqlT = "SELECT * FROM tutor WHERE ID = '$selectedTutorId'";
+        $result =  mysqli_query($conn, $sqlT);
+        
+        if($result) {
+            // Check if tutor information is found
+            if(mysqli_num_rows($result) > 0) {
+                // Fetch tutor data
+                $tutorData = mysqli_fetch_assoc($result);
+                // Extract tutor data here...
+                $email = $tutorData['Email'];
+                            $image = $tutorData['image'];
+                            $firstname = $tutorData['Firstname'];
+                            $lastname = $tutorData['Lastname'];
+                            $age = $tutorData['age'];
+                            $gender = $tutorData['gender'];
+                            $password = $tutorData['password'];
+                            $phoneNumber = $tutorData['PhoneNumber'];
+                            $city = $tutorData['city'];
+                            $bio = $tutorData['bio'];
+                            $experience = $tutorData['experience'];
+                            $education = $tutorData['eduction'];
+                
+                // Output other tutor information as needed
+            } else {
+                echo "No tutor found with ID: $selectedTutorId";
+            }
+        } else {
+            echo "Error executing query: " . mysqli_error($conn);
+        }
+    } else {
+        echo "Tutor ID not provided.";
+    }
 }
 
 
-include("tutorsInfo.php");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// if(isset($_SESSION['tutor_id'])) {
+  
+//     $selectedTutorId = $_SESSION['tutor_id'];
+    
+  
+//     $sqlT = "SELECT * FROM tutor WHERE ID = '$selectedTutorId'";
+   
+//     $result =  mysqli_query($conn, $sqlT);
+    
+//     if(mysqli_num_rows($result) > 0) {
+        
+//         $tutorData = mysqli_fetch_assoc($result);
+        
+      
+//         $email = $tutorData['Email'];
+//         $image = $tutorData['image'];
+//         $firstname = $tutorData['Firstname'];
+//         $lastname = $tutorData['Lastname'];
+//         $age = $tutorData['age'];
+//         $gender = $tutorData['gender'];
+//         $password = $tutorData['password'];
+//         $phoneNumber = $tutorData['PhoneNumber'];
+//         $city = $tutorData['city'];
+//         $bio = $tutorData['bio'];
+//         $experience = $tutorData['experience'];
+//         $education = $tutorData['eduction'];
+//     } else {
+//         echo "No tutor found with ID: $selectedTutorId";
+//     }
+
+  
+ 
+// } else {
+//     // Default content if no id is selected
+//     echo "<h1>Welcome to the tutor profile page!</h1>";
+// }
+
+
+// include("tutorsInfo.php");
 
 
 function displayTutorReviews() {
@@ -96,8 +204,6 @@ mysqli_close($conn);
         <link rel="stylesheet" href="../header_folder/headerPartner.css">
         <link rel="stylesheet" href="../css/footer.css">
         <link rel="stylesheet" href="../css/tutor_profile_page.css">
-        <link rel="stylesheet" href="../css/tutorRate.css">
-        <link rel="stylesheet" href="../css/learnerRequest2.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
         <link rel="stylesheet" href="css/tutorAvailableTimes.css">
