@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       
 
-        $sql_check = "SELECT * FROM tutor WHERE Email='$email' AND ID != $pid ";
+        $sql_check = "SELECT * FROM tutor WHERE Email='$email' AND ID != '$pid' ";
       $result_check = mysqli_query($conn, $sql_check);
   
       $selected_languages = []; // Store selected languages from checkboxes
@@ -69,12 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $selected_languages[] = $language;
       }
 
-      $sql_languages = "DELETE FROM tutor_languages WHERE P_ID= $pid "; // Delete existing languages
+      $sql_languages = "DELETE FROM tutor_languages WHERE P_ID= '$pid' "; // Delete existing languages
       mysqli_query($conn, $sql_languages);
 
       // Insert selected languages into tutor_languages table
       foreach ($selected_languages as $language) {
-          $sql_insert_language = "INSERT INTO tutor_languages (P_ID, Language) VALUES ($pid , '$language')";
+          $sql_insert_language = "INSERT INTO tutor_languages (P_ID, Language) VALUES ('$pid' , '$language')";
           mysqli_query($conn, $sql_insert_language);
       }
     
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql .= ", image='$newImageName'";
         }
 
-        $sql .= " WHERE ID=$pid";
+        $sql .= " WHERE ID='$pid'";
 
         if (mysqli_query($conn, $sql)) {
             $success = true;
@@ -149,7 +149,7 @@ if (mysqli_num_rows($result) > 0) {
     $bio = $user["bio"];
     $newImageName=$user["image"];
       // Prepare checkbox values based on user's languages
-      $sql_languages = "SELECT Language FROM tutor_languages WHERE P_ID= $_SESSION['user_id'] ";
+      $sql_languages = "SELECT Language FROM tutor_languages WHERE P_ID= '$user_id' ";
       $result_languages = mysqli_query($conn, $sql_languages);
   $languages = [];
   while ($row = mysqli_fetch_assoc($result_languages)) {
