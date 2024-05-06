@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Insert user data into respective table
         if ($formType === "learner") {
             $location = mysqli_real_escape_string($conn, $_POST["location"]) ;
-           $profLevel= $_POST["profLevel"];
+         
             if (!empty($_FILES["limage"]["name"])) {
             $fileName = $_FILES["limage"]["name"];
             $fileSize = $_FILES["limage"]["size"];
@@ -66,8 +66,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               }else{
                 
 
-                 $sql = "INSERT INTO learner (Firstname, Lastname, email, password, city,location,profLevel,image)
-                    VALUES ('$firstname', '$lastname', '$email', '$password', '$city','$location','$profLevel','$newImageName')";
+                 $sql = "INSERT INTO learner (Firstname, Lastname, email, password, city,location,image)
+                    VALUES ('$firstname', '$lastname', '$email', '$password', '$city','$location','$newImageName')";
                     //redirect
         }
         } elseif ($formType === "partner") {
@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $gender = $_POST["Gender"];
             $phonenum = mysqli_real_escape_string($conn, $_POST["phonenum"]);
             $bio = mysqli_real_escape_string($conn, $_POST["bio"]);
-            $professionlev= $_POST["profLevel"];
+            
             
 
             if (!empty($_FILES["pimage"]["name"])) {
@@ -124,8 +124,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
 
 
-            $sql = "INSERT INTO tutor (Email ,image, Firstname, Lastname,age, gender, password, PhoneNumber, city,profLevel ,bio)
-                    VALUES ('$email', '$newImageName','$firstname', '$lastname', '$age','$gender','$password', '$phonenum', '$city', '$professionlev','$bio')";
+            $sql = "INSERT INTO tutor (Email ,image, Firstname, Lastname,age, gender, password, PhoneNumber, city ,bio)
+                    VALUES ('$email', '$newImageName','$firstname', '$lastname', '$age','$gender','$password', '$phonenum', '$city','$bio')";
            
 
 
@@ -212,12 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
                 <input type="text" class="input-field" name="email" placeholder="E-mail" id="email-learner" required >
                 <input type="password" class="input-field" name="password" placeholder="Password" id="password-learner"required >
-                   <select name="profLevel" class="input-field" placeholder="Select Profession Level"  id="pLevel"  >
-                <option selected value="prof">Select Profession Level</option>
-                 <option value="beginner">Beginner</option>
-                  <option value="intermediate">Intermediate</option>
-               <option value="advanced">Advanced</option>
-              </select>
+                
                 <input type="text" class="input-field" name="city" placeholder="City" required >
                 <input type="text" class="input-field" name="location" placeholder="Location" >
                 <input type="checkbox" class="checkbox" ><span>I agree to the <a href="#" onclick="termsandconditions()">term & conditions <br> <br> </a></span>
@@ -262,12 +257,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="password" class="input-field" name="password" placeholder="Password" id="password-partner" required >
                  <input type="text" class="input-field" name="phonenum" id="phonenumber" placeholder="Phone Number" required >
                 <input type="text" class="input-field" name="city" placeholder="City" required >
-                <select name="profLevel" class="input-field" placeholder="Select Profession Level"  id="pLevel"  >
-                <option selected value="prof">Select Profession Level</option>
-                 <option value="beginner">Beginner</option>
-                  <option value="intermediate">Intermediate</option>
-               <option value="advanced">Advanced</option>
-              </select>
+               
         <div class="languages">
         <h5>Languages :</h5>
         <div class="language-container">
