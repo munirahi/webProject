@@ -85,44 +85,59 @@
                   $result = mysqli_query($conn, $sql);
                   if (mysqli_num_rows($result) > 0) { 
                     while($row = mysqli_fetch_assoc($result)) {
-                        // Check if the request status is not accepted or rejected
-                        if ($row['Status'] != 'accepted' && $row['Status'] != 'rejected') {
-                            // Render the buttons
-                            echo '
-                            <div class="result-cell">
-                                <div class="acc-info"> <!--row-->
-                                    <img class="result-img" src="../images/maleIcon3.png" alt="account image"> <!--column1-->
-                                    <div class="more-info">
-                                        <h5>'.$row['Firstname']. " "  .$row['Lastname'].'</h5>
-                                    </div>     
-                                </div>
-                                
-                                <div class="specifications-div">
-                                    <div class="language specifications">'.$row['Language'].'</div>
-                                    <div class="level specifications">'.$row['Level'].'</div>
-                                    <div class="duration specifications">'.$row['Duration'].' Minutes</div>
-                                    <div class="date specifications">'.$row['Date'].'</div>
-                                    <div class="time specifications">'.date("h:i A", strtotime($row['Time'])).'</div>
-                                </div>
-                                
-                                <form method="post">
-                                    <input type="hidden" name="req_date" value="'.$row['Date'].'">
-                                    <input type="hidden" name="req_time" value="'.$row['Time'].'">
-                                    <div class="req-options">
-                                        <div class="accept-req-btn">
-                                            <button type="submit" name="action" value="accept">Accept</button>
-                                        </div>
-                                        <div class="reject-req-btn">
-                                            <button type="submit" name="action" value="reject">Reject</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>';
+                        // Check if the request status is accepted and if it's not already added to the session table
+                        if ($row['Status'] == 'accepted') {
+                            // Check if the request is not already added to the session table
+                            $checkSessionQuery = "SELECT * FROM session WHERE T_ID = $ID AND Date = '{$row['Date']}' AND Time = '{$row['Time']}'";
+                            $sessionResult = mysqli_query($conn, $checkSessionQuery);
+                            if(mysqli_num_rows($sessionResult) == 0) {
+                                // If the request is not already added to the session table, add it
+                                $insertSessionQuery = "INSERT INTO session (T_ID, L_ID, Date, Time, Duration, Language, Level, Price, Status) VALUES ($ID, {$row['L_ID']}, '{$row['Date']}', '{$row['Time']}', '{$row['Duration']}', '{$row['Language']}', '{$row['Level']}', '{$row['Price']}', 'accepted')";
+                                if(mysqli_query($conn, $insertSessionQuery)) {
+                                    echo "Request added to session table successfully.";
+                                } else {
+                                    echo "Error adding request to session table: " . mysqli_error($conn);
+                                }
+                            } else {
+                                echo "Request is already added to session table.";
+                            }
                         }
+                        // Render the buttons
+                        echo '
+                        <div class="result-cell">
+                            <div class="acc-info"> <!--row-->
+                                <img class="result-img" src="../images/maleIcon3.png" alt="account image"> <!--column1-->
+                                <div class="more-info">
+                                    <h5>'.$row['Firstname']. " "  .$row['Lastname'].'</h5>
+                                </div>     
+                            </div>
+                            
+                            <div class="specifications-div">
+                                <div class="language specifications">'.$row['Language'].'</div>
+                                <div class="level specifications">'.$row['Level'].'</div>
+                                <div class="duration specifications">'.$row['Duration'].' Minutes</div>
+                                <div class="date specifications">'.$row['Date'].'</div>
+                                <div class="time specifications">'.date("h:i A", strtotime($row['Time'])).'</div>
+                            </div>
+                            
+                            <form method="post">
+                                <input type="hidden" name="req_date" value="'.$row['Date'].'">
+                                <input type="hidden" name="req_time" value="'.$row['Time'].'">
+                                <div class="req-options">
+                                    <div class="accept-req-btn">
+                                        <button type="submit" name="action" value="accept">Accept</button>
+                                    </div>
+                                    <div class="reject-req-btn">
+                                        <button type="submit" name="action" value="reject">Reject</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>';
                     }
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
                 }
+                
                 
                   ?>
                         
