@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST["email"];
     $password = $_POST["password"];
     $city = $_POST["city"];
-    $profLevel = $_POST["profLevel"];
+   
     $gender = $_POST["gender"];
     $phonenum = $_POST["phonenumber"];
     $education=$_POST["education"];
@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = " Email already exists. Please choose a different email.";
       }else{
 
-        $sql = "UPDATE tutor SET Firstname='$firstname', Lastname='$lastname', Email='$email', password='$password',age='$age',gender='$gender',PhoneNumber='$phonenum' ,city='$city',profLevel='$profLevel',bio='$bio',experience='$experience',eduction='$education' ";
+        $sql = "UPDATE tutor SET Firstname='$firstname', Lastname='$lastname', Email='$email', password='$password',age='$age',gender='$gender',PhoneNumber='$phonenum' ,city='$city',bio='$bio',experience='$experience',eduction='$education' ";
            // Update PP field only if a new image was uploaded
            if (!empty($_FILES["image"]["name"])) {
             $sql .= ", PP='$newImageName'";
@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST["email"];
             $password = $_POST["password"];
             $city = $_POST["city"];
-            $profLevel = $_POST["profLevel"];
+            
             $gender = $_POST["gender"];
             $phonenum = $_POST["phonenumber"];
             $education=$_POST["education"];
@@ -145,7 +145,7 @@ if (mysqli_num_rows($result) > 0) {
     $experience=$user["experience"];
     $gender = $user["gender"];
     $phonenum = $user["PhoneNumber"];
-    $profLevel = $user["profLevel"];
+   
     $bio = $user["bio"];
     $newImageName=$user["PP"];
       // Prepare checkbox values based on user's languages
@@ -406,12 +406,7 @@ function validatePhone(phoneNumber) {
             <input type="text" class="input-field" id="phonenumber" name="phonenumber" value="<?php echo $phonenum; ?>">
             <label for="city">City</label>
             <input type="text" class="input-field" id="city" name="city" value="<?php echo $city; ?>"> <!-- choices?-->
-            <label for="profLevel">Profession Level</label>
-            <select name="profLevel" class="input-field" required>
-        <option value="beginner" <?php if ($profLevel == 'beginner') echo 'selected'; ?> >Beginner</option>
-        <option value="intermediate" <?php if ($profLevel == 'intermediate') echo 'selected'; ?>>Intermediate</option>
-        <option value="advanced" <?php if ($profLevel == 'advanced') echo 'selected'; ?> >Advanced</option>
-        </select>
+      
        
         <label for="language">Languages </label> <br><br><br>
         <div class="language-container">
