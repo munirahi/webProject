@@ -1,32 +1,31 @@
 <?php
 include('connection.php');
 
-// Check if the P_id query parameter is set
-if(isset($_GET['ID'])) {
-    // Get the selected tutor ID
-    $selectedTutorId = $_GET['ID'];
+$_SESSION['tutor_id']=2;
+if(isset($_SESSION['tutor_id'])) {
+  
+    $selectedTutorId = $_SESSION['tutor_id'];
     
-    // Prepare the SQL query
-    $sqlT = "SELECT * FROM tutor WHERE ID = ?";
+  
+    $sqlT = "SELECT * FROM tutor WHERE ID = '$selectedTutorId'";
     
-    // Prepare the statement
+  
     $stmt = mysqli_prepare($conn, $sqlT);
     
-    // Bind the parameter to the placeholder
+   
     mysqli_stmt_bind_param($stmt, "i", $selectedTutorId);
     
-    // Execute the statement
+   
     mysqli_stmt_execute($stmt);
     
-    // Get the result
+   
     $result = mysqli_stmt_get_result($stmt);
     
-    // Check if there are rows returned
     if(mysqli_num_rows($result) > 0) {
-        // Fetch the data as an associative array
+        
         $tutorData = mysqli_fetch_assoc($result);
         
-        // Access the fetched data
+      
         $email = $tutorData['Email'];
         $image = $tutorData['image'];
         $firstname = $tutorData['Firstname'];
@@ -53,6 +52,48 @@ if(isset($_GET['ID'])) {
 
 include("tutorsInfo.php");
 
+
+function displayTutorReviews() {
+$tutorId =$_SESSION['tutor_id'];///888888888888888888888888888888888888888888888888888888888888888888888888888
+include('connection.php');
+    $sql = "SELECT * FROM review WHERE P_ID = '$tutorId' LIMIT 4";
+    $result = mysqli_query($conn, $sql);
+
+    
+    if(mysqli_num_rows($result) > 0) {
+     
+        while($row = mysqli_fetch_assoc($result)) {
+          $learner_id = $row['L_ID'];
+          $sqlLearner = "SELECT * FROM learner WHERE ID = '$learner_id'";
+          $resultLearner = mysqli_query($conn, $sqlLearner);
+          if(mysqli_num_rows($resultLearner) > 0) {
+              $learnerData = mysqli_fetch_assoc($resultLearner);
+              $learner_name = $learnerData['Firstname'] . ' ' . $learnerData['Lastname'];
+              $lImage = $learnerData['image'];
+          } else {
+              $learner_name = "Unknown"; // Default value if learner is not found
+          }
+            echo '<div class="result-cell">';
+            echo '<div class="acc-info">';
+
+            echo '<img class="result-img" src="../images/'.$lImage.'">'; 
+            echo '<h4 class="name"><i class="fa-solid fa-user"></i> ' .$learner_name . '</h4>'; 
+            echo '<div class="more-info">';
+            echo '<h3>' . $row['starts'] . ' <i class="fa-solid fa-star"></i></h3>';
+            echo '<div class="session-info">';
+            echo '<p>' . $row['ReviewText'] . '</p>';
+            echo '</div>'; 
+            echo '</div>'; 
+            echo '</div>'; 
+            echo '</div>'; 
+        }
+    } else {
+        // If no reviews 
+        echo '<h2>No reviews found for this tutor.</h2>';
+    }
+    
+}
+mysqli_close($conn);
 ?>
 
 
@@ -65,7 +106,7 @@ include("tutorsInfo.php");
         <link rel="stylesheet" href="../header_folder/headerPartner.css">
         <link rel="stylesheet" href="../css/footer.css">
         <link rel="stylesheet" href="../css/tutor_profile_page.css">
-        
+        <link rel="stylesheet" href="../css/tutorRate.css">
         <link rel="stylesheet" href="../css/learnerRequest2.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
@@ -160,6 +201,13 @@ include("tutorsInfo.php");
                 </section>
                 <section>
                     <h1>Reviews</h1>
+                   
+                              <div class="request_div inner-div">
+              <h1 id="result-header">Reviews</h1>
+                            <div class="week-sesstoin">
+                                <?php displayTutorReviews(); ?>
+                            </div>
+                        </div>
 
                 </section>
                 <h2>Book a Session</h2>
