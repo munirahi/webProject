@@ -129,44 +129,37 @@ if (!isset($_SESSION['user_id'])) {
     // Check if the provided language is in the map
     if (array_key_exists($language, $languageFlags)) {
       // Return the corresponding flag image directory
-      return "../images/" . $languageFlags[$language];
+      return "../images/". $languageFlags[$language];
     } else {
       // If the language is not found, return a default flag image
       return "../images/default-flag.png";
     }
   }
   // Current Sessions: Active sessions with today's date and time
-  $sql_current = "
-    SELECT s.*, t.Firstname, t.Lastname, t.image
+  $sql_current = "SELECT s.*, t.Firstname, t.Lastname, t.image
     FROM session s
     JOIN tutor t ON s.T_id = t.ID
-    WHERE s.Date = CURDATE()
+    WHERE s.L_id = $user_id AND s.Date = CURDATE()
       AND TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) >= CURTIME()
-      AND s.Time <= CURTIME() AND s.L_id = $user_id
-";
+      AND s.Time <= CURTIME()";
   $current_sessions = mysqli_query($conn, $sql_current);
 
   // Upcoming Sessions: Future sessions starting after now
-  $sql_upcoming = "
-    SELECT s.*, t.Firstname, t.Lastname, t.image
+  $sql_upcoming = "SELECT s.*, t.Firstname, t.Lastname, t.image
     FROM session s
     JOIN tutor t ON s.T_id = t.ID
-    WHERE s.Date > CURDATE()
-      OR (s.Date = CURDATE() AND s.Time > CURTIME()) AND s.L_id = $user_id
-";
+    WHERE s.L_id = $user_id AND s.Date > CURDATE()
+      OR (s.Date = CURDATE() AND s.Time > CURTIME())";
   $upcoming_sessions = mysqli_query($conn, $sql_upcoming);
 
   // Previous Sessions: Sessions that have ended
-  $sql_previous = "
-    SELECT s.*, t.Firstname, t.Lastname, t.image
+  $sql_previous = "SELECT s.*, t.Firstname, t.Lastname, t.image
     FROM session s
     JOIN tutor t ON s.T_id = t.ID
-    WHERE s.Date < CURDATE()
-      OR (s.Date = CURDATE() AND TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) < CURTIME()) AND s.L_id = $user_id 
-";
+    WHERE (s.Date < CURDATE()
+      OR (s.Date = CURDATE() AND
+       TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) < CURTIME())) AND s.L_id = $user_id";
   $previous_sessions = mysqli_query($conn, $sql_previous);
-
-
 
   ?>
 
@@ -232,7 +225,7 @@ if (!isset($_SESSION['user_id'])) {
                           <img src="../images/<?php echo $row['image']; ?>" width="25" alt="Tutor" />
                           <?php echo $row['Firstname'] . ' ' . $row['Lastname']; ?>
                         </td>
-                        <td><img src="<?php getFlagImage($row['language']); ?>" width="20" alt="Language" /><?php echo $row['language']; ?></td>
+                        <td><img src="<?php echo getFlagImage($row['language']); ?>" width="20" alt="Language" /><?php echo $row['language']; ?></td>
                         <td class="text-end">
                           <span class="fw-bolder"><?php echo date('g:iA', strtotime($row['Time'])); ?></span>
                           <button class="cancel-btn" onclick="cancelSession(<?php echo $row['ID']; ?>);">Cancel</button>
@@ -278,14 +271,14 @@ if (!isset($_SESSION['user_id'])) {
                   <?php if (mysqli_num_rows($previous_sessions) > 0) { ?>
                     <?php while ($row = mysqli_fetch_assoc($previous_sessions)) { ?>
                       <tr>
-                        <td><?php echo $row['ID']; ?></td>
+                        <td><?php echo $row['ID']; ?> <?php echo $row['L_id']; ?></td>
                         <td><?php echo date('j M, Y', strtotime($row['Date'])); ?></td>
                         <td><span class="ms-1"><?php echo $row['Duration']; ?> Minutes</span></td>
                         <td>
                           <img src="../images/<?php echo $row['image']; ?>" width="25" alt="Tutor" />
                           <?php echo $row['Firstname'] . ' ' . $row['Lastname']; ?>
                         </td>
-                        <td><img src="<?php getFlagImage($row['language']); ?>" width="20" alt="Language" /><?php echo $row['language']; ?></td>
+                        <td><img src="<?php echo getFlagImage($row['language']); ?>" width="20" alt="Language" /><?php echo $row['language']; ?></td>
                         <td class="text-end">
                           <span class="fw-bolder"><?php echo date('g:iA', strtotime($row['Time'])); ?></span>
                           <button class="cancel-btn" onclick="deleteSession(<?php echo $row['ID']; ?>);">Delete</button>

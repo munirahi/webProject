@@ -144,34 +144,29 @@ function getFlagImage($language) {
 }
 
 // Current Sessions: Active sessions with today's date and time
-$sql_current = "
-    SELECT s.*, l.Firstname, l.Lastname, l.image
-    FROM session s
-    JOIN learner l ON s.L_id = l.ID
-    WHERE s.Date = CURDATE()
-      AND TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) >= CURTIME()
-      AND s.Time <= CURTIME() AND s.T_id = $user_id
-";
+$sql_current = "SELECT s.*, t.Firstname, t.Lastname, t.image
+FROM session s
+JOIN tutor t ON s.T_id = t.ID
+WHERE s.T_id = $user_id AND s.Date = CURDATE()
+  AND TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) >= CURTIME()
+  AND s.Time <= CURTIME()";
 $current_sessions = mysqli_query($conn, $sql_current);
 
 // Upcoming Sessions: Future sessions starting after now
-$sql_upcoming = "
-    SELECT s.*, l.Firstname, l.Lastname, l.image
-    FROM session s
-    JOIN learner l ON s.L_id = l.ID
-    WHERE s.Date > CURDATE()
-      OR (s.Date = CURDATE() AND s.Time > CURTIME()) AND s.T_id = $user_id
-";
+$sql_upcoming = "SELECT s.*, t.Firstname, t.Lastname, t.image
+FROM session s
+JOIN tutor t ON s.T_id = t.ID
+WHERE s.T_id = $user_id AND s.Date > CURDATE()
+  OR (s.Date = CURDATE() AND s.Time > CURTIME())";
 $upcoming_sessions = mysqli_query($conn, $sql_upcoming);
 
 // Previous Sessions: Sessions that have ended
-$sql_previous = "
-    SELECT s.*, l.Firstname, l.Lastname, l.image
-    FROM session s
-    JOIN learner l ON s.L_id = l.ID
-    WHERE s.Date < CURDATE()
-      OR (s.Date = CURDATE() AND TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) < CURTIME()) AND s.T_id = $user_id
-";
+$sql_previous = "SELECT s.*, t.Firstname, t.Lastname, t.image
+FROM session s
+JOIN tutor t ON s.T_id = t.ID
+WHERE (s.Date < CURDATE()
+  OR (s.Date = CURDATE() AND
+   TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) < CURTIME())) AND s.T_id = $user_id";
 $previous_sessions = mysqli_query($conn, $sql_previous);
 ?>
 
