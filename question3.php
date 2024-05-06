@@ -64,7 +64,7 @@
        
             Supercharge your language learning journey by connecting with native speakers, immersing yourself in cultural exchange,
              and unlocking fluency through interactive sessions on our cutting-edge Online Language Exchange and Learning Platform.
-        <a class="find-more" href="About_us_pageMain.html">Find more about us</a>
+        <a class="find-more" href="About_us_pageMain.php">Find more about us</a>
     </h2>
 </h2><br><br><br><br><br><br><br><br><br><br><br>
 </div>
