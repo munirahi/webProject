@@ -85,42 +85,45 @@
                   $result = mysqli_query($conn, $sql);
                   if (mysqli_num_rows($result) > 0) { 
                     while($row = mysqli_fetch_assoc($result)) {
-                      echo '<div class="result-cell">
-                                                
-                      <div class="acc-info"> <!--row-->
-                          <img class="result-img" src="../images/maleIcon3.png" alt="account image"> <!--column1-->
-                          <div class="more-info">
-                              <h5>'.$row['Firstname']. " "  .$row['Lastname'].'</h5>
-                             
-                          </div>     
-                      </div>
-                      
-                      <div class="specifications-div">
-                          <div class="language specifications">'.$row['Language'].'</div>
-                          <div class="level specifications">'.$row['Level'].'</div>
-                          <div class="duration specifications">'.$row['Duration'].' Minutes</div>
-                          <div class="date specifications"> '.$row['Date'].'</div>
-                          <div class="time specifications">'. date("h:i A", strtotime($row['Time'])).'</div>
-                      </div>
-
-                      <form method="post">
-    
-                      <input type="hidden" name="req_date" value="<?php echo '.$row['Date'].'; ?>">
-                      <input type="hidden" name="req_time" value="<?php echo '.$row['Time'].'; ?>">
-    
-                      <div class="req-options">
-                       <div class="accept-req-btn">
-                        <button type="submit" name="action" value="accept">Accept</button>
-                       </div>
-                       <div class="reject-req-btn">
-                         <button type="submit" name="action" value="reject">Reject</button>
-                       </div>
-                      </div>
-                       </form>
-                  </div>';
-                  } }else {
-                      echo "Error: " . $sql . "<br>" . $conn->error;
-                  }
+                        // Check if the request status is not accepted or rejected
+                        if ($row['Status'] != 'accepted' && $row['Status'] != 'rejected') {
+                            // Render the buttons
+                            echo '
+                            <div class="result-cell">
+                                <div class="acc-info"> <!--row-->
+                                    <img class="result-img" src="../images/maleIcon3.png" alt="account image"> <!--column1-->
+                                    <div class="more-info">
+                                        <h5>'.$row['Firstname']. " "  .$row['Lastname'].'</h5>
+                                    </div>     
+                                </div>
+                                
+                                <div class="specifications-div">
+                                    <div class="language specifications">'.$row['Language'].'</div>
+                                    <div class="level specifications">'.$row['Level'].'</div>
+                                    <div class="duration specifications">'.$row['Duration'].' Minutes</div>
+                                    <div class="date specifications">'.$row['Date'].'</div>
+                                    <div class="time specifications">'.date("h:i A", strtotime($row['Time'])).'</div>
+                                </div>
+                                
+                                <form method="post">
+                                    <input type="hidden" name="req_date" value="'.$row['Date'].'">
+                                    <input type="hidden" name="req_time" value="'.$row['Time'].'">
+                                    <div class="req-options">
+                                        <div class="accept-req-btn">
+                                            <button type="submit" name="action" value="accept">Accept</button>
+                                        </div>
+                                        <div class="reject-req-btn">
+                                            <button type="submit" name="action" value="reject">Reject</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>';
+                        }
+                    }
+                } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
+                
                   ?>
                         
                     </div>
