@@ -22,32 +22,34 @@
       
     <header id="header">
       <div id="header-div">
-      <nav class="fixed-top" id="main-nav">
+        <nav class="fixed-top" id="main-nav">
           <ul id="ul1">
-              <li><img src="header_folder/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
-              <li class="list1-item"><a href="HomePageLearner.html" class="list1-item">Home</a></li>
-              <li class="list1-item"><a href="SESSionLearner.html">Sessions</a></li>
-              <li class="list1-item"><a href="learnerRequest2.html">Requests</a></li>
-              <li class="list1-item"><a href="RateAndReview.html">Rate and Review</a></li>
-              <li class="list1-item"><a href="Supports.html">Support</a></li>
+            <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo" id="logo-img"></li>
+            <li class="list1-item"><a href="HomePageLearner.php" class="list1-item">Home</a></li>
+            <li class="list1-item"><a href="SESSionLearner.php">Sessions</a></li>
+            <li class="list1-item"><a href="learnerRequest2.php">Requests</a></li>
+            <li class="list1-item"><a href="Supports.html">Support</a></li>
           </ul>
           <ul id="ul2">
-              
-              <li id="acnt li">
-                  <nav id="account-nav"><img src="header_folder/account.jfif" id="account-img">
-                      <ul>
-                          
-                          <li class="account-list"><a href="EditProfile.html"><div class="circle"></div>Edit Profile</a></li>
-                          
-                          <li class="account-list"><a href="#"><div class="circle"></div>Log Out</a></li>
-                      </ul>
-
-                  </nav>
-              </li>
+  
+            <li id="acnt li">
+            <nav id="account-nav"><img src="uploads/<?php echo $newImageName; ?>" id="account-img">
+                <ul>
+  
+                  <li class="account-list"><a href="EditProfile.html">
+                      <div class="circle"></div>Edit Profile
+                    </a></li>
+                    <li class="account-list"><a href="logout.php">
+                      <div class="circle"></div>Log Out
+                    </a></li>
+                </ul>
+  
+              </nav>
+            </li>
           </ul>
-      </nav>
-  </div>
-   </header>
+        </nav>
+      </div>
+    </header>
    
     <div class="que">
         
