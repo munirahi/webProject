@@ -92,54 +92,34 @@ function deleteSession(sessionId) {
     src="https://kit.fontawesome.com/5a18e3112f.js"
     crossorigin="anonymous"></script>
   <body>
-    <header id="header">
-      <div id="header-div">
-        <nav class="fixed-top" id="main-nav">
-          <ul id="ul1">
-            <li>
-              <img
-                src="../images/linguistBlueAndWhite.jpg"
-                alt="LINGUIST logo"
-                id="logo-img"
-              />
-            </li>
-            <li class="list1-item">
-              <a href="tutor_Home_page.html" class="list1-item">Home</a>
-            </li>
-            <li class="list1-item"><a href="SESSionTutor.html">Sessions</a></li>
-            <li class="list1-item"><a href="tutorReq.html">Requests</a></li>
-            <li class="list1-item">
-              <a href="toturRate.html">Rate and Review</a>
-            </li>
-            <li class="list1-item">
-              <a href="SupportsPartner.html">Support</a>
-            </li>
-          </ul>
-          <ul id="ul2">
+  <header id="header">
+    <div id="header-div">
+    <nav class="fixed-top" id="main-nav">
+        <ul id="ul1">
+          <li><img src="linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
+                    <li class="list1-item"><a href="../tutor_Home_page.php" class="list1-item">Home</a></li>
+                    <li class="list1-item"><a href="SESSionTutor.php">Sessions</a></li>
+                    <li class="list1-item"><a href="learnerRequest2.php">Requests</a></li>
+                    <li class="list1-item"><a href="RateAndReview.php">Rate and Review</a></li>
+                    <li class="list1-item"><a href="Supports.php">Support</a></li>
+        </ul>
+        <ul id="ul2">
+            
             <li id="acnt li">
-              <nav id="account-nav">
-                <img src="../images/account.jfif" id="account-img" />
-                <ul>
-                  <li class="account-list">
-                    <a href="EditProfileP.html"
-                      ><div class="circle"></div>
-                      Edit Profile</a
-                    >
-                  </li>
+                <nav id="account-nav"><img src="uploads/<?php echo $newImageName; ?>" id="account-img">
+                    <ul>
+                        
+                        <li class="account-list"><a href="EditProfile.php"><div class="circle"></div>Edit Profile</a></li>
+                        
+                        <li class="account-list"><a href="logout.php"><div class="circle"></div>Log Out</a></li>
+                    </ul>
 
-                  <li class="account-list">
-                    <a href="#"
-                      ><div class="circle"></div>
-                      Log Out</a
-                    >
-                  </li>
-                </ul>
-              </nav>
+                </nav>
             </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+        </ul>
+    </nav>
+</div>
+ </header>
 <?php
 include 'connection.php'; // Make sure your database connection settings are correct
 //a
