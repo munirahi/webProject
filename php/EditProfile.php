@@ -1,15 +1,16 @@
 <?php
+session_start();
 include("connection.php");
 
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-   
+   $lid= $_SESSION['user_id'];
     $firstname = $_POST["firstname"];
     $lastname = $_POST["lastname"];
     $email = $_POST["email"];
     $password = $_POST["password"];
-    $profLevel = $_POST["profLevel"];
+    
     $city = $_POST["city"];
     $location = $_POST["location"];
     
@@ -61,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
        
-        $sql_check = "SELECT * FROM learner WHERE email='$email' AND ID != 2";
+        $sql_check = "SELECT * FROM learner WHERE email='$email' AND ID != $lid ";
         $result_check = mysqli_query($conn, $sql_check); 
         if (mysqli_num_rows($result_check) > 0) {
             $error = " Email already exists. Please choose a different email.";
@@ -70,12 +71,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          
   
 
-        $sql = "UPDATE learner SET Firstname='$firstname', Lastname='$lastname', email='$email', password='$password', city='$city', location='$location',profLevel='$profLevel' ";
+        $sql = "UPDATE learner SET Firstname='$firstname', Lastname='$lastname', email='$email', password='$password', city='$city', location='$location' ";
         if (!empty($_FILES["image"]["name"])) {
             $sql .= ", image='$newImageName'";
         }
 
-        $sql .= " WHERE ID=2";
+        $sql .= " WHERE ID= $lid ";
         if (mysqli_query($conn, $sql)) {
             $success = true;
             $successM="Profile updated successfully!";
@@ -86,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lastname = $_POST["lastname"];
             $email = $_POST["email"];
             $password = $_POST["password"];
-            $profLevel = $_POST["profLevel"];
+            
             $city = $_POST["city"];
             $location = $_POST["location"];
             $newImageName=$_POST["image"];
@@ -97,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     } else if (isset($_POST['delete']) && $_POST['confirm_delete'] === "yes" ) {
-        $sql = "DELETE FROM learner WHERE ID=2"; // Replace with your actual delete query
+        $sql = "DELETE FROM learner WHERE ID=$lid"; // Replace with your actual delete query
     if (mysqli_query($conn, $sql)) {
       echo "Account deleted successfully.";
       // Redirect user to a relevant page (e.g., login)
@@ -110,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 /* retrieve user ID from session/cookie */
-$user_id = 2;
+$user_id =  $_SESSION['user_id'] ;
 $sql = "SELECT * FROM learner WHERE ID='$user_id'";
 $result = mysqli_query($conn, $sql);
 
@@ -121,7 +122,7 @@ if (mysqli_num_rows($result) > 0) {
     $lastname = $user['Lastname'];
     $email = $user['email'];
     $password = $user['password'];
-    $profLevel = $user["profLevel"];
+   
     $city = $user['city'];
     $location = $user['location'];
     $newImageName=$user["image"];
@@ -330,12 +331,7 @@ echo "<script>document.getElementById('error').textContent = '$error';</script>"
             <input type="text" id="email" name="email" value="<?php echo $email; ?>"> <!-- type email?-->
             <label for="password">Password</label>
             <input type="text" id="password" name="password" value="<?php echo $password; ?>" >
-          <label for="profLevel">Profession Level</label>
-            <select name="profLevel" class="input-field" required>
-        <option value="beginner" <?php if ($profLevel == 'beginner') echo 'selected'; ?> >Beginner</option>
-        <option value="intermediate" <?php if ($profLevel == 'intermediate') echo 'selected'; ?>>Intermediate</option>
-        <option value="advanced" <?php if ($profLevel == 'advanced') echo 'selected'; ?> >Advanced</option>
-        </select>
+         
             <label for="city">City</label>
             <input type="text" id="city" name="city" value="<?php echo $city; ?>"> <!-- choices?-->
             <label for="location">Location</label>

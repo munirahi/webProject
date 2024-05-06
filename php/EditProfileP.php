@@ -5,14 +5,14 @@ include("connection.php");
 
 $error='';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-   
+   $pid= $_SESSION['user_id'];
     $firstname = $_POST["firstname"];
     $lastname = $_POST["lastname"];
     $age = $_POST["age"];
     $email = $_POST["email"];
     $password = $_POST["password"];
     $city = $_POST["city"];
-    $profLevel = $_POST["profLevel"];
+   
     $gender = $_POST["gender"];
     $phonenum = $_POST["phonenumber"];
     $education=$_POST["education"];
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       
 
-        $sql_check = "SELECT * FROM tutor WHERE Email='$email' AND ID != $_SESSION['user_id'] ";
+        $sql_check = "SELECT * FROM tutor WHERE Email='$email' AND ID != $pid ";
       $result_check = mysqli_query($conn, $sql_check);
   
       $selected_languages = []; // Store selected languages from checkboxes
@@ -69,12 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $selected_languages[] = $language;
       }
 
-      $sql_languages = "DELETE FROM tutor_languages WHERE P_ID= $_SESSION['user_id'] "; // Delete existing languages
+      $sql_languages = "DELETE FROM tutor_languages WHERE P_ID= $pid "; // Delete existing languages
       mysqli_query($conn, $sql_languages);
 
       // Insert selected languages into tutor_languages table
       foreach ($selected_languages as $language) {
-          $sql_insert_language = "INSERT INTO tutor_languages (P_ID, Language) VALUES ($_SESSION['user_id'] , '$language')";
+          $sql_insert_language = "INSERT INTO tutor_languages (P_ID, Language) VALUES ($pid , '$language')";
           mysqli_query($conn, $sql_insert_language);
       }
     
@@ -83,13 +83,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = " Email already exists. Please choose a different email.";
       }else{
 
-        $sql = "UPDATE tutor SET Firstname='$firstname', Lastname='$lastname', Email='$email', password='$password',age='$age',gender='$gender',PhoneNumber='$phonenum' ,city='$city',profLevel='$profLevel',bio='$bio',experience='$experience',eduction='$education' ";
+        $sql = "UPDATE tutor SET Firstname='$firstname', Lastname='$lastname', Email='$email', password='$password',age='$age',gender='$gender',PhoneNumber='$phonenum' ,city='$city',bio='$bio',experience='$experience',eduction='$education' ";
            // Update PP field only if a new image was uploaded
            if (!empty($_FILES["image"]["name"])) {
-            $sql .= ", PP='$newImageName'";
+            $sql .= ", image='$newImageName'";
         }
 
-        $sql .= " WHERE ID=$_SESSION['user_id']";
+        $sql .= " WHERE ID=$pid";
 
         if (mysqli_query($conn, $sql)) {
             $success = true;
@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST["email"];
             $password = $_POST["password"];
             $city = $_POST["city"];
-            $profLevel = $_POST["profLevel"];
+            
             $gender = $_POST["gender"];
             $phonenum = $_POST["phonenumber"];
             $education=$_POST["education"];
@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     } else if (isset($_POST['delete']) && $_POST['confirm_delete'] === "yes" ) {
-        $sql = "DELETE FROM tutor WHERE ID=$_SESSION['user_id']"; // Replace with your actual delete query
+        $sql = "DELETE FROM tutor WHERE ID=$pid; // Replace with your actual delete query
     if (mysqli_query($conn, $sql)) {
       echo "Account deleted successfully.";
       // Redirect user to a relevant page (e.g., login)
@@ -145,9 +145,9 @@ if (mysqli_num_rows($result) > 0) {
     $experience=$user["experience"];
     $gender = $user["gender"];
     $phonenum = $user["PhoneNumber"];
-    $profLevel = $user["profLevel"];
+   
     $bio = $user["bio"];
-    $newImageName=$user["PP"];
+    $newImageName=$user["image"];
       // Prepare checkbox values based on user's languages
       $sql_languages = "SELECT Language FROM tutor_languages WHERE P_ID= $_SESSION['user_id'] ";
       $result_languages = mysqli_query($conn, $sql_languages);
@@ -406,12 +406,7 @@ function validatePhone(phoneNumber) {
             <input type="text" class="input-field" id="phonenumber" name="phonenumber" value="<?php echo $phonenum; ?>">
             <label for="city">City</label>
             <input type="text" class="input-field" id="city" name="city" value="<?php echo $city; ?>"> <!-- choices?-->
-            <label for="profLevel">Profession Level</label>
-            <select name="profLevel" class="input-field" required>
-        <option value="beginner" <?php if ($profLevel == 'beginner') echo 'selected'; ?> >Beginner</option>
-        <option value="intermediate" <?php if ($profLevel == 'intermediate') echo 'selected'; ?>>Intermediate</option>
-        <option value="advanced" <?php if ($profLevel == 'advanced') echo 'selected'; ?> >Advanced</option>
-        </select>
+      
        
         <label for="language">Languages </label> <br><br><br>
         <div class="language-container">
