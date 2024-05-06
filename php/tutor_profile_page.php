@@ -8,18 +8,8 @@ if(isset($_SESSION['tutor_id'])) {
     
   
     $sqlT = "SELECT * FROM tutor WHERE ID = '$selectedTutorId'";
-    
-  
-    $stmt = mysqli_prepare($conn, $sqlT);
-    
    
-    mysqli_stmt_bind_param($stmt, "i", $selectedTutorId);
-    
-   
-    mysqli_stmt_execute($stmt);
-    
-   
-    $result = mysqli_stmt_get_result($stmt);
+    $result =  mysqli_query($conn, $sqlT);
     
     if(mysqli_num_rows($result) > 0) {
         
@@ -42,8 +32,8 @@ if(isset($_SESSION['tutor_id'])) {
         echo "No tutor found with ID: $selectedTutorId";
     }
 
-    // Close the statement
-    mysqli_stmt_close($stmt);
+  
+ 
 } else {
     // Default content if no id is selected
     echo "<h1>Welcome to the tutor profile page!</h1>";
