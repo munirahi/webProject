@@ -130,9 +130,9 @@ function displayallSessions()
         // Output learner's profile picture
         echo '<div class="day">';
         // Output learner's name
-        echo '<p class="rating"><i class="fa-solid fa-star"></i> ' . (isset($learneRow['starts'])) . ' <i class="fa-solid fa-dollar-sign"></i> ' . (isset($row['ReviewText']) ? $row['ReviewText'] : 'N/A') . '</p>';
-    
-        echo '<h5><strong><i class="fa-solid fa-user"></i>'. $learneRow['ReviewText']. '</strong></h5>';
+        echo '<p class="rating"><i class="fa-solid fa-star"></i> ' . (isset($learneRow['starts'])) . ' </i> ' . (isset($row['ReviewText']) ? $row['ReviewText'] : '') . '</p>';
+        ?><br><?php
+        echo '<h3><strong><i class="fa-solid fa-user"></i>'. $learneRow['ReviewText']. '</strong></h3>';
 
         // Output the day of the session
        
