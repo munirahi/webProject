@@ -47,3 +47,19 @@ body{
     position: relative;
 
    }
+   .ing-btn{
+    text-align: center;
+    background-color:  #cdb309;
+    border-radius: 20px;
+    padding: 5px;
+    text-decoration: none;
+    color: #ffffff;
+    width: 35%;
+    border: none;
+    font-size: 12px;
+  }
+  .ing-btn:hover {
+    background-color:  rgba(228, 199, 11, 0.466);
+  }
+  
+  
