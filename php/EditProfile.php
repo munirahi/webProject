@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lastname = $_POST["lastname"];
     $email = $_POST["email"];
     $password = $_POST["password"];
-    $profLevel = $_POST["profLevel"];
+    
     $city = $_POST["city"];
     $location = $_POST["location"];
     
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          
   
 
-        $sql = "UPDATE learner SET Firstname='$firstname', Lastname='$lastname', email='$email', password='$password', city='$city', location='$location',profLevel='$profLevel' ";
+        $sql = "UPDATE learner SET Firstname='$firstname', Lastname='$lastname', email='$email', password='$password', city='$city', location='$location' ";
         if (!empty($_FILES["image"]["name"])) {
             $sql .= ", image='$newImageName'";
         }
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lastname = $_POST["lastname"];
             $email = $_POST["email"];
             $password = $_POST["password"];
-            $profLevel = $_POST["profLevel"];
+            
             $city = $_POST["city"];
             $location = $_POST["location"];
             $newImageName=$_POST["image"];
@@ -121,7 +121,7 @@ if (mysqli_num_rows($result) > 0) {
     $lastname = $user['Lastname'];
     $email = $user['email'];
     $password = $user['password'];
-    $profLevel = $user["profLevel"];
+   
     $city = $user['city'];
     $location = $user['location'];
     $newImageName=$user["image"];
@@ -330,12 +330,7 @@ echo "<script>document.getElementById('error').textContent = '$error';</script>"
             <input type="text" id="email" name="email" value="<?php echo $email; ?>"> <!-- type email?-->
             <label for="password">Password</label>
             <input type="text" id="password" name="password" value="<?php echo $password; ?>" >
-          <label for="profLevel">Profession Level</label>
-            <select name="profLevel" class="input-field" required>
-        <option value="beginner" <?php if ($profLevel == 'beginner') echo 'selected'; ?> >Beginner</option>
-        <option value="intermediate" <?php if ($profLevel == 'intermediate') echo 'selected'; ?>>Intermediate</option>
-        <option value="advanced" <?php if ($profLevel == 'advanced') echo 'selected'; ?> >Advanced</option>
-        </select>
+         
             <label for="city">City</label>
             <input type="text" id="city" name="city" value="<?php echo $city; ?>"> <!-- choices?-->
             <label for="location">Location</label>
