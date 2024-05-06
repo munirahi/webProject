@@ -85,7 +85,7 @@ if (!isset($_SESSION['user_id'])) {
     <div id="header-div">
       <nav class="fixed-top" id="main-nav">
         <ul id="ul1">
-          <li><img src="linguistBlueAndWhite.jpg" alt="LINGUIST logo" id="logo-img"></li>
+          <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo" id="logo-img"></li>
           <li class="list1-item"><a href="../HomePageLearner.php" class="list1-item">Home</a></li>
           <li class="list1-item"><a href="SESSionLearner.php">Sessions</a></li>
           <li class="list1-item"><a href="learnerRequest2.php">Requests</a></li>
