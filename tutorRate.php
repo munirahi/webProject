@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 //include("php/learnerhp.php");
-include("php/learnerInfo.php");
+include("php/ratet.php");
 ?>
    <!DOCTYPE html>
    <html>
@@ -101,8 +101,10 @@ function displayallSessions()
         // Output learner's profile picture
         echo '<div class="day">';
         // Output learner's name
-        echo '<h5><strong>' . $learneRow['starts']. ' </h5>';
-        echo '<h5><strong>' . $learneRow['ReviewText']. ' </h5>';
+        echo '<p class="rating"><i class="fa-solid fa-star"></i> ' . (isset($learneRow['starts'])) . ' <i class="fa-solid fa-dollar-sign"></i> ' . (isset($row['ReviewText']) ? $row['ReviewText'] : 'N/A') . '</p>';
+    
+        echo '<h5><strong><i class="fa-solid fa-user"></i>'. $learneRow['ReviewText']. '</strong></h5>';
+
         // Output the day of the session
        
 
