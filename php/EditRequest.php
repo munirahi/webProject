@@ -10,7 +10,12 @@
     if(!mysqli_select_db($conn, DB_NAME))
         die("Could not open the ".DB_NAME." database.");
         session_start();
-
+// Check if the user is not logged in
+if (!isset($_SESSION['user_id'])) {
+    // Redirect the user to the login page
+    header("Location: login.php");
+    exit(); // Stop further execution
+}
    
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
@@ -32,7 +37,7 @@
     <head>
         <title>Edit Request</title>
         <link rel="stylesheet" href="../css/footer.css">
-        <link rel="stylesheet" href="../header_folder/headerLearner.css">
+        <link rel="stylesheet" href="../header_folder/headerPartner.css">
         <link rel="stylesheet" href="../css/EditRequest.css">
         
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
@@ -55,7 +60,7 @@
                 </ul>
                 <ul id="ul2">
                     <li id="acnt li">
-                        <nav id="account-nav"><img src="images/account.jfif" id="account-img">
+                         <nav id="account-nav"><img src="../images/<?php echo  $image?>" id="account-img">
                             <ul>
                                 
                                 <li class="account-list"><a href="#"><div class="circle"></div>Edit Account</a></li>
