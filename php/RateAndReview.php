@@ -30,6 +30,7 @@ if (isset($_GET['sessionID']) && isset($_GET['teacherID'])) {
   <title>rating</title>
   <link rel="stylesheet" type="text/css" href="../css/SessionLearner.css" />
   <link rel="stylesheet" href="../css/footer.css" />
+  <link rel="stylesheet" href="../css/RateAndReview.css" />
   <link rel="stylesheet" type="text/css" href="../css/sidebar-tutor.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <link rel="stylesheet" href="../header_folder/headerPartner.css" />
@@ -96,11 +97,10 @@ if (isset($_GET['sessionID']) && isset($_GET['teacherID'])) {
                   <i class="rating__star far fa-star"></i>
                   <i class="rating__star far fa-star"></i>
                 </div>
-                <div class="textarea">
                   <form action="save_feedback.php" method="POST">
                     <input  name="ReviewText" cols="21" placeholder="Describe your experience.. value="'.$row['ReviewText'].'">
                     <input type="hidden" name="rating" .'$row['starts'].' id="rating-value" value="0">
-                    <div button class="post-req-btn" type="submit"><button>Post</button>
+                    <button class="post-btn" type="submit">Post</button>
                     <br><br><br><br>
                   </form>
                 </div>
