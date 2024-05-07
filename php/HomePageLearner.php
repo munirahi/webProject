@@ -233,7 +233,7 @@ function getFlagImage($language) {
         <section class="request-post">
           <h3>Let's Get Started!</h3>
           <p>Start posting requests to find the perfect language learning partner!</p>
-          <a href="learnerRequest2.html"><button>Post Request</button></a>
+          <a href="learnerRequest2.php"><button>Post Request</button></a>
 
 
         </section>

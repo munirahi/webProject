@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($password === $rowLearner['password']) {
             echo "<h1>Login Successful - Learner!</h1>";
              $_SESSION['user_id'] = $rowLearner['ID'];
-            // header("Location: singup.html"); 
+             header("Location: HomePageLearner.php "); 
              exit(); 
         } else {
             $passwordError = "Invalid password"; 
