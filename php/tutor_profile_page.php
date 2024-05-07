@@ -1,50 +1,4 @@
 <?php
-// include('connection.php');
-// session_start();
-// // $_SESSION['tutor_id']=2;
-// if (!isset($_SESSION['user_id'])) {
- 
-//     header("Location: login.php");
-//     exit(); 
-// }else{
-//     if(isset($_POST['tutor_id'])) {
-//         $selectedTutorId =  $_POST['tutor_id'];
-
-//         $sqlT = "SELECT * FROM tutor WHERE ID = '$selectedTutorId'";
-   
-//         $result =  mysqli_query($conn, $sqlT);
-        
-//         if(mysqli_num_rows($result) > 0) {
-            
-//             $tutorData = mysqli_fetch_assoc($result);
-            
-          
-//             $email = $tutorData['Email'];
-//             $image = $tutorData['image'];
-//             $firstname = $tutorData['Firstname'];
-//             $lastname = $tutorData['Lastname'];
-//             $age = $tutorData['age'];
-//             $gender = $tutorData['gender'];
-//             $password = $tutorData['password'];
-//             $phoneNumber = $tutorData['PhoneNumber'];
-//             $city = $tutorData['city'];
-//             $bio = $tutorData['bio'];
-//             $experience = $tutorData['experience'];
-//             $education = $tutorData['eduction'];
-//         } else {
-//             echo "No tutor found with ID: $selectedTutorId";
-//         }
-//         // header('Location: tutor_profile_page.php');
-//         exit(); 
-//     } else {
-        
-//         echo "Tutor ID not provided.";
-//     }
-// }
-
-
-
-
 
 include('connection.php');
 session_start();
@@ -57,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
     // Check if the form has been submitted with a tutor ID
     if(isset($_POST['tutor_id'])) {
         $selectedTutorId =  $_POST['tutor_id'];
-
+        $selectedLanguage =$_POST['language'];
         // Prepare and execute the SQL query to fetch tutor information
         $sqlT = "SELECT * FROM tutor WHERE ID = '$selectedTutorId'";
         $result =  mysqli_query($conn, $sqlT);
@@ -93,62 +47,6 @@ if (!isset($_SESSION['user_id'])) {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// if(isset($_SESSION['tutor_id'])) {
-  
-//     $selectedTutorId = $_SESSION['tutor_id'];
-    
-  
-//     $sqlT = "SELECT * FROM tutor WHERE ID = '$selectedTutorId'";
-   
-//     $result =  mysqli_query($conn, $sqlT);
-    
-//     if(mysqli_num_rows($result) > 0) {
-        
-//         $tutorData = mysqli_fetch_assoc($result);
-        
-      
-//         $email = $tutorData['Email'];
-//         $image = $tutorData['image'];
-//         $firstname = $tutorData['Firstname'];
-//         $lastname = $tutorData['Lastname'];
-//         $age = $tutorData['age'];
-//         $gender = $tutorData['gender'];
-//         $password = $tutorData['password'];
-//         $phoneNumber = $tutorData['PhoneNumber'];
-//         $city = $tutorData['city'];
-//         $bio = $tutorData['bio'];
-//         $experience = $tutorData['experience'];
-//         $education = $tutorData['eduction'];
-//     } else {
-//         echo "No tutor found with ID: $selectedTutorId";
-//     }
-
-  
- 
-// } else {
-//     // Default content if no id is selected
-//     echo "<h1>Welcome to the tutor profile page!</h1>";
-// }
-
-
-// include("tutorsInfo.php");
 function displayLanguages() {
     $tutorId = $GLOBALS ['selectedTutorId'] ;
     include("connection.php");
@@ -339,10 +237,10 @@ mysqli_close($conn);
                <form method='POST' action='postRequest.php'>
                 <fieldset>
                     <div class="fieldset-container">
-                      <input type="hidden" name="tutor_id" value="<?php echo $_POST['tutor_id']; ?>">
-                      <input type="hidden" name="language" value="<?php echo $_POST['language']; ?>">
+                      <input type="hidden" name="tutor_id" value="<?php echo $selectedTutorId  ?>">
+                      <input type="hidden" name="language" value="<?php echo  $selectedLanguage  ?>">
                     <div class="btn-container">
-                        <button type="submit" class="selectWrapper" id="postReq-btn">Post A Request</button>
+                        <button type="submit" class="view-more-button" id="postReq-btn">Post A Request</button>
                     </div>
                 </div>
                 </fieldset>
