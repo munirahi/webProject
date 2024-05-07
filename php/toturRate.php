@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 //include("php/learnerhp.php");
-include("php/ratet.php");
+include("ratet.php");
 ?>
    <!DOCTYPE html>
    <html>
@@ -19,11 +19,11 @@ include("php/ratet.php");
    <head>
      <meta charset="UTF-8">
    
-     <link rel="stylesheet" href="css/footer.css">
-     <link rel="stylesheet" href="header_folder/headerPartner.css">
+     <link rel="stylesheet" href="../css/footer.css">
+     <link rel="stylesheet" href="../header_folder/headerPartner.css">
      <script src="https://kit.fontawesome.com/59189109f7.js" crossorigin="anonymous"></script>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-     <link rel="stylesheet" href="css/tutorRate.css">
+     <link rel="stylesheet" href="../css/tutorRate.css">
 
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
@@ -41,6 +41,7 @@ include("php/ratet.php");
             <li class="list1-item"><a href="HomePageLearner.php" class="list1-item">Home</a></li>
             <li class="list1-item"><a href="SESSionLearner.php">Sessions</a></li>
             <li class="list1-item"><a href="learnerRequest2.php">Requests</a></li>
+            <li class="list1-item"><a href="toturRate.php">Rates and Reviews</a></li>
             <li class="list1-item"><a href="Supports.php">Support</a></li>
           </ul>
           <ul id="ul2">
@@ -133,9 +134,7 @@ function displayAllSessions()
     }
 }
 ?>
-<header>
-  <!-- Header content -->
-</header>
+
  
 <div class="backg">
   <section class="box-content">
