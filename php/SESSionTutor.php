@@ -109,7 +109,7 @@ function deleteSession(sessionId) {
           <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
                     <li class="list1-item"><a href="tutor_Home_page.php" class="list1-item">Home</a></li>
                     <li class="list1-item"><a href="SESSionTutor.php">Sessions</a></li>
-                    <li class="list1-item"><a href="learnerRequest2.php">Requests</a></li>
+                    <li class="list1-item"><a href="tutorReq.php">Requests</a></li>
                     <li class="list1-item"><a href="RateAndReview.php">Rate and Review</a></li>
                     <li class="list1-item"><a href="Supports.php">Support</a></li>
         </ul>
@@ -119,7 +119,7 @@ function deleteSession(sessionId) {
             <nav id="account-nav"><img src="../images/<?php echo $image; ?>" id="account-img">
                     <ul>
                         
-                        <li class="account-list"><a href="EditProfile.php"><div class="circle"></div>Edit Profile</a></li>
+                        <li class="account-list"><a href="EditProfileP.php"><div class="circle"></div>Edit Profile</a></li>
                         
                         <li class="account-list"><a href="logout.php"><div class="circle"></div>Log Out</a></li>
                     </ul>
