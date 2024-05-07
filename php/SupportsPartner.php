@@ -23,12 +23,12 @@
       <div id="header-div">
         <nav class="fixed-top" id="main-nav">
           <ul id="ul1">
-            <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo" id="logo-img"></li>
-            <li class="list1-item"><a href="HomePageLearner.php" class="list1-item">Home</a></li>
-            <li class="list1-item"><a href="SESSionLearner.php">Sessions</a></li>
-            <li class="list1-item"><a href="learnerRequest2.php">Requests</a></li>
+            <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo" id="logo-img"></li>
+            <li class="list1-item"><a href="tutor_Home_page.php" class="list1-item">Home</a></li>
+            <li class="list1-item"><a href="SESSionTutor.php">Sessions</a></li>
+            <li class="list1-item"><a href="tutorReq.php">Requests</a></li>
             <li class="list1-item"><a href="toturRate.php">Rates and Reviews</a></li>
-            <li class="list1-item"><a href="Supports.php">Support</a></li>
+            <li class="list1-item"><a href="SupportsPartner.php">Support</a></li>
           </ul>
           <ul id="ul2">
   
@@ -36,7 +36,7 @@
             <nav id="account-nav"><img src="uploads/<?php echo $newImageName; ?>" id="account-img">
                 <ul>
   
-                  <li class="account-list"><a href="EditProfile.html">
+                  <li class="account-list"><a href="EditProfileP.html">
                       <div class="circle"></div>Edit Profile
                     </a></li>
                     <li class="account-list"><a href="logout.php">

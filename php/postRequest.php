@@ -17,7 +17,7 @@
         <title>Post Request</title>
         <link rel="stylesheet" href="../css/footer.css">
         <link rel="stylesheet" href="../css/tutorReq.css">
-        <link rel="stylesheet" href="../header_folder/headerLearner.css">
+         <link rel="stylesheet" href="../header_folder/headerPartner.css">
         <link rel="stylesheet" href="../css/EditRequest.css">
         
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
@@ -40,12 +40,11 @@
                 </ul>
                 <ul id="ul2">
                     <li id="acnt li">
-                        <nav id="account-nav"><img src="../images/account.jfif" id="account-img">
+                        <nav id="account-nav"><img src="../images/<?php echo  $image?>" id="account-img">
                             <ul>
                                 
-                                <li class="account-list"><a href="#"><div class="circle"></div>Edit Account</a></li>
-                                
-                                <li class="account-list"><a href="#"><div class="circle"></div>Log Out</a></li>
+                               <li class="account-list"><a href="EditProfile.php"><div class="circle"></div>Edit Profile</a></li> 
+                                <li class="account-list"><a href="logout.php"><div class="circle"></div>Log Out</a></li>
                             </ul>
 
                         </nav>

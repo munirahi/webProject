@@ -295,7 +295,7 @@ if (!isset($_SESSION['user_id'])) {
                         </td>
                         <td class="text-end">
                           <span class="fw-bolder">
-           <button class="ing-btn" id="rateBtn-<?php echo htmlspecialchars($row['ID']) . '-' . htmlspecialchars($row['T_id']); ?>" onclick="openRatePage(<?php echo $row['ID'] . ', ' . $row['T_id']; ?>)">Rate</button>
+          <button class="ing-btn" id="rateBtn-<?php echo htmlspecialchars($row['ID']) . '-' . htmlspecialchars($row['T_id']); ?>" onclick="openRatePage(<?php echo $row['ID'] . ', ' . $row['T_id']; ?>)">Rate</button>
                       </tr>
                     <?php } ?>
                   <?php } else { ?>
@@ -324,9 +324,6 @@ function openRatePage(ID, T_id) {
     window.open(url, '_blank');
 }
 </script>
-  <!--Footer-->
-
-
   <footer>
     <div class="main-content">
       <div class="left box">
