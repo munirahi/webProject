@@ -33,7 +33,7 @@
             <div id="header-div">
             <nav class="fixed-top" id="main-nav">
                 <ul id="ul1">
-                    <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img" ></li>
+                    <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img" ></li>
                     <li class="list1-item"><a href="HomePageLearner.html" class="list1-item">Home</a></li>
                     <li class="list1-item"><a href="SESSionLearner.html">Sessions</a></li>
                     <li class="list1-item" ><a href="learnerRequest2.html">Requests</a></li>
@@ -43,7 +43,7 @@
                 <ul id="ul2">
 
                     <li id="acnt li">
-                        <nav id="account-nav"><img src="images/account.jfif" id="account-img">
+                        <nav id="account-nav"><img src="../images/account.jfif" id="account-img">
                             <ul>
 
                                 <li class="account-list"><a href="EditProfile.html"><div class="circle"></div>Edit Profile</a></li>
@@ -127,7 +127,36 @@
 
 
                 <?php
+// Include your database connection code here
 
+//if(isset($_GET['language']) && isset($_GET['level'])) {
+    // $language = $_GET['Language'];
+    // $level = $_GET['Level'];
+
+    // // Fetch dates from the database based on the selected language and level
+    // $sql3 = "SELECT DISTINCT date FROM available_times, tutor_languages WHERE Language = '$language' AND Level = '$level' AND tutor_languages.P_ID = available_times.P_ID";
+    // $result3 = mysqli_query($conn, $sql3);
+
+   
+    // if(mysqli_num_rows($result3) > 0) {
+    //     echo "<script>";
+    //     echo "var select = document.getElementById('dateSelect');";
+    //     while($row3 = mysqli_fetch_assoc($result3)) {
+    //         echo "var option = document.createElement('option');";
+    //         echo "option.text = '{$row3['date']}';";
+    //         echo "select.add(option);";
+    //     }
+    //     echo "</script>";
+    // } else {
+    //     echo "<script>";
+    //     echo "var select = document.getElementById('dateSelect');";
+    //     echo "select.innerHTML = '<option>No dates available</option>';";
+    //     echo "</script>";
+    // }
+// else echo"help";
+?>
+
+               
 
 
 
@@ -234,6 +263,8 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
            
             <button class="cancel" >Cancel</button>
     </div>';
+    echo $row2['P_ID'].'<br>';
+    echo $_SESSION['user_id'];
     }
 
 
@@ -241,6 +272,9 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
 
 
                 ?>
+
+                   
+
 
 
 
