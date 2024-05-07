@@ -10,6 +10,13 @@
     if(!mysqli_select_db($conn, DB_NAME))
         die("Could not open the ".DB_NAME." database.");
 
+// Check if the user is not logged in
+if (!isset($_SESSION['user_id'])) {
+    // Redirect the user to the login page
+    header("Location: login.php");
+    exit(); // Stop further execution
+}
+
     session_start();
 ?>
 <!DOCTYPE html>
@@ -40,7 +47,7 @@
                 <ul id="ul2">
 
                     <li id="acnt li">
-                        <nav id="account-nav"><img src="../images/account.jfif" id="account-img">
+                         <nav id="account-nav"><img src="../images/<?php echo  $image?>" id="account-img">
                             <ul>
 
                                 <li class="account-list"><a href="images/EditProfileP.html"><div class="circle"></div>Edit Profile</a></li>
