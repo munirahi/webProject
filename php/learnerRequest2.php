@@ -124,7 +124,7 @@ if (!isset($_SESSION['user_id'])) {
                     <div class="acc-info">  
                     <img class="result-img" src="../images/'.$row['image'].'" alt="account image">
                      <div class="more-info"><h6>
-                    <i class="fa-solid fa-user"></i> '.$row['Firstname']. " "  .$row['Lastname'].' <i class="fa-solid fa-star"></i> 4 <i class="fa-solid fa-dollar-sign"></i> 45</h6>
+                    <i class="fa-solid fa-user"></i> '.$row['Firstname']. " "  .$row['Lastname'].' </h6>
                     <h6 id="categories">'.$row['Language'].' </h6> </div> </div> 
                     <div class="bio"><p>'./*.$row['bio'].*/'</p></div> 
                     <form action="tutor_profile_page.php" method="post">
@@ -173,7 +173,7 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
                            <div class="time specifications">'.date("h:i A", strtotime($row2['Time'])).'</div>
                            <div class="date specifications">'.$row2['Date'].'</div>
                        </div>
-                                           <h6 class="status" id="'.$row2['Status'].'">'.$row2['Status'].'</h6>
+                                           <h6 class="status" id="'.$row2['Status'].'">'.$row2['Status'].'</h6><br>
                                            <button class="edit" id="disabled">Edit</button>
                                             <button class="cancel" id="disabled">Cancel</button>
                     </div>';
@@ -196,7 +196,7 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
            <div class="time specifications">'.date("h:i A", strtotime($row2['Time'])).'</div>
            <div class="date specifications">'.$row2['Date'].'</div>
        </div>
-           <h6 class="status" id="pending">'.$row2['Status'].'</h6>
+           <h6 class="status" id="pending">'.$row2['Status'].'</h6><br>
            <form action="EditRequest.php" method="post">
                         <input type="hidden" name="p_id" value="'.$row2['P_ID'].'">
                         <input type="hidden" name="l_id" value="'.$_SESSION['user_id'].'">
