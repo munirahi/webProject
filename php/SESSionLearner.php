@@ -245,8 +245,7 @@ if (!isset($_SESSION['user_id'])) {
         </section>
       </section>
 
-
-      <section class="new2-requests-container">
+<section class="new2-requests-container">
         <h3>Previous Sessions</h3>
         <br />
         <section class="requests">
