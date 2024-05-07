@@ -129,7 +129,7 @@ function getFlagImage($language) {
     <div id="header-div">
       <nav class="fixed-top" id="main-nav">
         <ul id="ul1">
-          <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo" id="logo-img"></li>
+          <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo" id="logo-img"></li>
           <li class="list1-item"><a href="HomePageLearner.php" class="list1-item">Home</a></li>
           <li class="list1-item"><a href="SESSionLearner.php">Sessions</a></li>
           <li class="list1-item"><a href="learnerRequest2.php">Requests</a></li>
@@ -138,7 +138,7 @@ function getFlagImage($language) {
         <ul id="ul2">
 
           <li id="acnt li">
-          <nav id="account-nav"><img src="uploads/<?php echo $newImageName; ?>" id="account-img">
+          <nav id="account-nav"><img src="../images/<?php echo $newImageName; ?>" id="account-img">
               <ul>
 
                 <li class="account-list"><a href="EditProfile.html">
@@ -163,7 +163,7 @@ function getFlagImage($language) {
 
       <div class="sidebar-card">
         <div class="card-body-profile">
-          <img src="images/femaleIcon.png" alt="Profile Picture">
+          <img src="../images/femaleIcon.png" alt="Profile Picture">
           <h2><?php
   $learner_id = $_SESSION['user_id'];
   $sql = "SELECT Firstname, Lastname FROM learner WHERE ID = '$learner_id'";
@@ -270,9 +270,9 @@ function getFlagImage($language) {
             
             
             if (isset($row['profile_picture'])) {
-              echo '<img src="images/' . $row['profile_picture'] . '" alt="profile Picture">';
+              echo '<img src="../images/' . $row['profile_picture'] . '" alt="profile Picture">';
             } else {
-              echo '<img src="images/default-profile.png" alt="profile Picture">'; // Default image
+              echo '<img src="../images/default-profile.png" alt="profile Picture">'; // Default image
             }
             $tutorId= $row['P_ID'];
             $sql_t = "SELECT * FROM tutor WHERE  id = '$tutorId';";
