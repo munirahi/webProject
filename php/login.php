@@ -95,7 +95,7 @@ mysqli_close($conn);
 </head>
 <body>
     <div class="hero">
-        <a href="main.html" ><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"> </a>
+        <a href="main.html" ><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"> </a>
         <div class="form-box">
             <h2>Log In</h2>
             <?php

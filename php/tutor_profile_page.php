@@ -300,9 +300,11 @@ mysqli_close($conn);
                    
                               <div class="request_div inner-div">
               <h1 id="result-header">Reviews</h1>
-                            <div class="week-sesstoin">
-                                <?php displayTutorReviews(); ?>
-                            </div>
+
+                            <!-- <div class="week-sesstoin">
+                            <?php //displayTutorReviews(); ?>
+                            </div> -->
+                            
                         </div>
 
                 </section>
