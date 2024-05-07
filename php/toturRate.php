@@ -100,31 +100,33 @@ function getFlagImage($language) {
 function displayAllSessions()
 {
     // Include the database connection file
-    include("php/connection.php");
+    include("connection.php");
 
     // Get the current user ID from the session
     $user_id = $_SESSION['user_id'];
 
     // Construct the SQL query to retrieve sessions for the tutor with a status of 'previous'
-    $sql = "SELECT s.*, r.starts, r.ReviewText FROM session s LEFT JOIN review r ON s.ID = r.SESSION_ID WHERE s.T_id = '$user_id' AND s.Status = 'previous'";
+    $sql = "SELECT starts, ReviewText FROM review WHERE P_id = '$user_id' ";
     $sessions_result = mysqli_query($conn, $sql);
 
     // Check if there are any sessions for this tutor
     if (mysqli_num_rows($sessions_result) > 0) {
         // Loop through the sessions and display each session card
         while ($session_row = mysqli_fetch_assoc($sessions_result)) {
-            $starts = $session_row['starts'];
+            $stars = $session_row['starts'];
             $reviewText = $session_row['ReviewText'];
 
             // Output the session card HTML
-            echo '<div class="request-card">';
-            echo '<div class="learner-info">';
+            echo '<div class="result-cell">';
             
+            echo ' <div class="acc-info">';
+          
             // Output the session details
-            echo '<p class="rating"><i class="fa-solid fa-star"></i> ' . $starts . '</i>' . $reviewText . '</p>';
-            
+            echo '<p class="rating"><i class="fa-solid fa-star"></i> ' . $stars . '</p>';
+            echo '<p>' . $reviewText . '</p>';
+          
             // Output other session information (e.g., day, language, etc.)
-
+          
             echo '</div>'; // Close the learner-info div
             echo '</div>'; // Close the request-card div
         }
@@ -142,15 +144,16 @@ function displayAllSessions()
       <div class="request_div inner-div">
         <h1 id="result-header">Your Ratings and Reviews!</h1>
         <div class="week-sessions">
-          <div class="result-cell">
-            <div class="acc-info">
-              <?php displayAllSessions(); ?>
-            </div>
-          </div>
+          
+              <?php
+              displayAllSessions();
+              ?>
+        
         </div>
       </div>
     </div>
   </section>
+</div>
 </div>  
       
    </main>
