@@ -1,5 +1,5 @@
 
-    main{
+  main{
         padding: 50px;
         padding-top: 90px;
         background-color: #d9d9d9;
@@ -50,6 +50,7 @@
 
     form{
         margin-bottom: 15px;
+        display: contents;
     }
 
     .selectWrapper{
@@ -249,7 +250,7 @@
         padding: 5px;
         width: auto;
         text-align: center;
-        margin: 10px 0px;
+        margin: 10px 20px;
         
     }
 
@@ -259,11 +260,18 @@
         
     }
 
+    .Pending.status{
+        background-color: #cdcbc0;
+        font-weight: bold;
+        
+    }
+
     #pending{
         background-color: #cdcbc0;
         font-weight: bold;
         
     }
+
 
     #rejected{
         background-color: rgba(179, 80, 80, 0.514); 
@@ -298,9 +306,5 @@
     .cancel:hover{
         background-color: rgb(160, 22, 22);
     }
-
-    
-
-
    
 
