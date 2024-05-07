@@ -72,12 +72,12 @@ common questions
 
     <div class="box">
    <li> <strong>
-     <a href="question3.php" class="cqi" > Why lenguest?</strong></a></li>  
+     <a href="q3.php" class="cqi" > Why lenguest?</strong></a></li>  
     <br> <br>
 </div>
 <div class="box">  
    
-  <li><strong><a href="question2.php"class="cqi" >Tips for getting started on lenguest?</strong>  </a></li> 
+  <li><strong><a href="q2.php"class="cqi" >Tips for getting started on lenguest?</strong>  </a></li> 
     <br>  <br>
 
 </div>
