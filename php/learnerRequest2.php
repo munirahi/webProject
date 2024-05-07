@@ -43,7 +43,7 @@
                 <ul id="ul2">
 
                     <li id="acnt li">
-                        <nav id="account-nav"><img src="../images/account.jfif" id="account-img">
+                        <nav id="account-nav"><img src="images/account.jfif" id="account-img">
                             <ul>
 
                                 <li class="account-list"><a href="EditProfile.html"><div class="circle"></div>Edit Profile</a></li>
@@ -254,12 +254,14 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
        </div>
            <h6 class="status" id="pending">'.$row2['Status'].'</h6>
            <form action="EditRequest.php" method="post">
-<input type="hidden" name="p_id" value="'.$row2['P_ID'].'">
-<input type="hidden" name="l_id" value="'.$_SESSION['user_id'].'">
-<input type="hidden" name="time" value="'.$row2['Time'].'">
-<input type="hidden" name="date" value="'.$row2['Date'].'">
-<button class="edit" type="submit">Edit</button>
-</form>
+                        <input type="hidden" name="p_id" value="'.$row2['P_ID'].'">
+                        <input type="hidden" name="l_id" value="'.$_SESSION['user_id'].'">
+                        <input type="hidden" name="time" value="'.$row2['Time'].'">
+                        <input type="hidden" name="date" value="'.$row2['Date'].'">
+                        <button class="edit" type="submit">Edit</button>
+                        </form>
+
+                        
            
             <button class="cancel" >Cancel</button>
     </div>';

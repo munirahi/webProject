@@ -9,6 +9,22 @@
 
     if(!mysqli_select_db($conn, DB_NAME))
         die("Could not open the ".DB_NAME." database.");
+        session_start();
+
+   
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+      
+            $_SESSION['p_id'] =  $_POST["p_id"];
+            $_SESSION['l_id'] =  $_POST["l_id"];
+            $_SESSION['time'] =$_POST["time"];
+            $_SESSION['date'] = $_POST["date"];
+           
+        } else {
+     
+            echo "Form submission method is not POST.";
+        }
+
 ?>
 
 <!DOCTYPE html>
@@ -107,17 +123,17 @@
 
          <?php
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
-      if(isset($_GET["time"]) && isset($_GET["date"]) && isset($_GET["Duration"]) && isset($_POST["p_id"]) && isset($_POST["l_id"]) && isset($_POST["time"]) && isset($_POST["date"])) {
-          $p_id = $_POST["p_id"];
-          $l_id = $_POST["l_id"];
-          $time = $_POST["time"];
-          $date = $_POST["date"];
+      if(isset($_GET["time"]) && isset($_GET["date"]) && isset($_GET["Duration"]) ) {
+        $p_id= $_SESSION['p_id'] ;
+        $l_id= $_SESSION['l_id'] ;
+        $time= $_SESSION['time'] ;
+         $date =$_SESSION['date'] ;
           $newTime = $_GET["time"];
           $newDate = $_GET["date"];
-          $newDuration = $_GET["Duration"];
+          $newDuration = intval($_GET["Duration"]);
 
           // Prepare and execute the SQL update query
-          $sql = "UPDATE request SET Time='$newTime', Date='$newDate', Duration=$newDuration WHERE P_ID=$p_id AND L_ID=$l_id AND Time='$time' AND Date='$date'";
+          $sql = "UPDATE request SET Time='$newTime', Date='$newDate', Duration='$newDuration' WHERE P_ID='$p_id' AND L_ID='$l_id' AND Time='$time' AND Date='$date';";
           if (mysqli_query($conn, $sql)) {
               echo "Record updated successfully";
           } else {
