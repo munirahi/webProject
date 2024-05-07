@@ -229,11 +229,11 @@ mysqli_close($conn);
                     <h2>Reviews</h2>
                     <?php displayTutorReviews(); ?>
                    
-                    <a href="ratet.php">
-            <button class="view-more-button">View All Reviews</button></a >
+                    <a href="viewtutorreviews.php">
                         
-                </section>
+                    <a href="viewtutorreviews.php?pid=<?php echo $row['T_ID']; ?>">View Reviews</a>                </section>
                 <h2>Book a Session</h2>
+
                <form method='POST' action='postRequest.php'>
                 <fieldset>
                     <div class="fieldset-container">
@@ -246,7 +246,11 @@ mysqli_close($conn);
                 </fieldset>
             </form> 
 
-              
+              <script>
+function sendData(id) {
+  window.location.href = "viewtutorreviews.php?id=" + id;
+}
+</script>
 
 
 
@@ -258,6 +262,9 @@ mysqli_close($conn);
   
   
         </div>
+        <script>
+ 
+    </script>
         <footer>
             <div class="main-content">
                 <div class="left box">
