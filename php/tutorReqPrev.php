@@ -83,15 +83,16 @@
                             
                             <div class="result-carousel">
 
-                          <?php  $ID = $_SESSION['user_id'];
+                         <?php  $ID = $_SESSION['user_id'];
                   $sql = "SELECT * FROM request, learner WHERE P_ID = $ID AND L_ID=learner.ID";
                   $result = mysqli_query($conn, $sql);
                   if (mysqli_num_rows($result) > 0) { 
                     while($row = mysqli_fetch_assoc($result)) {
+                      if($row['Status']=='accepted'){
                       echo '<div class="result-cell">
                                                 
                       <div class="acc-info"> <!--row-->
-                          <img class="result-img" src="../images/'.$row['image'].'" alt="account image"> <!--column1-->
+                          <img class="result-img" src="images/maleIcon3.png" alt="account image"> <!--column1-->
                           <div class="more-info">
                               <h5><i class="fa-solid fa-user"></i>'.$row['Firstname']. " "  .$row['Lastname'].'</h5>
                              
@@ -101,17 +102,39 @@
                       <div class="specifications-div">
                           <div class="language specifications">'.$row['Language'].'</div>
                           <div class="level specifications">'.$row['Level'].'</div>
-                          <div class="duration specifications">'.$row['Duration'].'</div>
+                          <div class="duration specifications">'.$row['Duration'].' Minutes</div>
                           <div class="time specifications">'.date("h:i A", strtotime($row['Time'])).'</div>
                           <div class="date specifications">'.$row['Date'].'</div>
-                     
                       </div>
                       <div class="req-final-status accepted">'.$row['Status'].'</div>
                   </div>';
-                  } }else {
-                      echo "Error: " . $sql . "<br>" . $conn->error;
+                      }elseif($row['Status']== 'rejected'){
+                        echo '<div class="result-cell">
+                                                
+                      <div class="acc-info"> <!--row-->
+                          <img class="result-img" src="images/maleIcon3.png" alt="account image"> <!--column1-->
+                          <div class="more-info">
+                              <h5><i class="fa-solid fa-user"></i>'.$row['Firstname']. " "  .$row['Lastname'].'</h5>
+                             
+                          </div>     
+                      </div>
+                      
+                      <div class="specifications-div">
+                          <div class="language specifications">'.$row['Language'].'</div>
+                          <div class="level specifications">'.$row['Level'].'</div>
+                          <div class="duration specifications">'.$row['Duration'].' Minutes</div>
+                          <div class="time specifications">'.date("h:i A", strtotime($row['Time'])).'</div>
+                          <div class="date specifications">'.$row['Date'].'</div>
+                      </div>
+                      <div class="req-final-status rejected">'.$row['Status'].'</div>
+                  </div>';
+                  } 
+                }}
+                  else {
+                      echo "No Previous Requests<br>" ;
                   }
                   ?>
+
 
 
                 
