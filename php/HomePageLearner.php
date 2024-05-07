@@ -23,7 +23,8 @@ include("learnerInfo.php");
   <link rel="stylesheet" href="../css/footer.css">
   <link rel="stylesheet" type="text/css" href="../css/sidebar-tutor.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <link rel="stylesheet" href="../header_folder/headerPartner.css">
+  <link rel="stylesheet" href="../header_folder/headerLearner.css">
+  <link rel="stylesheet" type="text/css" href="../css/css-for-tutor-home.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
@@ -205,11 +206,7 @@ function getFlagImage($language) {
   }
 ?>
             </li>
-            <li id="Cultural backgrounds">
-              <span>Cultural backgrounds</span>
-              <img class="flag" src="images/united-states.png" alt="USA">
-              <img class="flag" src="images/france.png" alt="French">
-            </li>
+           
             <li>
               <span>Achievements</span>
               <span>
@@ -255,13 +252,12 @@ function getFlagImage($language) {
       </section>
 
 
-      <section class="new-requests-container">
+      <section class="session">
         <h3>Recommended Partners </h3>
         <br>
         <section class="requests">
 
-          <div class="request-card">
-            <div class="learner-info">
+            <div class="week-sesstoin">
               <?php
     
 
