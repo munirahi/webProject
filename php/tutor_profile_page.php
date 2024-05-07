@@ -353,7 +353,7 @@ mysqli_close($conn);
 
                         <label>Date<br>
                             <div class="selectWrapper" id="datetimepicker">
-                                <input class="input-box" type="date" name=""date>
+                                <input class="input-box" type="date" name="date">
                             </div>
                         </label>
 
