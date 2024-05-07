@@ -149,10 +149,44 @@ if (!isset($_SESSION['user_id'])) {
 
 
 // include("tutorsInfo.php");
+function displayLanguages() {
+    $tutorId = $GLOBALS ['selectedTutorId'] ;
+    include("connection.php");
+    $tutorsLagsQuery ="SELECT * FROM tutor_languages WHERE P_ID = '$tutorId'";
+    $tutorsLagsResult=mysqli_query($conn, $tutorsLagsQuery);
+    $tutorLanguages =array();
+    
+    if ($tutorsLagsResult && mysqli_num_rows($tutorsLagsResult) > 0) {
+        // Fetch the name from the result set
+        while ($tutorsLags = mysqli_fetch_assoc($tutorsLagsResult)) {
+            // Add the language to the array
+            $tutorLanguages[] = $tutorsLags['Language'];
+        }
+    }
 
+
+
+    // Check if the array is not empty
+    if (!empty($tutorLanguages)) {
+
+        // Loop through each language in the array
+        foreach ($tutorLanguages as $language) {
+            // Echo the language
+            echo $language;
+
+            // If it's not the last language, add a comma and space
+            if ($language !== end($tutorLanguages)) {
+                echo ', ';
+            }
+        }
+
+        
+    }
+}
 
 function displayTutorReviews() {
-$tutorId =$_SESSION['tutor_id'];///888888888888888888888888888888888888888888888888888888888888888888888888888
+$tutorId = $GLOBALS ['selectedTutorId'] ;
+///888888888888888888888888888888888888888888888888888888888888888888888888888
 include('connection.php');
     $sql = "SELECT * FROM review WHERE P_ID = '$tutorId' LIMIT 4";
     $result = mysqli_query($conn, $sql);
@@ -175,9 +209,9 @@ include('connection.php');
             echo '<div class="acc-info">';
 
             echo '<img class="result-img" src="../images/'.$lImage.'">'; 
-            echo '<h4 class="name"><i class="fa-solid fa-user"></i> ' .$learner_name . '</h4>'; 
+            echo '<h6 class="name"><i class="fa-solid fa-user"></i> ' .$learner_name . '</h6>'; 
             echo '<div class="more-info">';
-            echo '<h3>' . $row['starts'] . ' <i class="fa-solid fa-star"></i></h3>';
+            echo '<h6>' . $row['starts'] . ' <i class="fa-solid fa-star"></i></h6>';
             echo '<div class="session-info">';
             echo '<p>' . $row['ReviewText'] . '</p>';
             echo '</div>'; 
@@ -200,11 +234,11 @@ mysqli_close($conn);
 
 <!DOCTYPE html>
 <html>
-    <head> 
+    <head>
         <link rel="stylesheet" href="../header_folder/headerPartner.css">
         <link rel="stylesheet" href="../css/footer.css">
         <link rel="stylesheet" href="../css/tutor_profile_page.css">
-        <link rel="stylesheet" href="../css/learnerRequest2.css">
+        <link rel="stylesheet" href="../css/learnerRequest2.css"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
         <link rel="stylesheet" href="css/tutorAvailableTimes.css">
@@ -230,7 +264,7 @@ mysqli_close($conn);
             <div id="header-div">
                 <nav class="fixed-top" id="main-nav">
                     <ul id="ul1">
-                        <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
+                        <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
                         <li class="list1-item"><a href="tutor_Home_page.php" class="list1-item">Home</a></li>
                         <li class="list1-item"><a href="SESSionTutor.php">Sessions</a></li>
                         <li class="list1-item"><a href="tutorReq.php">Requests</a></li>
@@ -264,11 +298,14 @@ mysqli_close($conn);
                     
                 </section>
                 <section>
-                    <h1>bio</h1>
+
+                    <h2>bio</h2>
                     <p id="bio"><?php echo $bio; ?></p>
+                    <h2>Languages</h2>
+                    <?php displayLanguages() ;?>
                 </section>
                 <section class="Contact_tutor">
-                    <h1>Contact</h1>
+                    <h2>Contact</h2>
                     <div class= "Contact_tutor_div">
                             <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?>
                             <span class="fas fa-envelope"></span>
@@ -280,34 +317,23 @@ mysqli_close($conn);
                             <span class="fas fa-phone-alt"></span>
                           </a>
                     </div>
-<!-- 
-                    <div class="email">
-                      <span class="fas fa-envelope"></span>
-                      <span class="text"><a href="mailto:content@linguist.com">content@linguist.com</a>
-                        </span>
-                     </div> -->
                 </section>
         
                 <section>
-                    <h1>education</h1>
+                    <h2>education</h2>
                     <?php echo $education?>
                 </section>
                 <section>
-                    <h1>experiences</h1>
+                    <h2>experiences</h2>
                     <?php echo $experience?>
                 </section>
                 <section>
-                    <h1>Reviews</h1>
+                    <h2>Reviews</h2>
+                    <?php displayTutorReviews(); ?>
                    
-                              <div class="request_div inner-div">
-              <h1 id="result-header">Reviews</h1>
-
-                            <!-- <div class="week-sesstoin">
-                            <?php //displayTutorReviews(); ?>
-                            </div> -->
-                            
-                        </div>
-
+                    <a href="ratet.php">
+            <button class="view-more-button">View All Reviews</button></a >
+                        
                 </section>
                 <h2>Book a Session</h2>
                <form method='POST' action='postRequest.php'>
@@ -322,9 +348,7 @@ mysqli_close($conn);
                 </fieldset>
             </form> 
 
-
-
-
+              
 
 
 
