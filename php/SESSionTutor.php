@@ -123,30 +123,31 @@ function deleteSession(sessionId) {
 <?php
 include 'connection.php'; // Make sure your database connection settings are correct
 //a
-function getFlagImage($language) {
+function getFlagImage($language)
+{
   // Define a map of language names to flag image directories
   $languageFlags = array(
-      "French" => "france.png",
-      "German" => "germanyy.png",
-      "English" => "united-states.png",
-      "Arabic" => "flag.png"
-      // Add more language-flag mappings as needed
+    "French" => "france.png",
+    "German" => "germanyy.png",
+    "English" => "united-states.png",
+    "Arabic" => "flag.png"
+    // Add more language-flag mappings as needed
   );
 
   // Check if the provided language is in the map
   if (array_key_exists($language, $languageFlags)) {
-      // Return the corresponding flag image directory
-      return "../images/" . $languageFlags[$language];
+    // Return the corresponding flag image directory
+    return "../images/". $languageFlags[$language];
   } else {
-      // If the language is not found, return a default flag image
-      return "../images/default-flag.png";
+    // If the language is not found, return a default flag image
+    return "../images/default-flag.png";
   }
 }
 
 // Current Sessions: Active sessions with today's date and time
 $sql_current = "SELECT s.*, l.Firstname, l.Lastname, l.image
 FROM session s
-JOIN tutor t ON s.T_id = t.ID
+JOIN learner l ON s.L_id = l.ID
 WHERE s.T_id = $user_id AND s.Date = CURDATE()
   AND TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) >= CURTIME()
   AND s.Time <= CURTIME()";
@@ -155,7 +156,7 @@ $current_sessions = mysqli_query($conn, $sql_current);
 // Upcoming Sessions: Future sessions starting after now
 $sql_upcoming = "SELECT s.*, l.Firstname, l.Lastname, l.image
 FROM session s
-JOIN tutor t ON s.T_id = t.ID
+JOIN learner l ON s.L_id = l.ID
 WHERE s.T_id = $user_id AND s.Date > CURDATE()
   OR (s.Date = CURDATE() AND s.Time > CURTIME())";
 $upcoming_sessions = mysqli_query($conn, $sql_upcoming);
@@ -163,7 +164,7 @@ $upcoming_sessions = mysqli_query($conn, $sql_upcoming);
 // Previous Sessions: Sessions that have ended
 $sql_previous = "SELECT s.*, l.Firstname, l.Lastname, l.image
 FROM session s
-JOIN tutor t ON s.T_id = t.ID
+JOIN learner l ON s.L_id = l.ID
 WHERE (s.Date < CURDATE()
   OR (s.Date = CURDATE() AND
    TIME(DATE_ADD(CONCAT(s.Date, ' ', s.Time), INTERVAL s.Duration MINUTE)) < CURTIME())) AND s.T_id = $user_id";
@@ -235,7 +236,7 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
                     <img src="../images/<?php echo $row['image']; ?>" width="25" alt="Tutor"/>
                         <?php echo $row['Firstname'] . ' ' . $row['Lastname']; ?>
                     </td>
-                    <td><img src="<?php getFlagImage($row['language']); ?>" width="20" alt="Language"/><?php echo $row['language']; ?></td>
+                    <td><img src="<?php echo getFlagImage($row['language']); ?>" width="20" alt="Language" /><?php echo $row['language']; ?></td>
                     <td class="text-end">
                         <span class="fw-bolder"><?php echo date('g:iA', strtotime($row['Time'])); ?></span>
                         <button class="cancel-btn" onclick="cancelSession(<?php echo $row['ID']; ?>);">Cancel</button>
@@ -286,7 +287,7 @@ $previous_sessions = mysqli_query($conn, $sql_previous);
                     <img src="../images/<?php echo $row['image']; ?>" width="25" alt="Tutor"/>
                         <?php echo $row['Firstname'] . ' ' . $row['Lastname']; ?>
                     </td>
-                    <td><img src="<?php getFlagImage($row['language']); ?>" width="20" alt="Language"/><?php echo $row['language']; ?></td>
+                    <td><img src="<?php echo getFlagImage($row['language']); ?>" width="20" alt="Language" /><?php echo $row['language']; ?></td>
                     <td class="text-end">
                         <span class="fw-bolder"><?php echo date('g:iA', strtotime($row['Time'])); ?></span>
                         <button class="cancel-btn" onclick="deleteSession(<?php echo $row['ID']; ?>);">Delete</button>
