@@ -138,7 +138,7 @@ function getFlagImage($language) {
         <ul id="ul2">
 
           <li id="acnt li">
-          <nav id="account-nav"><img src="../images/<?php echo $newImageName; ?>" id="account-img">
+          <nav id="account-nav"><img src="../images/<?php echo $row['image']; ?>" width="25" alt="pic" />
               <ul>
 
                 <li class="account-list"><a href="EditProfile.html">
@@ -163,7 +163,7 @@ function getFlagImage($language) {
 
       <div class="sidebar-card">
         <div class="card-body-profile">
-          <img src="../images/femaleIcon.png" alt="Profile Picture">
+        <img src="../images/<?php echo $row['image']; ?>" width="25" alt="pic" />
           <h2><?php
   $learner_id = $_SESSION['user_id'];
   $sql = "SELECT Firstname, Lastname FROM learner WHERE ID = '$learner_id'";
@@ -260,19 +260,19 @@ function getFlagImage($language) {
               <?php
     
 
-        $query = "SELECT * FROM review WHERE starts >= 4"; // Assuming you have a query to retrieve partners
-        $result = mysqli_query($conn, $query);
-        
+    $query = "SELECT * FROM review WHERE starts >= 4";
+    $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) > 0) {
           while ($row = mysqli_fetch_assoc($result)) {
             echo '<div class="request-card">';
             echo '<div class="learner-info">';
             
             
-            if (isset($row['profile_picture'])) {
-              echo '<img src="../images/' . $row['profile_picture'] . '" alt="profile Picture">';
+            if (isset($row['image'])) {
+              
+              echo '<img src="../images/' . $row['image'] . '" width="25" alt="pic" />';
             } else {
-              echo '<img src="../images/default-profile.png" alt="profile Picture">'; // Default image
+              echo '<img src="../images/teacher.jpg" alt="profile Picture">'; // Default image
             }
             $tutorId= $row['P_ID'];
             $sql_t = "SELECT * FROM tutor WHERE  id = '$tutorId';";
