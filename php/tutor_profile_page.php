@@ -308,7 +308,7 @@ mysqli_close($conn);
                         </div>
 
                 </section>
-                <h2>Book a Session</h2>
+                  <h2>Book a Session</h2>
                <form method='POST' action='<?php $_SERVER['PHP_SELF'] ?>'>
                 <fieldset>
                     <div class="fieldset-container">
@@ -343,35 +343,64 @@ mysqli_close($conn);
                                     <option>10 Minutes</option>
                                     <option>20 Minutes</option>
                                     <option>30 Minutes</option>
+                                    <option>40 Minutes</option>
+                                    <option>50 Minutes</option>
                                     <option>60 Minutes</option>
                                 </select>
                             </div>
                         </label>
 
-                        <label>Date and Time<br>
+                        <label>Date<br>
                             <div class="selectWrapper" id="datetimepicker">
-                                <input class="input-box" type="datetime-local">
+                                <input class="input-box" type="date" name=""date>
+                            </div>
+                        </label>
+
+                        <label>Time<br>
+                            <div class="selectWrapper" id="datetimepicker">
+                                <input class="input-box" type="time" name="time">
                             </div>
                         </label>
                     </div>
                     <div class="btn-container">
-                        <button class="selectWrapper" id="go-btn">Go!</button>
+                        <button type="submit" class="selectWrapper" id="go-btn">Go!</button>
                     </div>
                 </div>
                 </fieldset>
             </form> 
 
-            <label for="datepicker">Select Date:</label>
-<input type="text" id="datepicker" name="datepicker">
 
-<label for="available-times">Available Times:</label>
-<select id="available-times" name="available-times"></select>
+            <?php
+if(isset($_POST['level']) && isset($_POST['Duration']) && isset($_POST['time']) && isset($_POST['date']) && isset($_POST['Language'])){
+    
+    $level = $_POST['level'];
+    $duration = $_POST['Duration'];
+    $time = $_POST['time'];
+    $date = $_POST['date'];
+    $language = $_POST['Language'];
+    
 
+    
+    $L_ID = $_SESSION['user_id'];
 
+    
+    $P_ID = $selectedTutorId;
 
+    // Define the SQL query with actual values
+    $sql = "INSERT INTO request (P_ID, L_ID, Time, Date, Duration, Language, Level) 
+            VALUES ($P_ID, $L_ID, '$time', '$date', '$duration', '$language', '$level')";
 
+    // Execute the query
+    $result = mysqli_query($conn, $sql);
 
-
+    // Check if the query was successful
+    if ($result) {
+        echo "Request successfully inserted!";
+    } else {
+        echo "Error inserting request: " . mysqli_error($conn);
+    }
+}
+?>
 
 
 
