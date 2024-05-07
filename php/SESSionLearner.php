@@ -295,8 +295,7 @@ if (!isset($_SESSION['user_id'])) {
                         </td>
                         <td class="text-end">
                           <span class="fw-bolder">
-                             <button class="ing-btn" id="rateBtn-<?php echo $row['ID']; ?>" onclick="RateSession(<?php echo $row['ID']; ?>)">Rate</button>                          </span>
-                        </td>
+                            <button class="ing-btn" id="rateBtn-<?php echo htmlspecialchars($row['ID']) . '-' . htmlspecialchars($row['T_id']); ?>" onclick="submitFeedback(<?php echo $row['ID'] . ', ' . $row['T_id']; ?>)">Rate</button>
                         
                       </tr>
                     <?php } ?>
@@ -315,8 +314,9 @@ if (!isset($_SESSION['user_id'])) {
       </section>
     </section>
   </section>
-  <script>
-function RateSession(sessionId) {
+
+<script>
+function submitFeedback(sessionId,pid) {
   if (confirm("Let's rate this session!")) {
     let text = prompt("Enter your feedback for this session:");
     let ratingPrompt = "Rate this session out of 5";
@@ -327,30 +327,31 @@ function RateSession(sessionId) {
       formData.append("sessionID", sessionId);
       formData.append("text", text);
       formData.append("rating", rating);
+      formData.append("pid", pid);
 
       fetch('save_feedback.php', {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-          if (data === "Feedback saved successfully!") {
-            alert("Thank you for your feedback!");
-          } else {
-            alert(data);
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('There was an error saving your feedback.');
-        });
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        if (data === "Feedback saved successfully!") {
+          // Disable the button after successful feedback submission
+          document.getElementById("rateBtn-" + sessionId).disabled = true;
+        } else {
+          alert(data);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('There was an error saving your feedback.');
+      });
     } else {
       alert('Please enter a valid rating between 0 and 5.');
     }
   }
 }
-    
-  </script>
+</script>
   <!--Footer-->
 
   <footer>
