@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="../css/learnerRequest2.css">
         <link rel="stylesheet" href="../css/tutorReq.css">
         <link rel="stylesheet" href="../css/footer.css">
-        <link rel="stylesheet" href="header_folder/headerLearner.css">
+        <link rel="stylesheet" href="../header_folder/headerLearner.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/59189109f7.js" crossorigin="anonymous"></script>   
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -127,36 +127,7 @@
 
 
                 <?php
-// Include your database connection code here
 
-//if(isset($_GET['language']) && isset($_GET['level'])) {
-    // $language = $_GET['Language'];
-    // $level = $_GET['Level'];
-
-    // // Fetch dates from the database based on the selected language and level
-    // $sql3 = "SELECT DISTINCT date FROM available_times, tutor_languages WHERE Language = '$language' AND Level = '$level' AND tutor_languages.P_ID = available_times.P_ID";
-    // $result3 = mysqli_query($conn, $sql3);
-
-   
-    // if(mysqli_num_rows($result3) > 0) {
-    //     echo "<script>";
-    //     echo "var select = document.getElementById('dateSelect');";
-    //     while($row3 = mysqli_fetch_assoc($result3)) {
-    //         echo "var option = document.createElement('option');";
-    //         echo "option.text = '{$row3['date']}';";
-    //         echo "select.add(option);";
-    //     }
-    //     echo "</script>";
-    // } else {
-    //     echo "<script>";
-    //     echo "var select = document.getElementById('dateSelect');";
-    //     echo "select.innerHTML = '<option>No dates available</option>';";
-    //     echo "</script>";
-    // }
-// else echo"help";
-?>
-
-               
 
 
 
