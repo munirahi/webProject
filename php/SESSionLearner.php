@@ -298,7 +298,7 @@ if (!isset($_SESSION['user_id'])) {
                         <form action="RateAndReview.php" method="post">
                                 <input type="hidden" name="tutor_id" value="<?php echo $row['T_id']?>">
                                 <input type="hidden" name="sesstion_to_rate" value="<?php echo $row['ID']?>">
-                                <div type="submit" class="post-req-btn"><button>Rate</button></div></div> 
+                                <div  ><button class="ing-btn" id="rateBtn">Rate</button onclick="openRatePage()"></div></div> 
                             </form>
                         </td>
                         <td class="text-end">
@@ -323,7 +323,7 @@ if (!isset($_SESSION['user_id'])) {
 
 
   <script>
-function openRatePage(ID, T_id) {
+function openRatePage() {
     // Construct the URL for the rate.php page with the session and teacher IDs as query parameters
     var url = 'RateAndReview.php?sessionID=' + ID + '&teacherID=' + T_id;
 
