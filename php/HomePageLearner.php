@@ -252,7 +252,7 @@ function getFlagImage($language) {
       </section>
 
 
-      <section class="session">
+      <section class="sessions">
         <h3>Recommended Partners </h3>
         <br>
         <section class="requests">
