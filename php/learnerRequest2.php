@@ -9,6 +9,12 @@
 
     if(!mysqli_select_db($conn, DB_NAME))
         die("Could not open the ".DB_NAME." database.");
+// Check if the user is not logged in
+if (!isset($_SESSION['user_id'])) {
+    // Redirect the user to the login page
+    header("Location: login.php");
+    exit(); // Stop further execution
+}
    
     session_start();
 ?>
@@ -19,7 +25,7 @@
         <link rel="stylesheet" href="../css/learnerRequest2.css">
         <link rel="stylesheet" href="../css/tutorReq.css">
         <link rel="stylesheet" href="../css/footer.css">
-        <link rel="stylesheet" href="../header_folder/headerLearner.css">
+         <link rel="stylesheet" href="../header_folder/headerPartner.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/59189109f7.js" crossorigin="anonymous"></script>   
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,7 +49,8 @@
                 <ul id="ul2">
 
                     <li id="acnt li">
-                        <nav id="account-nav"><img src="images/account.jfif" id="account-img">
+                        <nav id="account-nav"><img src="../images/<?php echo  $image?>" id="account-img">
+
                             <ul>
 
                                 <li class="account-list"><a href="EditProfile.php"><div class="circle"></div>Edit Profile</a></li>
