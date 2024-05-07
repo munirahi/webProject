@@ -1,4 +1,6 @@
 <?php
+
+session_start();
     DEFINE('DB_USER','root');
     DEFINE('DB_PSWD','');
     DEFINE('DB_HOST','localhost');
@@ -17,7 +19,6 @@ if (!isset($_SESSION['user_id'])) {
     exit(); // Stop further execution
 }
 
-    session_start();
 ?>
 <!DOCTYPE html>
 <html>
