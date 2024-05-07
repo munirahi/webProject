@@ -151,9 +151,11 @@ if (mysqli_num_rows($result) > 0) {
       // Prepare checkbox values based on user's languages
       $sql_languages = "SELECT Language FROM tutor_languages WHERE P_ID= '$user_id' ";
       $result_languages = mysqli_query($conn, $sql_languages);
+      echo "inlanguages";
   $languages = [];
   while ($row = mysqli_fetch_assoc($result_languages)) {
       $languages[] = $row['Language'];
+      echo $row['Language'] . " is added";
   }
   $checked_languages = array_fill_keys($languages, 'checked');
     // Validate 
