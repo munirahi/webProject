@@ -215,8 +215,7 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
            <button class="cancel" type="submit" name="cancel" value="cancel">Cancel</button>
        </form>
     </div>';
-    echo $row2['P_ID'].'<br>';
-    echo $_SESSION['user_id'];
+    
     }
 
 
