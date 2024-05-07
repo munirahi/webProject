@@ -30,7 +30,7 @@
             <div id="header div">
             <nav class="fixed-top" id="main-nav">
                 <ul id="ul1">
-                  <li id="disabled"><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img" ></li>
+                  <li id="disabled"><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img" ></li>
                   <li class="list1-item"><a href="HomePageLearner.html" class="list1-item">Home</a></li>
                   <li class="list1-item"><a href="SESSionLearner.html">Sessions</a></li>
                   <li class="list1-item"><a href="learnerRequest2.html">Requests</a></li>

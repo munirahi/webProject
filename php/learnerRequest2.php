@@ -131,7 +131,7 @@
 
 
 
-                 <h5 id="result-header">Results</h5>
+                 <h5> id="result-header">Results</h5>
                 <div class="result">
                 <div class="result-carousel">  
                     <!--div class="result-carousel"-->
