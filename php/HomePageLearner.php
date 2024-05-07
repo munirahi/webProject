@@ -247,7 +247,7 @@ function getFlagImage($language) {
           <?php displayThisWeekSessions(); ?>
         </section>
         <br>
-        <a href="SESSionTutor.html"> <button class="view-more-button">View All Sessions</button></a>
+        <a href="SESSionTutor.php"> <button class="view-more-button">View All Sessions</button></a>
         
       </section>
 
