@@ -224,7 +224,14 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
            <div class="date specifications">'.$row2['Date'].'</div>
        </div>
            <h6 class="status" id="pending">'.$row2['Status'].'</h6>
-           <button class="edit" onclick="window.location.href=\'editRequest.php?p_id='.$row2['P_ID'].'&l_id='.$_SESSION['user_id'].'&time='.$row2['Time'].'&date='.$row2['Date'].'\'" >Edit</button>
+           <form action="EditRequest.php" method="post">
+<input type="hidden" name="p_id" value="'.$row2['P_ID'].'">
+<input type="hidden" name="l_id" value="'.$_SESSION['user_id'].'">
+<input type="hidden" name="time" value="'.$row2['Time'].'">
+<input type="hidden" name="date" value="'.$row2['Date'].'">
+<button class="edit" type="submit">Edit</button>
+</form>
+           
             <button class="cancel" >Cancel</button>
     </div>';
     }
@@ -234,9 +241,6 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
 
 
                 ?>
-
-                   
-
 
 
 
