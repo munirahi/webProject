@@ -1,7 +1,7 @@
 <?php
     DEFINE('DB_USER','root');
     DEFINE('DB_PSWD','');
-    DEFINE('DB_HOST','localhost:3306');
+    DEFINE('DB_HOST','localhost:4306');
     DEFINE('DB_NAME','linguist');
 
     if (!$conn = mysqli_connect(DB_HOST,DB_USER,DB_PSWD,DB_NAME)) 
@@ -16,9 +16,9 @@
 <html>
     <head>
         <title>Request</title>
-        <link rel="stylesheet" href="../css/learnerRequest2.css">
-        <link rel="stylesheet" href="../css/footer.css">
-        <link rel="stylesheet" href="../header_folder/headerLearner.css">
+        <link rel="stylesheet" href="css/learnerRequest2.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="header_folder/headerLearner.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/59189109f7.js" crossorigin="anonymous"></script>   
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +80,7 @@
                                 </div>
                             </label>
     
-                            <label name="level">Level<br>
+                            <!-- <label name="level">Level<br>
                                 <div class="selectWrapper">
                                     <select class="input-box" name="Level">
                                         <option></option>
@@ -89,7 +89,15 @@
                                         <option>Advanced</option>
                                     </select>
                                 </div>
-                            </label>
+                            </label> -->
+
+                            <!-- <label name="date">Date<br>
+                                <div class="selectWrapper">
+                                    <select class="input-box" name="dateSelect">
+
+                                    </select>
+                                </div>
+                            </label> -->
     
                             <!-- <label>Duration<br>
                                 <div class="selectWrapper">
@@ -117,6 +125,35 @@
                 </form>
 
 
+                <?php
+// Include your database connection code here
+
+//if(isset($_GET['language']) && isset($_GET['level'])) {
+    // $language = $_GET['Language'];
+    // $level = $_GET['Level'];
+
+    // // Fetch dates from the database based on the selected language and level
+    // $sql3 = "SELECT DISTINCT date FROM available_times, tutor_languages WHERE Language = '$language' AND Level = '$level' AND tutor_languages.P_ID = available_times.P_ID";
+    // $result3 = mysqli_query($conn, $sql3);
+
+   
+    // if(mysqli_num_rows($result3) > 0) {
+    //     echo "<script>";
+    //     echo "var select = document.getElementById('dateSelect');";
+    //     while($row3 = mysqli_fetch_assoc($result3)) {
+    //         echo "var option = document.createElement('option');";
+    //         echo "option.text = '{$row3['date']}';";
+    //         echo "select.add(option);";
+    //     }
+    //     echo "</script>";
+    // } else {
+    //     echo "<script>";
+    //     echo "var select = document.getElementById('dateSelect');";
+    //     echo "select.innerHTML = '<option>No dates available</option>';";
+    //     echo "</script>";
+    // }
+// else echo"help";
+?>
 
                
 
@@ -128,8 +165,8 @@
                     <!--div class="result-carousel"-->
 
                     <?php
- if(isset($_GET['Language']) && isset($_GET['Level']) ) { //&& isset($_GET['Duration'])
-    $sql = "SELECT * FROM tutor, tutor_languages where Language='" .$_GET['Language']. "' AND profLevel='" .$_GET['Level']. "' AND P_ID=ID "; //AND Duration='" .$_GET['Duration']. "' "
+ if(isset($_GET['Language'])  ) { //&& isset($_GET['Duration'])
+    $sql = "SELECT * FROM tutor, tutor_languages where Language='" .$_GET['Language']."' AND P_ID=ID "; //AND Duration='" .$_GET['Duration']. "' "
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) { // $result=="false"
         while($row = mysqli_fetch_assoc($result)) {
@@ -140,20 +177,19 @@
                     '
                     <div class="result-cell"> 
                     <div class="acc-info">  
-                    <img class="result-img" src="images/maleIcon.png" alt="account image">
+                    <img class="result-img" src="../images/'.$row['image'].'" alt="account image">
                      <div class="more-info"><h6>
                     <i class="fa-solid fa-user"></i> '.$row['Firstname']. " "  .$row['Lastname'].' <i class="fa-solid fa-star"></i> 4 <i class="fa-solid fa-dollar-sign"></i> 45</h6>
-                    <h6 id="categories">'.$row['Language'].' | '.$row['profLevel'].'</h6> </div> </div> 
+                    <h6 id="categories">'.$row['Language'].' </h6> </div> </div> 
                     <div class="bio"><p>'./*.$row['bio'].*/'</p></div> 
-                    <div  class="post-req-btn"><button>View Profile</button></div></div> ';
+                    <div  class="post-req-btn"><button><a href="tutor_profile_page.php">View Profile</a></button></div></div> ';
                                                                    
 
                     }}//end while
                     else
                     echo '<h3>No results.</h3>';
              }
-            //  else
-            //  echo 'hiiiiiiiiiiiii';
+            
     ?>
 
 </div> 
@@ -177,7 +213,7 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
    
                echo     '<div class="status-cell">
                         <div class="acc-info">
-                            <img src="images/maleIcon3.png" alt="account image">
+                            <img src="../images/'.$row2['image'].'" alt="account image">
                             <div class="status-info">
                                <h6><i class="fa-solid fa-user"></i> '.$row2['Firstname']. " "  .$row2['Lastname'].'</h6>
                                <h6 class="status" id="'.$row2['Status'].'">'.$row2['Status'].'</h6>
@@ -191,7 +227,7 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
         $status = $row2["Status"];
         echo     '<div class="status-cell">
         <div class="acc-info">
-            <img src="images/maleIcon3.png" alt="account image">
+            <img src="../images/'.$row2['image'].'" alt="account image">
             <div class="status-info">
                <h6><i class="fa-solid fa-user"></i> '.$row2['Firstname']. " "  .$row2['Lastname'].'</h6>
                <h6 class="status" id="pending">'.$row2['Status'].'</h6>
@@ -200,7 +236,7 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
             </div>
            </div>
     </div>';
-    }else echo 'no result2';
+    }
 
 
 }}else echo 'no result';
@@ -209,7 +245,9 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
                 ?>
 
                    
-                    
+
+
+
 
                 </div>
                 
