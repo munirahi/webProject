@@ -1,191 +1,17 @@
 <?php
-// include('connection.php');
-// session_start();
-// // $_SESSION['tutor_id']=2;
-// if (!isset($_SESSION['user_id'])) {
- 
-//     header("Location: login.php");
-//     exit(); 
-// }else{
-//     if(isset($_POST['tutor_id'])) {
-//         $selectedTutorId =  $_POST['tutor_id'];
-
-//         $sqlT = "SELECT * FROM tutor WHERE ID = '$selectedTutorId'";
-   
-//         $result =  mysqli_query($conn, $sqlT);
-        
-//         if(mysqli_num_rows($result) > 0) {
-            
-//             $tutorData = mysqli_fetch_assoc($result);
-            
-          
-//             $email = $tutorData['Email'];
-//             $image = $tutorData['image'];
-//             $firstname = $tutorData['Firstname'];
-//             $lastname = $tutorData['Lastname'];
-//             $age = $tutorData['age'];
-//             $gender = $tutorData['gender'];
-//             $password = $tutorData['password'];
-//             $phoneNumber = $tutorData['PhoneNumber'];
-//             $city = $tutorData['city'];
-//             $bio = $tutorData['bio'];
-//             $experience = $tutorData['experience'];
-//             $education = $tutorData['eduction'];
-//         } else {
-//             echo "No tutor found with ID: $selectedTutorId";
-//         }
-//         // header('Location: tutor_profile_page.php');
-//         exit(); 
-//     } else {
-        
-//         echo "Tutor ID not provided.";
-//     }
-// }
-
-
-
 
 
 include('connection.php');
 session_start();
-
-// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit(); 
-} else {
-    // Check if the form has been submitted with a tutor ID
-    if(isset($_POST['tutor_id'])) {
-        $selectedTutorId =  $_POST['tutor_id'];
+} 
+ include("tutorsInfo.php");
 
-        // Prepare and execute the SQL query to fetch tutor information
-        $sqlT = "SELECT * FROM tutor WHERE ID = '$selectedTutorId'";
-        $result =  mysqli_query($conn, $sqlT);
-        
-        if($result) {
-            // Check if tutor information is found
-            if(mysqli_num_rows($result) > 0) {
-                // Fetch tutor data
-                $tutorData = mysqli_fetch_assoc($result);
-                // Extract tutor data here...
-                $email = $tutorData['Email'];
-                            $image = $tutorData['image'];
-                            $firstname = $tutorData['Firstname'];
-                            $lastname = $tutorData['Lastname'];
-                            $age = $tutorData['age'];
-                            $gender = $tutorData['gender'];
-                            $password = $tutorData['password'];
-                            $phoneNumber = $tutorData['PhoneNumber'];
-                            $city = $tutorData['city'];
-                            $bio = $tutorData['bio'];
-                            $experience = $tutorData['experience'];
-                            $education = $tutorData['eduction'];
-                
-                // Output other tutor information as needed
-            } else {
-                echo "No tutor found with ID: $selectedTutorId";
-            }
-        } else {
-            echo "Error executing query: " . mysqli_error($conn);
-        }
-    } else {
-        echo "Tutor ID not provided.";
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// if(isset($_SESSION['tutor_id'])) {
-  
-//     $selectedTutorId = $_SESSION['tutor_id'];
-    
-  
-//     $sqlT = "SELECT * FROM tutor WHERE ID = '$selectedTutorId'";
-   
-//     $result =  mysqli_query($conn, $sqlT);
-    
-//     if(mysqli_num_rows($result) > 0) {
-        
-//         $tutorData = mysqli_fetch_assoc($result);
-        
-      
-//         $email = $tutorData['Email'];
-//         $image = $tutorData['image'];
-//         $firstname = $tutorData['Firstname'];
-//         $lastname = $tutorData['Lastname'];
-//         $age = $tutorData['age'];
-//         $gender = $tutorData['gender'];
-//         $password = $tutorData['password'];
-//         $phoneNumber = $tutorData['PhoneNumber'];
-//         $city = $tutorData['city'];
-//         $bio = $tutorData['bio'];
-//         $experience = $tutorData['experience'];
-//         $education = $tutorData['eduction'];
-//     } else {
-//         echo "No tutor found with ID: $selectedTutorId";
-//     }
-
-  
- 
-// } else {
-//     // Default content if no id is selected
-//     echo "<h1>Welcome to the tutor profile page!</h1>";
-// }
-
-
-// include("tutorsInfo.php");
-function displayLanguages() {
-    $tutorId = $GLOBALS ['selectedTutorId'] ;
-    include("connection.php");
-    $tutorsLagsQuery ="SELECT * FROM tutor_languages WHERE P_ID = '$tutorId'";
-    $tutorsLagsResult=mysqli_query($conn, $tutorsLagsQuery);
-    $tutorLanguages =array();
-    
-    if ($tutorsLagsResult && mysqli_num_rows($tutorsLagsResult) > 0) {
-        // Fetch the name from the result set
-        while ($tutorsLags = mysqli_fetch_assoc($tutorsLagsResult)) {
-            // Add the language to the array
-            $tutorLanguages[] = $tutorsLags['Language'];
-        }
-    }
-
-
-
-    // Check if the array is not empty
-    if (!empty($tutorLanguages)) {
-
-        // Loop through each language in the array
-        foreach ($tutorLanguages as $language) {
-            // Echo the language
-            echo $language;
-
-            // If it's not the last language, add a comma and space
-            if ($language !== end($tutorLanguages)) {
-                echo ', ';
-            }
-        }
-
-        
-    }
-}
 
 function displayTutorReviews() {
-$tutorId = $GLOBALS ['selectedTutorId'] ;
+$tutorId = $_SESSION['user_id'] ;
 ///888888888888888888888888888888888888888888888888888888888888888888888888888
 include('connection.php');
     $sql = "SELECT * FROM review WHERE P_ID = '$tutorId' LIMIT 4";
@@ -225,7 +51,6 @@ include('connection.php');
     }
     
 }
-mysqli_close($conn);
 ?>
 
 
@@ -246,16 +71,6 @@ mysqli_close($conn);
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-<!-- //extras -->
-
-
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
-
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
-
 
     </head>
     <body>
@@ -263,7 +78,7 @@ mysqli_close($conn);
             <div id="header-div">
                 <nav class="fixed-top" id="main-nav">
                     <ul id="ul1">
-                        <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
+                        <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
                         <li class="list1-item"><a href="tutor_Home_page.php" class="list1-item">Home</a></li>
                         <li class="list1-item"><a href="SESSionTutor.php">Sessions</a></li>
                         <li class="list1-item"><a href="tutorReq.php">Requests</a></li>
@@ -312,7 +127,7 @@ mysqli_close($conn);
                     </div>
 
                     <div class= "Contact_tutor_div">
-                    <a href="tel:<?php echo $phoneNumber; ?>"><?php echo $phoneNumber; ?>
+                    <a href="tel:<?php echo $phone; ?>"><?php echo $phone; ?>
                             <span class="fas fa-phone-alt"></span>
                           </a>
                     </div>
@@ -320,7 +135,7 @@ mysqli_close($conn);
         
                 <section>
                     <h2>education</h2>
-                    <?php echo $education?>
+                    <?php echo $eduction?>
                 </section>
                 <section>
                     <h2>experiences</h2>
@@ -334,8 +149,9 @@ mysqli_close($conn);
             <button class="view-more-button">View All Reviews</button></a >
                         
                 </section>
-                <h2>Book a Session</h2>
-
+                <a href="EditProfileP.php">
+            <button class="view-more-button">Edit Profile </button></a >
+             
 
 
 

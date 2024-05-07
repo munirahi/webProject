@@ -111,9 +111,9 @@ $currentDate = date('Y-m-d');
 
 // Calculate the date 7 days from now
 $endDate = date('Y-m-d', strtotime('+7 days'));
-$user_id = $_SESSION['user_id'];
+$userT_id = $_SESSION['user_id'];
 // Construct the SQL query to select sessions within the next 7 days
-$sql = "SELECT * FROM session WHERE T_id='$user_id' AND Date BETWEEN '$currentDate' AND '$endDate';";
+$sql = "SELECT * FROM session WHERE T_id='$userT_id' AND Date BETWEEN '$currentDate' AND '$endDate';";
 $weeksesstions = mysqli_query($conn,$sql);
 
     // Check if there are any sessions for this week
@@ -232,20 +232,27 @@ continue;
                 <span>Teaching Languages</span>
                 <span> <?php displayLanguages(); ?></span>
               </li>
-              <li id="Cultural backgrounds">
+              <!-- <li id="Cultural backgrounds">
                 <span>Cultural backgrounds</span>
                 <img class="flag" src="../images/flag.png" alt="KSA" />
                 <img class="flag" src="../images/france.png" alt="French" />
-              </li>
-              <li>
+              </li> -->
+              <!-- <li>
                 <span>Achievements</span>
                 <span>
                   <i class="fa-solid fa-gift"></i>
                   <i class="fa-solid fa-handshake"></i>
-                  <!-- Add more achievements as needed -->
+                 
                 </span>
+              </li> -->
+              <li>
+                <hr />
+                <i class="fa-solid fa-user"></i>
+                <!-- add icons -->
+                <a id="profile-settings" href="tutor_view_profile_page.php"
+                  >view Profile </a
+                >
               </li>
-
               <li>
                 <hr />
                 <i class="fa-solid fa-user"></i>
