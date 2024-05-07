@@ -17,17 +17,6 @@ if (!isset($_SESSION['user_id'])) {
   }
 
 }
-
-
-
-
-// if (isset($_GET['sessionID']) && isset($_GET['teacherID'])) {
-//     $sessionID = $_GET['sessionID'];
-//     $teacherID = $_GET['teacherID'];
-
-//     // Display the rating form or perform any other necessary operations
-//     // ...
-// }
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,7 +44,7 @@ if (!isset($_SESSION['user_id'])) {
 
 <body>
   
-  <!-- <header id="header">
+   <header id="header">
     <div id="header-div">
       <nav class="fixed-top" id="main-nav">
         <ul id="ul1">
@@ -86,7 +75,7 @@ if (!isset($_SESSION['user_id'])) {
         </ul>
       </nav>
     </div>
-  </header> -->
+  </header> 
  
       <br><br><br>
          <h2>Rates and Reviews</h2>
@@ -110,15 +99,18 @@ if (!isset($_SESSION['user_id'])) {
                   <!-- <form action="save_feedback.php" method="POST"> -->
                     <input  name="ReviewText" cols="21" placeholder="Describe your experience.." value="">
                     <input type="hidden" name="rating" id="rating-value" value="0">
-                    <div button class="post-req-btn" type="submit"><button>Post</button>
+                    <div button type="submit"><button class="post-btn" >Post</button>
                     <br><br><br><br>
-                  <!-- </form> -->
                 </div>
               </div>
               </section>
                </div>
+               
               </section>
              
+
+
+              
 <script>
   const ratingContainers = document.getElementsByClassName("rating");
 
@@ -145,30 +137,10 @@ if (!isset($_SESSION['user_id'])) {
     });
   }
 
-  // executeRatings(ratingContainers);
+   executeRatings(ratingContainers);
 </script>
 <?php
 
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//   if(isset($_POST["ReviewText"]) && isset($_POST["rating"])) {
-//       $ReviewText = $_POST["ReviewText"];
-//       $rating = $_POST["rating"];
-//       $tutor_id = $_SESSION['tutor_id'];
-//       $session_to_rate = $_SESSION['session_to_rate'];
-
-//       // Prepare and execute the SQL insert query
-//       $sql = "INSERT INTO review (tutor_id, session_id, rating, ReviewText) 
-//               VALUES ('$tutor_id', '$session_to_rate', '$rating', '$ReviewText')";
-
-//       if (mysqli_query($conn, $sql)) {
-//           echo "Review added successfully";
-//       } else {
-//           echo "Error adding review: " . mysqli_error($conn);
-//       }
-//   } else {
-//       echo "Please fill out all required fields.";
-//   }
-// }
 DEFINE('DB_USER','root');
 DEFINE('DB_PSWD','');
 DEFINE('DB_HOST','localhost');
@@ -202,28 +174,9 @@ if (mysqli_query($conn, $sql3)) {
 
 
   }}else {
-    echo "so bad";
+    echo "";
   }
-
-
-
-  //   if ($_SERVER["REQUEST_METHOD"] == "GET") {
-  //     if(isset($_GET["ReviewText"]) && isset($_GET["starts"])  ) {
-        
-  //         $ReviewText = $_GET["ReviewText"];
-  //         $starts = $_GET["starts"];
-
-  //         // Prepare and execute the SQL update query
-  //         $sql = "UPDATE review SET starts='$starts', ReviewText='$ReviewText' WHERE L_ID='$L_id';";
-  //         if (mysqli_query($conn, $sql)) {
-  //             echo "rate updated successfully";
-  //         } else {
-  //             echo "Error updating rate: " . mysqli_error($conn);
-  //         }
-  //     } else {
-  //         echo "";
-  //     }
-  // } else echo '';
-?>   
-</body>
+?>
+ 
+  </body>
 </html>
