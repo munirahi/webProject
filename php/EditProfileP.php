@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     else{
         
         $newImageName = $fileName;
-        $destination = 'images/' . $newImageName;
+        $destination = '../images/' . $newImageName;
        
       move_uploaded_file($tmpName, $destination);
     }
@@ -333,7 +333,7 @@ function validatePhone(phoneNumber) {
         <div id="header-div">
         <nav class="fixed-top" id="main-nav">
             <ul id="ul1">
-                <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
+                <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
                 <li class="list1-item"><a href="tutor_Home_page.php" class="list1-item">Home</a></li>
                 <li class="list1-item"><a href="SESSionTutor.php">Sessions</a></li>
                 <li class="list1-item"><a href="tutorReq.php">Requests</a></li>
@@ -374,7 +374,7 @@ function validatePhone(phoneNumber) {
         <div class="wrapper">
                    
             <div class="image">
-            <img src="images/<?php echo $newImageName; ?>" alt="Uplaod pic" id="preview">
+            <img src="../images/<?php echo $newImageName; ?>" alt="Uplaod pic" id="preview">
             <input type="file" accept="Image/jpeg, Image/png, Image/jpg" id="file-choose" name="image">
              </div>
              <h3>Change Picture</h3> <!-- update -->
