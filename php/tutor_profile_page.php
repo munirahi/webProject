@@ -149,44 +149,10 @@ if (!isset($_SESSION['user_id'])) {
 
 
 // include("tutorsInfo.php");
-function displayLanguages() {
-    $tutorId = $GLOBALS ['selectedTutorId'] ;
-    include("connection.php");
-    $tutorsLagsQuery ="SELECT * FROM tutor_languages WHERE P_ID = '$tutorId'";
-    $tutorsLagsResult=mysqli_query($conn, $tutorsLagsQuery);
-    $tutorLanguages =array();
-    
-    if ($tutorsLagsResult && mysqli_num_rows($tutorsLagsResult) > 0) {
-        // Fetch the name from the result set
-        while ($tutorsLags = mysqli_fetch_assoc($tutorsLagsResult)) {
-            // Add the language to the array
-            $tutorLanguages[] = $tutorsLags['Language'];
-        }
-    }
 
-
-
-    // Check if the array is not empty
-    if (!empty($tutorLanguages)) {
-
-        // Loop through each language in the array
-        foreach ($tutorLanguages as $language) {
-            // Echo the language
-            echo $language;
-
-            // If it's not the last language, add a comma and space
-            if ($language !== end($tutorLanguages)) {
-                echo ', ';
-            }
-        }
-
-        
-    }
-}
 
 function displayTutorReviews() {
-$tutorId = $GLOBALS ['selectedTutorId'] ;
-///888888888888888888888888888888888888888888888888888888888888888888888888888
+$tutorId =$_SESSION['tutor_id'];///888888888888888888888888888888888888888888888888888888888888888888888888888
 include('connection.php');
     $sql = "SELECT * FROM review WHERE P_ID = '$tutorId' LIMIT 4";
     $result = mysqli_query($conn, $sql);
@@ -209,9 +175,9 @@ include('connection.php');
             echo '<div class="acc-info">';
 
             echo '<img class="result-img" src="../images/'.$lImage.'">'; 
-            echo '<h6 class="name"><i class="fa-solid fa-user"></i> ' .$learner_name . '</h6>'; 
+            echo '<h4 class="name"><i class="fa-solid fa-user"></i> ' .$learner_name . '</h4>'; 
             echo '<div class="more-info">';
-            echo '<h6>' . $row['starts'] . ' <i class="fa-solid fa-star"></i></h6>';
+            echo '<h3>' . $row['starts'] . ' <i class="fa-solid fa-star"></i></h3>';
             echo '<div class="session-info">';
             echo '<p>' . $row['ReviewText'] . '</p>';
             echo '</div>'; 
@@ -234,11 +200,11 @@ mysqli_close($conn);
 
 <!DOCTYPE html>
 <html>
-    <head>
+    <head> 
         <link rel="stylesheet" href="../header_folder/headerPartner.css">
         <link rel="stylesheet" href="../css/footer.css">
         <link rel="stylesheet" href="../css/tutor_profile_page.css">
-        <link rel="stylesheet" href="../css/learnerRequest2.css"> 
+        <link rel="stylesheet" href="../css/learnerRequest2.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
         <link rel="stylesheet" href="css/tutorAvailableTimes.css">
@@ -264,7 +230,7 @@ mysqli_close($conn);
             <div id="header-div">
                 <nav class="fixed-top" id="main-nav">
                     <ul id="ul1">
-                        <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
+                        <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
                         <li class="list1-item"><a href="tutor_Home_page.php" class="list1-item">Home</a></li>
                         <li class="list1-item"><a href="SESSionTutor.php">Sessions</a></li>
                         <li class="list1-item"><a href="tutorReq.php">Requests</a></li>
@@ -298,14 +264,11 @@ mysqli_close($conn);
                     
                 </section>
                 <section>
-
-                    <h2>bio</h2>
+                    <h1>bio</h1>
                     <p id="bio"><?php echo $bio; ?></p>
-                    <h2>Languages</h2>
-                    <?php displayLanguages() ;?>
                 </section>
                 <section class="Contact_tutor">
-                    <h2>Contact</h2>
+                    <h1>Contact</h1>
                     <div class= "Contact_tutor_div">
                             <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?>
                             <span class="fas fa-envelope"></span>
@@ -317,120 +280,52 @@ mysqli_close($conn);
                             <span class="fas fa-phone-alt"></span>
                           </a>
                     </div>
+<!-- 
+                    <div class="email">
+                      <span class="fas fa-envelope"></span>
+                      <span class="text"><a href="mailto:content@linguist.com">content@linguist.com</a>
+                        </span>
+                     </div> -->
                 </section>
         
                 <section>
-                    <h2>education</h2>
+                    <h1>education</h1>
                     <?php echo $education?>
                 </section>
                 <section>
-                    <h2>experiences</h2>
+                    <h1>experiences</h1>
                     <?php echo $experience?>
                 </section>
                 <section>
-                    <h2>Reviews</h2>
-                    <?php displayTutorReviews(); ?>
+                    <h1>Reviews</h1>
                    
-                    <a href="ratet.php">
-            <button class="view-more-button">View All Reviews</button></a >
-                        
+                              <div class="request_div inner-div">
+              <h1 id="result-header">Reviews</h1>
+
+                            <!-- <div class="week-sesstoin">
+                            <?php //displayTutorReviews(); ?>
+                            </div> -->
+                            
+                        </div>
+
                 </section>
-                  <h2>Book a Session</h2>
-               <form method='POST' action='<?php $_SERVER['PHP_SELF'] ?>'>
+                <h2>Book a Session</h2>
+               <form method='POST' action='postRequest.php'>
                 <fieldset>
                     <div class="fieldset-container">
-                    <div class="select-container">
-                        <label>Language<br>
-                            <div class="selectWrapper">
-                                <select class="input-box" name="Language">  
-                                    <option></option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                    <option>French</option>
-                                    <option>Arabic</option>
-                                </select>
-                            </div>
-                        </label>
-
-                        <label name="level">Level<br>
-                            <div class="selectWrapper">
-                                <select class="input-box" name="level">
-                                    <option></option>
-                                    <option>Beginner</option>
-                                    <option>Intermediate</option>
-                                    <option>Advanced</option>
-                                </select>
-                            </div>
-                        </label>
-
-                        <label>Duration<br>
-                            <div class="selectWrapper">
-                                <select class="input-box" name="Duration">
-                                    <option></option>
-                                    <option>10 Minutes</option>
-                                    <option>20 Minutes</option>
-                                    <option>30 Minutes</option>
-                                    <option>40 Minutes</option>
-                                    <option>50 Minutes</option>
-                                    <option>60 Minutes</option>
-                                </select>
-                            </div>
-                        </label>
-
-                        <label>Date<br>
-                            <div class="selectWrapper" id="datetimepicker">
-                                <input class="input-box" type="date" name="date">
-                            </div>
-                        </label>
-
-                        <label>Time<br>
-                            <div class="selectWrapper" id="datetimepicker">
-                                <input class="input-box" type="time" name="time">
-                            </div>
-                        </label>
-                    </div>
+                      <input type="hidden" name="tutor_id" value="<?php echo $_POST['tutor_id'] ?>">
+                      <input type="hidden" name="language" value="<?php echo $_POST['language'] ?>">
                     <div class="btn-container">
-                        <button type="submit" class="selectWrapper" id="go-btn">Go!</button>
+                        <button type="submit" class="selectWrapper" id="postReq-btn">Post A Request</button>
                     </div>
                 </div>
                 </fieldset>
             </form> 
 
 
-            <?php
-if(isset($_POST['level']) && isset($_POST['Duration']) && isset($_POST['time']) && isset($_POST['date']) && isset($_POST['Language'])){
-    
-    $level = $_POST['level'];
-    $duration = $_POST['Duration'];
-    $time = $_POST['time'];
-    $date = (int)$_POST['date'];
-    $language = $_POST['Language'];
-    
-    if(empty($level) || empty($duration) || empty($time) || empty($date) || empty($language)){
-      echo "Please fill in all fields.";
-  } else {
-    
-    $L_ID = $_SESSION['user_id'];
 
-    
-    $P_ID = $selectedTutorId;
 
-    $sql = "INSERT INTO request (P_ID, L_ID, Time, Date, Duration, Language, Level) VALUES ($P_ID, $L_ID, $time, $date, $duration, '$language', '$level')";
 
-    
-    $result = mysqli_query($conn, $sql);
-
-    
-    if ($result) {
-        echo "Request successfully inserted!";
-    } else {
-        echo "Error inserting request: " . mysqli_error($conn);
-    }
-  }} else {
-    echo "All fields are required.";
-}
-
-?>
 
 
 
