@@ -339,3 +339,12 @@ justify-content: flex-start;
   margin-bottom: 10px;
   overflow: hidden; /* Add this line to hide the horizontal scroll */
 }
+.week1-sesstoin {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px;
+  overflow: hidden; /* Add this line to hide the horizontal scroll */
+}
+
