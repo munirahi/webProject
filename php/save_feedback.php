@@ -1,28 +1,33 @@
 <?php
+
+session_start(); // Start a session (if needed)
+
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "linguist";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-
 if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+  die("Connection failed: " . mysqli_connect_error());
 }
-
 $sessionID = $_POST["sessionID"];
 $text = $_POST["text"];
 $rating = $_POST["rating"];
+$P_ID = $_POST["pid"];
+// Check if session is set before accessing user ID
 
-$sql = "INSERT INTO review (sessionID, text, rating) VALUES (?, ?, ?)";
+  $L_ID = $_SESSION['user_id'];
+  
+  
+$sql = "INSERT INTO review (L_ID, starts, ReviewText, P_ID, sessionID) VALUES (?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("iss", $sessionID, $text, $rating);
-$stmt->execute();
+$stmt->bind_param("iisii", $L_ID, $rating, $text, $P_ID, $sessionID);
 
-if ($stmt->affected_rows > 0) {
-  echo "Feedback saved successfully!";
+if (!$stmt->execute()) {
+  echo "Error saving feedback: " . $stmt->error;
 } else {
-  echo "Error saving feedback.";
+  echo "Feedback saved successfully!";
 }
 
 $stmt->close();
