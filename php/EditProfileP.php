@@ -411,11 +411,12 @@ function validatePhone(phoneNumber) {
       
        
         <label for="language">Languages </label> <br><br><br>
-        <div class="language-container">
-            <input type="checkbox"  name="languages[]" value="english"> English
-            <input type="checkbox" name="languages[]" value="spanish"> Spanish 
-            <input type="checkbox" name="languages[]" value="french"> French 
-            <input type="checkbox" name="languages[]" value="arabic"> Arabic </div>
+      <div class="language-container">
+            <input type="checkbox"  name="languages[]" value="english" <?php echo isset($checked_languages['english']) ? $checked_languages['english'] : ''; ?> > English
+            <input type="checkbox" name="languages[]" value="spanish" <?php echo isset($checked_languages['spanish']) ? $checked_languages['spanish'] : ''; ?>  > Spanish 
+            <input type="checkbox" name="languages[]" value="french" <?php echo isset($checked_languages['french']) ? $checked_languages['french'] : ''; ?> > French 
+            <input type="checkbox" name="languages[]" value="arabic" <?php echo isset($checked_languages['arabic']) ? $checked_languages['arabic'] : ''; ?> > Arabic </div>
+   
    
             <label for="education">Education</label>
             <textarea rows="2" class="input-field" id="education" name="education" > <?php echo $education; ?></textarea>

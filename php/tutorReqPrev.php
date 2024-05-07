@@ -92,7 +92,7 @@
                       echo '<div class="result-cell">
                                                 
                       <div class="acc-info"> <!--row-->
-                          <img class="result-img" src="images/maleIcon3.png" alt="account image"> <!--column1-->
+                          <img class="result-img" src="../images/'.$row['image'].'" alt="account image"> <!--column1-->
                           <div class="more-info">
                               <h5><i class="fa-solid fa-user"></i>'.$row['Firstname']. " "  .$row['Lastname'].'</h5>
                              
