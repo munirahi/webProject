@@ -4,7 +4,8 @@
 
 
 // }
-session_start(); // Start the session
+session_start(); 
+include 'connection.php';// Start the session
 // Check if the user is not logged in
 if (!isset($_SESSION['user_id'])) {
     // Redirect the user to the login page
@@ -13,6 +14,15 @@ if (!isset($_SESSION['user_id'])) {
 }
 else{
   $user_id= $_SESSION['user_id'];
+  $sql = "SELECT image FROM Tutor WHERE ID = $user_id";
+  $result = mysqli_query($conn, $sql);
+
+  if ($result && mysqli_num_rows($result) > 0) {
+      $row = mysqli_fetch_assoc($result);
+      $image = $row['image'];
+  } else {
+      $image = "default.png"; // Provide a default image if none found
+  }
 }
 
 ?>
@@ -106,7 +116,7 @@ function deleteSession(sessionId) {
         <ul id="ul2">
             
             <li id="acnt li">
-                <nav id="account-nav"><img src="uploads/<?php echo $newImageName; ?>" id="account-img">
+            <nav id="account-nav"><img src="../images/<?php echo $image; ?>" id="account-img">
                     <ul>
                         
                         <li class="account-list"><a href="EditProfile.php"><div class="circle"></div>Edit Profile</a></li>
