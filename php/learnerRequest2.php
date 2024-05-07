@@ -129,6 +129,7 @@ if (!isset($_SESSION['user_id'])) {
                     <div class="bio"><p>'./*.$row['bio'].*/'</p></div> 
                     <form action="tutor_profile_page.php" method="post">
     <input type="hidden" name="tutor_id" value="'.$row['ID'].'">
+    <input type="hidden" name="language" value="'.$_GET['Language'].'">
     <div type="submit" class="post-req-btn"><button>View Profile</button></div></div> 
 </form>';
                   

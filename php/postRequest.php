@@ -9,6 +9,19 @@
 
     if(!mysqli_select_db($conn, DB_NAME))
         die("Could not open the ".DB_NAME." database.");
+
+
+  
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit(); 
+}else{
+  $_SESSION['language']= $_POST['language'];
+  $_SESSION['tutor_id']= $_POST['tutor_id'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +78,7 @@
                               
         
                                
-                            <form method='POST' action='<?php $_SERVER['PHP_SELF'] ?>'>
+                            <form method='GET' action='<?php $_SERVER['PHP_SELF'] ?>'>
                 <fieldset>
                     <div class="fieldset-container">
                     <div class="select-container">
@@ -130,46 +143,37 @@
          </main>
 
          <?php
-if(isset($_POST['level']) && isset($_POST['Duration']) && isset($_POST['time']) && isset($_POST['date']) && isset($_POST['language']) && isset($_POST['tutor_id'])){
+
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+          if(isset($GET['level']) && isset($GET['Duration']) && isset($GET['time']) && isset($GET['date']) && isset($_POST['language']) && isset($_POST['tutor_id'])){
     
-    $level = $_POST['level'];
-    $duration = $_POST['Duration'];
-    $time = $_POST['time'];
-    $date = (int)$_POST['date'];
-    $language = $_POST['language'];
-    $tutor_id= $_POST['tutor_id'];
+    $level = $GET['level'];
+    $duration = $GET['Duration'];
+    $time = $GET['time'];
+    $date = (int)$GET['date'];
+    $language2 = $_SESSION['language'];
+    $tutor_id2= $_SESSION['tutor_id'];
     
-    if(empty($level) || empty($duration) || empty($time) || empty($date) || empty($language)){
+    if(empty($level) || empty($duration) || empty($time) || empty($date) || empty($language2)){
       echo "Please fill in all fields.";
-  } else {
+        } else {
     
-    $L_ID = $_SESSION['user_id'];
+          $L_ID = $_SESSION['user_id'];
 
-    
+          $sql = "INSERT INTO request (P_ID, L_ID, Time, Date, Duration, Language, Level) 
+                  VALUES ($tutor_id2, $L_ID, $time, $date, $duration, '$language2', '$level')";
 
-    // Define the SQL query with actual values
-    $sql = "INSERT INTO request (P_ID, L_ID, Time, Date, Duration, Language, Level) 
-            VALUES ($tutor_id, $L_ID, $time, $date, $duration, '$language', '$level')";
+          // Execute the query
+          $result = mysqli_query($conn, $sql);
 
-    // Execute the query
-    $result = mysqli_query($conn, $sql);
-
-    // Check if the query was successful
-    if ($result) {
-        echo "Request successfully inserted!";
-    } else {
-        echo "Error inserting request: " . mysqli_error($conn);
-    }
-  }} else {
-    echo "All fields are required.";
-    echo $level ;
-    echo $duration ;
-    echo $time ;
-    echo $date ;
-    echo $language;
-    echo $tutor_id;
+          // Check if the query was successful
+                    if ($result) {
+                        echo "Request successfully inserted!";
+                    } else {
+                        echo "Error inserting request: " . mysqli_error($conn);
+                    }
+  }} 
 }
-
 ?>
 
 

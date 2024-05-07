@@ -12,6 +12,7 @@ if (!isset($_SESSION['user_id'])) {
     if(isset($_POST['tutor_id'])) {
         $selectedTutorId =  $_POST['tutor_id'];
         $selectedLanguage =$_POST['language'];
+        
         // Prepare and execute the SQL query to fetch tutor information
         $sqlT = "SELECT * FROM tutor WHERE ID = '$selectedTutorId'";
         $result =  mysqli_query($conn, $sqlT);
