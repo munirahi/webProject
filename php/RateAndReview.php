@@ -1,5 +1,6 @@
 <?php
-session_start(); // Start the session
+session_start(); 
+// Start the session
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
@@ -9,9 +10,7 @@ if (!isset($_SESSION['user_id'])) {
     exit(); // Stop further execution
 }
 
-include("learnerInfo.php");
 
-// rate.php
 
 if (isset($_GET['sessionID']) && isset($_GET['teacherID'])) {
     $sessionID = $_GET['sessionID'];
@@ -51,7 +50,7 @@ if (isset($_GET['sessionID']) && isset($_GET['teacherID'])) {
       <nav class="fixed-top" id="main-nav">
         <ul id="ul1">
           <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo" id="logo-img"></li>
-          <li class="list1-item"><a href="HomePageLearner.php" class="list1-item">Home</a></li>
+          <li class="list1-item"><a href="../HomePageLearner.php" class="list1-item">Home</a></li>
           <li class="list1-item"><a href="SESSionLearner.php">Sessions</a></li>
           <li class="list1-item"><a href="learnerRequest2.php">Requests</a></li>
           <li class="list1-item"><a href="RateAndReview.php">Rate and Review</a></li>
@@ -78,139 +77,84 @@ if (isset($_GET['sessionID']) && isset($_GET['teacherID'])) {
       </nav>
     </div>
   </header>
-  <?php
-function getFlagImage($language) {
-    // Define a map of language names to flag image directories
-    $languageFlags = array(
-        "French" => "france.png",
-        "German" => "germanyy.png",
-        "English" => "united-states.png",
-        "Arabic" => "flag.png"
-        // Add more language-flag mappings as needed
-    );
-
-    // Check if the provided language is in the map
-    if (array_key_exists($language, $languageFlags)) {
-        // Return the corresponding flag image directory
-        return "images/" . $languageFlags[$language];
-    } else {
-        // If the language is not found, return a default flag image
-        return "images/default-flag.png";
-    }
-}
-function saveFeedback() {
-    // Include the database connection file
-    include("connection.php");
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Retrieve the form data
-        $session_id = $_POST['session_id'];
-        $rating = $_POST['rating'];
-        $review = $_POST['review'];
-
-        // Perform any necessary validation on the form data
-
-        // Prepare the SQL statement to insert the feedback into the database
-        $sql = "INSERT INTO review (L_ID, sessionID, starts, ReviewText) VALUES (?, ?, ?, ?)";
-        $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, 'iiis', $_SESSION['user_id'], $session_id, $rating, $review);
-
-        // Execute the prepared statement
-        if (mysqli_stmt_execute($stmt)) {
-            // Feedback successfully saved
-            echo "Feedback saved successfully.";
-        } else {
-            // Failed to save feedback
-            echo "Error saving feedback: " . mysqli_error($conn);
-        }
-
-        // Close the statement
-        mysqli_stmt_close($stmt);
-    }
-}
-
-// Call the saveFeedback() function to handle the form submission
-
-function displaySessions() {
-    // Include the database connection file
-    include("connection.php");
-
-    // Get the current date
-    $currentDate = date('Y-m-d');
-    $endDate = $currentDate;
-    $user_id = $_SESSION['user_id'];
-    $sql = "SELECT * FROM session WHERE L_id='$user_id' AND Date >='$endDate';";
-    $sessions = mysqli_query($conn, $sql);
-
-    // Check if there are any sessions for this week
-    if (mysqli_num_rows($sessions) > 0) {
-        // Loop through the sessions and display each session card
-        while ($row = mysqli_fetch_assoc($sessions)) {
-            $tutorId = $row['T_id'];
-            $sql_tutor = "SELECT * FROM tutor WHERE id = '$tutorId';";
-            $result_tutor = mysqli_query($conn, $sql_tutor);
-            if ($result_tutor) {
-                // Fetch the tutor's information from the result set
-                $tutorRow = mysqli_fetch_assoc($result_tutor);
-            }
-
-            $dayOfWeek = date('l', strtotime($row['Date']));
-            if ($currentDate == $row['Date']) {
-                continue;
-            }
-
-            echo '<div class="request-card">';
-            echo '<div class="learner-info">';
-            // Output tutor's profile picture
-            echo '<img src="images/' . $tutorRow['image'] . '" alt="profile Picture" />';
-            echo '<div class="day">';
-            // Output tutor's name
-            echo '<h5><strong>' . $tutorRow['Firstname'] . ' ' . $tutorRow['Lastname'] . '</strong></h5>';
-            // Output the day of the session
-            echo '<p class="day-of-upcoming-sessions">' . $dayOfWeek . '</p>';
-            echo '</div></div>';
-            echo '<section class="incard-elements">';
-            // Output session details
-            $flagImage = getFlagImage($row['language']);
-            echo '<p class="language"><img class="flag" src="' . $flagImage . '" alt="language image" />' . $row['language'] . '</p>';
-            echo '<p class="level">' . $row['level'] . '</p>';
-            echo '<p class="type">' . date("h:i A", strtotime($row['Time'])) . '</p>';
-            echo '<p class="duration">' . $row['Duration'] . ' Minutes</p>';
-            echo '</section></div>';
-        }
-    } 
-}
-?>
-
-        <?php
-        displaySessions();
-        saveFeedback();
-
-        ?><br><br><br>
+ 
+      <br><br><br>
          <h2>Rates and Reviews</h2>
     </div>
 
     <section class="week-sesstoin">
       <br><br><br>
       <div class="request-card">
-       
-        <form method="POST" action="SESSionLearner.php">
-            <div class="form-group">
-             <br>   <label for="session_id">Session ID:</label><br>
-                <input type="text" name="session_id" id="session_id" required>
-            </div>
-            <div class="form-group"><br><br>
-             <label for="rating">Rating (1-5):</label><br>
-                <input type="number" name="rating" id="rating" min="1" max="5" required>
-           
-            <div class="form-group"><br>
-                <label for="review">Review:</label>
-               <br><br><br> <textarea name="review" id="review" rows="5" ></textarea>
-            </div>
-            <input type="submit" value="Submit">
+       <br><br><br>
+       <form action ="SESSionLearner.php" method="post" >
+      <div class="item">
+
+                <div class="rating">
+                  <i class="rating__star far fa-star"></i>
+                  <i class="rating__star far fa-star"></i>
+                  <i class="rating__star far fa-star"></i>
+                  <i class="rating__star far fa-star"></i>
+                  <i class="rating__star far fa-star"></i>
+                </div>
+                <div class="textarea">
+                  <form action="save_feedback.php" method="POST">
+                    <input  name="ReviewText" cols="21" placeholder="Describe your experience.. value="'.$row['ReviewText'].'">
+                    <input type="hidden" name="rating" .'$row['starts'].' id="rating-value" value="0">
+                    <div button class="post-req-btn" type="submit"><button>Post</button>
+                    <br><br><br><br>
+                  </form>
+                </div>
+              </div>
+              </section>
+               </div>
+              </section>
+             
+<script>
+  const ratingContainers = document.getElementsByClassName("rating");
+
+  function executeRatings(containers) {
+    const starClassActive = "rating__star fas fa-star";
+    const starClassInactive = "rating__star far fa-star";
+
+    Array.from(containers).forEach((container) => {
+      const stars = container.getElementsByClassName("rating__star");
+
+      Array.from(stars).forEach((star) => {
+        star.onclick = () => {
+          const clickedIndex = Array.from(stars).indexOf(star);
+
+          for (let i = 0; i < stars.length; i++) {
+            if (i <= clickedIndex) {
+              stars[i].className = starClassActive;
+            } else {
+              stars[i].className = starClassInactive;
+            }
+          }
+        };
+      });
+    });
+  }
+
+  executeRatings(ratingContainers);
+</script>
+<?php
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+      if(isset($_GET["ReviewText"]) && isset($_GET["starts"])  ) {
         
-        </form>
-    </section>
-      </div></section>
+          $ReviewText = $_GET["ReviewText"];
+          $starts = $_GET["starts"];
+
+          // Prepare and execute the SQL update query
+          $sql = "UPDATE review SET starts='$starts', ReviewText='$ReviewText' WHERE L_ID='$L_id';";
+          if (mysqli_query($conn, $sql)) {
+              echo "rate updated successfully";
+          } else {
+              echo "Error updating rate: " . mysqli_error($conn);
+          }
+      } else {
+          echo "";
+      }
+  } else echo '';
+?>   
 </body>
 </html>
