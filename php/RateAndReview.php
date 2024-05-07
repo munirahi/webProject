@@ -158,8 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $starts = 2;
     $tutor_id= intval($_SESSION['tutor_id']);
     $user_id = intval( $_SESSION['user_id']);
-    echo  $tutor_id .'  '. $user_id;
-echo " it works!!!!!";
+ 
 // Prepare and execute the SQL update query 
 
 // $sql = "UPDATE review SET starts='$starts', ReviewText='$ReviewText' WHERE L_ID='$L_id';";
