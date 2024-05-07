@@ -1,24 +1,33 @@
 <?php
 session_start(); 
-// Start the session
-header("Cache-Control: no-cache, no-store, must-revalidate");
-header("Pragma: no-cache");
-header("Expires: 0");
+
 if (!isset($_SESSION['user_id'])) {
     // Redirect the user to the login page
     header("Location: login.php");
     exit(); // Stop further execution
+}else{
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+      
+    $_SESSION['tutor_id'] =  $_POST["tutor_id"];
+    $_SESSION['sesstion_to_rate'] =  $_POST["sesstion_to_rate"];
+  
+   
+  }
+
 }
 
 
 
-if (isset($_GET['sessionID']) && isset($_GET['teacherID'])) {
-    $sessionID = $_GET['sessionID'];
-    $teacherID = $_GET['teacherID'];
 
-    // Display the rating form or perform any other necessary operations
-    // ...
-}
+// if (isset($_GET['sessionID']) && isset($_GET['teacherID'])) {
+//     $sessionID = $_GET['sessionID'];
+//     $teacherID = $_GET['teacherID'];
+
+//     // Display the rating form or perform any other necessary operations
+//     // ...
+// }
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,7 +54,7 @@ if (isset($_GET['sessionID']) && isset($_GET['teacherID'])) {
 
 <body>
   
-  <header id="header">
+  <!-- <header id="header">
     <div id="header-div">
       <nav class="fixed-top" id="main-nav">
         <ul id="ul1">
@@ -76,7 +85,7 @@ if (isset($_GET['sessionID']) && isset($_GET['teacherID'])) {
         </ul>
       </nav>
     </div>
-  </header>
+  </header> -->
  
       <br><br><br>
          <h2>Rates and Reviews</h2>
@@ -86,7 +95,7 @@ if (isset($_GET['sessionID']) && isset($_GET['teacherID'])) {
       <br><br><br>
       <div class="request-card">
        <br><br><br>
-       <form action ="SESSionLearner.php" method="post" >
+       <form   method="GET" >
       <div class="item">
 
                 <div class="rating">
@@ -97,12 +106,12 @@ if (isset($_GET['sessionID']) && isset($_GET['teacherID'])) {
                   <i class="rating__star far fa-star"></i>
                 </div>
                 <div class="textarea">
-                  <form action="save_feedback.php" method="POST">
-                    <input  name="ReviewText" cols="21" placeholder="Describe your experience.. value="'.$row['ReviewText'].'">
-                    <input type="hidden" name="rating" .'$row['starts'].' id="rating-value" value="0">
+                  <!-- <form action="save_feedback.php" method="POST"> -->
+                    <input  name="ReviewText" cols="21" placeholder="Describe your experience.." value="">
+                    <input type="hidden" name="rating" id="rating-value" value="0">
                     <div button class="post-req-btn" type="submit"><button>Post</button>
                     <br><br><br><br>
-                  </form>
+                  <!-- </form> -->
                 </div>
               </div>
               </section>
@@ -135,26 +144,85 @@ if (isset($_GET['sessionID']) && isset($_GET['teacherID'])) {
     });
   }
 
-  executeRatings(ratingContainers);
+  // executeRatings(ratingContainers);
 </script>
 <?php
-    if ($_SERVER["REQUEST_METHOD"] == "GET") {
-      if(isset($_GET["ReviewText"]) && isset($_GET["starts"])  ) {
-        
-          $ReviewText = $_GET["ReviewText"];
-          $starts = $_GET["starts"];
 
-          // Prepare and execute the SQL update query
-          $sql = "UPDATE review SET starts='$starts', ReviewText='$ReviewText' WHERE L_ID='$L_id';";
-          if (mysqli_query($conn, $sql)) {
-              echo "rate updated successfully";
-          } else {
-              echo "Error updating rate: " . mysqli_error($conn);
-          }
-      } else {
-          echo "";
-      }
-  } else echo '';
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//   if(isset($_POST["ReviewText"]) && isset($_POST["rating"])) {
+//       $ReviewText = $_POST["ReviewText"];
+//       $rating = $_POST["rating"];
+//       $tutor_id = $_SESSION['tutor_id'];
+//       $session_to_rate = $_SESSION['session_to_rate'];
+
+//       // Prepare and execute the SQL insert query
+//       $sql = "INSERT INTO review (tutor_id, session_id, rating, ReviewText) 
+//               VALUES ('$tutor_id', '$session_to_rate', '$rating', '$ReviewText')";
+
+//       if (mysqli_query($conn, $sql)) {
+//           echo "Review added successfully";
+//       } else {
+//           echo "Error adding review: " . mysqli_error($conn);
+//       }
+//   } else {
+//       echo "Please fill out all required fields.";
+//   }
+// }
+DEFINE('DB_USER','root');
+DEFINE('DB_PSWD','');
+DEFINE('DB_HOST','localhost');
+DEFINE('DB_NAME','linguist');
+
+if (!$conn = mysqli_connect(DB_HOST,DB_USER,DB_PSWD))
+    die("Connection failed.");
+
+if(!mysqli_select_db($conn, DB_NAME))
+    die("Could not open the ".DB_NAME." database.");
+ 
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+  if(isset($_GET["ReviewText"])  ) {
+    $ReviewText = $_GET["ReviewText"];
+    $starts = 2;
+    $tutor_id= intval($_SESSION['tutor_id']);
+    $user_id = intval( $_SESSION['user_id']);
+    echo  $tutor_id .'  '. $user_id;
+echo " it works!!!!!";
+// Prepare and execute the SQL update query 
+
+// $sql = "UPDATE review SET starts='$starts', ReviewText='$ReviewText' WHERE L_ID='$L_id';";
+$sql3 = "INSERT INTO review ( L_ID, P_ID, starts , ReviewText ) 
+VALUES ( '$user_id' , '$tutor_id' , '2' , '$ReviewText')";
+
+if (mysqli_query($conn, $sql3)) {
+    echo "rate updated successfully";
+} else {
+    echo "Error updating rate: " . mysqli_error($conn);
+}
+
+
+  }}else {
+    echo "so bad";
+  }
+
+
+
+  //   if ($_SERVER["REQUEST_METHOD"] == "GET") {
+  //     if(isset($_GET["ReviewText"]) && isset($_GET["starts"])  ) {
+        
+  //         $ReviewText = $_GET["ReviewText"];
+  //         $starts = $_GET["starts"];
+
+  //         // Prepare and execute the SQL update query
+  //         $sql = "UPDATE review SET starts='$starts', ReviewText='$ReviewText' WHERE L_ID='$L_id';";
+  //         if (mysqli_query($conn, $sql)) {
+  //             echo "rate updated successfully";
+  //         } else {
+  //             echo "Error updating rate: " . mysqli_error($conn);
+  //         }
+  //     } else {
+  //         echo "";
+  //     }
+  // } else echo '';
 ?>   
 </body>
 </html>

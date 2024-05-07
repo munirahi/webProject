@@ -291,11 +291,18 @@ if (!isset($_SESSION['user_id'])) {
                         <td><img src="<?php echo getFlagImage($row['language']); ?>" width="20" alt="Language" /><?php echo $row['language']; ?></td>
                         <td class="text-end">
                           <span class="fw-bolder"><?php echo date('g:iA', strtotime($row['Time'])); ?></span>
+
                           <button class="cancel-btn" onclick="deleteSession(<?php echo $row['ID']; ?>);">Delete</button>
                         </td>
                         <td class="text-end">
+                        <form action="RateAndReview.php" method="post">
+                                <input type="hidden" name="tutor_id" value="<?php echo $row['T_id']?>">
+                                <input type="hidden" name="sesstion_to_rate" value="<?php echo $row['ID']?>">
+                                <div type="submit" class="post-req-btn"><button>Rate</button></div></div> 
+                            </form>
+                        </td>
+                        <td class="text-end">
                           <span class="fw-bolder">
-          <button class="ing-btn" id="rateBtn-<?php echo htmlspecialchars($row['ID']) . '-' . htmlspecialchars($row['T_id']); ?>" onclick="openRatePage(<?php echo $row['ID'] . ', ' . $row['T_id']; ?>)">Rate</button>
                       </tr>
                     <?php } ?>
                   <?php } else { ?>
