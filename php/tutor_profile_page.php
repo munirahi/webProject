@@ -339,8 +339,8 @@ mysqli_close($conn);
                <form method='POST' action='postRequest.php'>
                 <fieldset>
                     <div class="fieldset-container">
-                      <input type="hidden" name="tutor_id" value="<?php echo $_POST['tutor_id'] ?>">
-                      <input type="hidden" name="language" value="<?php echo $_POST['language'] ?>">
+                      <input type="hidden" name="tutor_id" value="<?php echo $_POST['tutor_id']; ?>">
+                      <input type="hidden" name="language" value="<?php echo $_POST['language']; ?>">
                     <div class="btn-container">
                         <button type="submit" class="selectWrapper" id="postReq-btn">Post A Request</button>
                     </div>
