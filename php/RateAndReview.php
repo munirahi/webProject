@@ -39,6 +39,7 @@ if (!isset($_SESSION['user_id'])) {
   <title>rating</title>
   <link rel="stylesheet" type="text/css" href="../css/SessionLearner.css" />
   <link rel="stylesheet" href="../css/footer.css" />
+  <link rel="stylesheet" href="../css/RateAndReview.css" />
   <link rel="stylesheet" type="text/css" href="../css/sidebar-tutor.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <link rel="stylesheet" href="../header_folder/headerPartner.css" />

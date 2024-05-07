@@ -4,7 +4,7 @@
 <head>
      <link rel="stylesheet" href="../css/questions.css">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../header_folder/headerLearner.css">
+    <link rel="stylesheet" href="../header_folder/headerPartner.css" />
     <link rel="stylesheet" href="../css/footer.css">
     <!-- icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
@@ -19,36 +19,42 @@
   <div class="backg">
       
 
-  <header id="header">
-    <div id="header-div">
-      <nav class="fixed-top" id="main-nav">
-        <ul id="ul1">
-          <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo" id="logo-img"></li>
-          <li class="list1-item"><a href="HomePageLearner.php" class="list1-item">Home</a></li>
-          <li class="list1-item"><a href="SESSionLearner.php">Sessions</a></li>
-          <li class="list1-item"><a href="learnerRequest2.php">Requests</a></li>
-          <li class="list1-item"><a href="Supports.php">Support</a></li>
-        </ul>
-        <ul id="ul2">
 
-          <li id="acnt li">
-          <nav id="account-nav"><img src="../images/<?php echo $row['image']; ?>" width="25" alt="pic" />
-              <ul>
+<header>
+            <div id="header-div">
+                <nav class="fixed-top" id="main-nav">
+                    <ul id="ul1">
+                        <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
+                        <li class="list1-item"><a href="#" class="list1-item">Home</a></li>
+                        <li class="list1-item"><a href="SESSionTutor.php">Sessions</a></li>
+                        <li class="list1-item"><a href="tutorReq.php">Requests</a></li>
+                        <li class="list1-item"><a href="toturRate.php">Rates and Reviews</a></li>
+                        <li class="list1-item">  
+                           <form action="tutor_profile_page.php" method="post">
+                              <input type="hidden" name="tutor_id" value="<?php echo $user_id; ?>">
+                              <button type="submit" class="list1-item">rrtrtsrhsmlth</button>
+                          </form></li>
 
-                <li class="account-list"><a href="EditProfile.html">
-                    <div class="circle"></div>Edit Profile
-                  </a></li>
-                  <li class="account-list"><a href="logout.php">
-                    <div class="circle"></div>Log Out
-                  </a></li>
-              </ul>
-
-            </nav>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+                        <li class="list1-item"><a href="SupportsPartner.php">Support</a></li>
+                    </ul>
+                    <ul id="ul2">
+                        
+                        <li id="acnt li">
+                            <nav id="account-nav"><img src="../images/<?php echo  $image?>" id="account-img">
+                                <ul>
+                                    
+                                    <li class="account-list"><a href="EditProfileP.php"><div class="circle"></div>Edit Profile</a></li>
+                                    
+                                    <li class="account-list"><a href="logout.php"><div class="circle"></div>Log Out</a></li>
+                                </ul>
+            
+                            </nav>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+        </header>
     <div class="que">
     <h1>
         Tips for getting started on linguist?
