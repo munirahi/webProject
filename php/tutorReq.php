@@ -51,7 +51,7 @@ if (!isset($_SESSION['user_id'])) {
                          <nav id="account-nav"><img src="../images/<?php echo  $image?>" id="account-img">
                             <ul>
 
-                                <li class="account-list"><a href="images/EditProfileP.html"><div class="circle"></div>Edit Profile</a></li>
+                                <li class="account-list"><a href="EditProfileP.php"><div class="circle"></div>Edit Profile</a></li>
 
                                 <li class="account-list"><a href="#"><div class="circle"></div>Log Out</a></li>
                             </ul>
@@ -98,7 +98,7 @@ if (!isset($_SESSION['user_id'])) {
                         echo '
                         <div class="result-cell">
                             <div class="acc-info"> <!--row-->
-                                <img class="result-img" src="../images/maleIcon3.png" alt="account image"> <!--column1-->
+                                <img class="result-img" src="../images/'.$row['image'].'" alt="account image"> <!--column1-->
                                 <div class="more-info">
                                     <h5>'.$row['Firstname']. " "  .$row['Lastname'].'</h5>
                                 </div>     
