@@ -9,6 +9,7 @@
 
     if(!mysqli_select_db($conn, DB_NAME))
         die("Could not open the ".DB_NAME." database.");
+ session_start();
 // Check if the user is not logged in
 if (!isset($_SESSION['user_id'])) {
     // Redirect the user to the login page
@@ -16,7 +17,7 @@ if (!isset($_SESSION['user_id'])) {
     exit(); // Stop further execution
 }
    
-    session_start();
+   
 ?>
 <!DOCTYPE html>
 <html>   
