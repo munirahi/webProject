@@ -17,6 +17,7 @@
     <head>
         <title>Request</title>
         <link rel="stylesheet" href="../css/learnerRequest2.css">
+        <link rel="stylesheet" href="../css/tutorReq.css">
         <link rel="stylesheet" href="../css/footer.css">
         <link rel="stylesheet" href="../header_folder/headerLearner.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -126,7 +127,7 @@
 
 
                 <?php
-   
+
 
 
 
@@ -153,9 +154,11 @@
                     <i class="fa-solid fa-user"></i> '.$row['Firstname']. " "  .$row['Lastname'].' <i class="fa-solid fa-star"></i> 4 <i class="fa-solid fa-dollar-sign"></i> 45</h6>
                     <h6 id="categories">'.$row['Language'].' </h6> </div> </div> 
                     <div class="bio"><p>'./*.$row['bio'].*/'</p></div> 
-                    <div  class="post-req-btn"><button><a href="tutor_profile_page.php">View Profile</a></button></div></div> ';
-                                                                   
-
+                    <form action="tutor_profile_page.php" method="post">
+    <input type="hidden" name="tutor_id" value="'.$row['ID'].'">
+    <div type="submit" class="post-req-btn"><button>View Profile</button></div></div> 
+</form>';
+                  
                     }}//end while
                     else
                     echo '<h3>No results.</h3>';
@@ -180,32 +183,49 @@ $result2 = mysqli_query($conn, $sql2);
 if (mysqli_num_rows($result2) > 0) { // $result=="false"
     while($row2 = mysqli_fetch_assoc($result2)) {
 
-        if($row2["Status"] == "accepted" || $row2["Status"] == "rejected"){
+        if( strcasecmp($row2["Status"], "accepted") == 0 ||  strcasecmp($row2["Status"], "rejected") == 0){
    
                echo     '<div class="status-cell">
                         <div class="acc-info">
                             <img src="../images/'.$row2['image'].'" alt="account image">
                             <div class="status-info">
                                <h6><i class="fa-solid fa-user"></i> '.$row2['Firstname']. " "  .$row2['Lastname'].'</h6>
-                               <h6 class="status" id="'.$row2['Status'].'">'.$row2['Status'].'</h6>
-                               <button class="edit" id="disabled">Edit</button>
-                                <button class="cancel" id="disabled">Cancel</button>
+                              
                             </div>
                            </div>
+                           <div class="specifications-div">
+                           <div class="language specifications">'.$row2['Language'].'</div>
+                           <div class="level specifications">'.$row2['Level'].'</div>
+                           <div class="duration specifications">'.$row2['Duration'].' Minutes</div>
+                           <div class="time specifications">'.date("h:i A", strtotime($row2['Time'])).'</div>
+                           <div class="date specifications">'.$row2['Date'].'</div>
+                       </div>
+                                           <h6 class="status" id="'.$row2['Status'].'">'.$row2['Status'].'</h6>
+                                           <button class="edit" id="disabled">Edit</button>
+                                            <button class="cancel" id="disabled">Cancel</button>
                     </div>';
 
-    } elseif($row2["Status"] == "pending"){
+    } elseif( strcasecmp($row2["Status"], "pending") == 0){
         $status = $row2["Status"];
         echo     '<div class="status-cell">
         <div class="acc-info">
             <img src="../images/'.$row2['image'].'" alt="account image">
             <div class="status-info">
                <h6><i class="fa-solid fa-user"></i> '.$row2['Firstname']. " "  .$row2['Lastname'].'</h6>
-               <h6 class="status" id="pending">'.$row2['Status'].'</h6>
-               <button class="edit" >Edit</button>
-                <button class="cancel" >Cancel</button>
+              
             </div>
            </div>
+
+           <div class="specifications-div">
+           <div class="language specifications">'.$row2['Language'].'</div>
+           <div class="level specifications">'.$row2['Level'].'</div>
+           <div class="duration specifications">'.$row2['Duration'].' Minutes</div>
+           <div class="time specifications">'.date("h:i A", strtotime($row2['Time'])).'</div>
+           <div class="date specifications">'.$row2['Date'].'</div>
+       </div>
+           <h6 class="status" id="pending">'.$row2['Status'].'</h6>
+           <button class="edit" onclick="window.location.href=\'editRequest.php?p_id='.$row2['P_ID'].'&l_id='.$_SESSION['user_id'].'&time='.$row2['Time'].'&date='.$row2['Date'].'\'" >Edit</button>
+            <button class="cancel" >Cancel</button>
     </div>';
     }
 
