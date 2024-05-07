@@ -295,9 +295,9 @@ if (!isset($_SESSION['user_id'])) {
                         </td>
                         <td class="text-end">
                           <span class="fw-bolder">
-                            <button class="ing-btn" onclick="RateSession(<?php echo $row['ID']; ?>)">Rate</button>
-                          </span>
+                             <button class="ing-btn" id="rateBtn-<?php echo $row['ID']; ?>" onclick="RateSession(<?php echo $row['ID']; ?>)">Rate</button>                          </span>
                         </td>
+                        
                       </tr>
                     <?php } ?>
                   <?php } else { ?>
@@ -316,34 +316,39 @@ if (!isset($_SESSION['user_id'])) {
     </section>
   </section>
   <script>
-    function RateSession(sessionId) {
-      if (confirm("Let's rate this session!")) {
-        // Prompt for text and rating with clickable stars
-        let text = prompt("Enter your feedback for this session:");
-        let ratingPrompt = "Rate this session out of 5";
-        let rating = prompt(ratingPrompt);
-        }
+function RateSession(sessionId) {
+  if (confirm("Let's rate this session!")) {
+    let text = prompt("Enter your feedback for this session:");
+    let ratingPrompt = "Rate this session out of 5";
+    let rating = parseInt(prompt(ratingPrompt));
 
-        // Validation (optional)
-        if (rating && !isNaN(rating) && rating >= 1 && rating <= 5) {
-          fetch('save_feedback.php', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-              },
-              body: 'sessionID=' + sessionId + '&text=' + text + '&rating=' + rating
-            })
-            .then(response => response.text())
-            .then(data => {
-              alert(data);
-              location.reload(); // Reload the page to reflect changes
-            })
-            .catch(error => {
-              console.error('Error:', error);
-              alert('There was an error saving your feedback.');
-            });
-        }
-      }
+    if (!isNaN(rating) && rating >= 0 && rating <= 5) {
+      let formData = new FormData();
+      formData.append("sessionID", sessionId);
+      formData.append("text", text);
+      formData.append("rating", rating);
+
+      fetch('save_feedback.php', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+          if (data === "Feedback saved successfully!") {
+            alert("Thank you for your feedback!");
+          } else {
+            alert(data);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('There was an error saving your feedback.');
+        });
+    } else {
+      alert('Please enter a valid rating between 0 and 5.');
+    }
+  }
+}
     
   </script>
   <!--Footer-->
