@@ -8,134 +8,46 @@ body{
     background-size: cover;
     
 }
-h1 {
-    position:relative;
-    text-align: center;
-    padding: 2cm;
-    color: rgb(23, 58, 118);
 
-}
-
-
-.rate{
+/*rating*/
+.rating{
+    margin: 7px;
+    margin-left: 60px;
+  }
+  
+  .post-btn{
  
-color: #173A76;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
- flex-basis: 40%; 
- background: rgb(23, 58, 118);
- font-size: medium;
- text-align: center;
- border-radius: 30px;
- position: relative;
- 
- 
-    
-}
-
-
-.rate img{
-margin-top: 20px;
-    flex: 10%;
-    width: 10%;
-    height: 10%;
-    margin-right: 5px;
-    border-radius: 100%;
-    margin: 0px;
-}
-
-.link{
-    color:white
-}
-.rating h2{
-    position:relative;
+    margin-left: 50px;
     text-align: center;
-    padding: 10px;
-    color: #173A76;    
-}
-.pp p{
-    position:relative;
-    text-align: center;
-    padding: 2cm;
-    color: rgb(255, 255, 255);  
-    align-items: center;  
-}
-button {
-    
-    background-color: #CDB309;
-    border: none;
-    padding: 10px;
+    background-color: rgba(228, 199, 11, 0.466);
     border-radius: 20px;
-    text-align: center;
-    align-items: center;
-}
-
-.stars {
-    font-size: 30px;
-    text-align: center;
-}
-.rating {
-    font-size: 20px;
-    margin: 10px 0;
-    text-align: center;
-   
-}
-.tea textarea {
-    width: 90%;
-    padding: 10px;
-    border-radius: 4px;
-}
-.reviews {
-    margin-top: 20px;
-    text-align: left;
-}
-
- 
-.review p {
-    margin: 0;
-}
-.last p {
-    position:relative;
-    text-align: center;
-    color: rgb(23, 58, 118);
-
-}
-
-
-ul{
-    list-style: none;
-}
-.bar{
-   
-    top: 0;
-    left: 0;
-    position:fixed;
-    background: linear-gradient(rgba(106, 137, 237, 0.6),transparent);  
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    padding: 20px;
-    color: black;
-   
-}
-.bar ul li .link{
-    color:rgb(23, 58, 118);  
-}
-.links{
-    display: flex;
-    align-items: center;  
-}
-
-
-.links li{
-    margin: 0 30px;
-}
-.stars p{
-    color:  #CDB309;
-}
- h4{
+    padding: 5px;
+    text-decoration: none;
     color: #ffffff;
- }
-
- .color{
-    color: #173A76;
- }
+    width: 35%;
+    border: none;
+    font-size: 12px;
+  
+  }
+  
+  .rating__star {
+    cursor: pointer;
+    color: #dabd18b2;
+  }
+  .textarea{
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+  }
+  .textarea {
+    height: 100%;
+    width: 90%;
+    outline: none;
+    padding: 10px;
+    font-size: 17px;
+    resize: none;
+    margin-left: 15px;
+  
+  }
+  
+  
