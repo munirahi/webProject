@@ -63,9 +63,9 @@ if (!isset($_SESSION['user_id'])) {
                          <nav id="account-nav"><img src="../images/<?php echo  $image?>" id="account-img">
                             <ul>
                                 
-                                <li class="account-list"><a href="#"><div class="circle"></div>Edit Account</a></li>
-                                
-                                <li class="account-list"><a href="#"><div class="circle"></div>Log Out</a></li>
+                               <li class="account-list"><a href="EditProfile.php"><div class="circle"></div>Edit Profile</a></li>
+                            
+                            <li class="account-list"><a href="logout.php"><div class="circle"></div>Log Out</a></li>
                             </ul>
 
                         </nav>
