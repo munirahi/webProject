@@ -345,7 +345,7 @@ function validatePhone(phoneNumber) {
             <ul id="ul2">
                 
                 <li id="acnt li">
-                    <nav id="account-nav"><img src="uploads/<?php echo $newImageName; ?>" id="account-img">
+                    <nav id="account-nav"><img src="../images/<?php echo $newImageName; ?>" id="account-img">
                         <ul>
                             
                             <li class="account-list"><a href="EditProfileP.php"><div class="circle"></div>Edit Profile</a></li>
@@ -359,6 +359,7 @@ function validatePhone(phoneNumber) {
         </nav>
     </div>
      </header>
+     
       <div class="main">
       
  <?php

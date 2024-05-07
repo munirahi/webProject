@@ -264,7 +264,7 @@ mysqli_close($conn);
     <div id="header-div">
     <nav class="fixed-top" id="main-nav">
         <ul id="ul1">
-          <li><img src="linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
+          <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
                     <li class="list1-item"><a href="HomePageLearner.php" class="list1-item">Home</a></li>
                     <li class="list1-item"><a href="SESSionLearner.php">Sessions</a></li>
                     <li class="list1-item"><a href="learnerRequest2.php">Requests</a></li>
@@ -274,7 +274,7 @@ mysqli_close($conn);
         <ul id="ul2">
             
             <li id="acnt li">
-                <nav id="account-nav"><img src="uploads/<?php echo $newImageName; ?>" id="account-img">
+                <nav id="account-nav"><img src="../images/<?php echo $newImageName; ?>" id="account-img">
                     <ul>
                         
                         <li class="account-list"><a href="EditProfile.php"><div class="circle"></div>Edit Profile</a></li>
@@ -309,7 +309,7 @@ mysqli_close($conn);
                    
           <div class="image">
           
-       <img src="images/<?php echo $newImageName; ?>" alt="image available" id= "preview" >
+       <img src="../images/<?php echo $newImageName; ?>" alt="image available" id= "preview" >
       
           <input type="file" accept="Image/jpeg, Image/png, Image/jpg" id="file-choose" name ="image">
            </div>
