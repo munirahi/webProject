@@ -101,10 +101,10 @@ mysqli_close($conn);
             <?php
    
     if (!empty($emailError)) {
-      echo "<span class='error-message'>$emailError</span>";
+      echo "<span class='error-message' style='color:red;>$emailError</span>";
     }
     if (!empty($passwordError)) {
-      echo "<span class='error-message'>$passwordError</span>";
+      echo "<span class='error-message' style='color:red;'>$passwordError</span>";
     }
     ?>
 
