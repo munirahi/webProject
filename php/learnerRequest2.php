@@ -13,7 +13,7 @@
     session_start();
 ?>
 <!DOCTYPE html>
-<html>
+<html>   
     <head>
         <title>Request</title>
         <link rel="stylesheet" href="../css/learnerRequest2.css">
@@ -34,11 +34,11 @@
             <nav class="fixed-top" id="main-nav">
                 <ul id="ul1">
                     <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img" ></li>
-                    <li class="list1-item"><a href="HomePageLearner.html" class="list1-item">Home</a></li>
-                    <li class="list1-item"><a href="SESSionLearner.html">Sessions</a></li>
-                    <li class="list1-item" ><a href="learnerRequest2.html">Requests</a></li>
-                    <li class="list1-item"><a href="RateAndReview.html">Rate and Review</a></li>
-                    <li class="list1-item"><a href="Supports.html">Support</a></li>
+                    <li class="list1-item"><a href="HomePageLearner.php" class="list1-item">Home</a></li>
+                    <li class="list1-item"><a href="SESSionLearner.php">Sessions</a></li>
+                    <li class="list1-item" ><a href="learnerRequest2.php">Requests</a></li>
+                    <li class="list1-item"><a href="RateAndReview.php">Rate and Review</a></li>
+                    <li class="list1-item"><a href="Supports.php">Support</a></li>
                 </ul>
                 <ul id="ul2">
 
@@ -46,7 +46,7 @@
                         <nav id="account-nav"><img src="images/account.jfif" id="account-img">
                             <ul>
 
-                                <li class="account-list"><a href="EditProfile.html"><div class="circle"></div>Edit Profile</a></li>
+                                <li class="account-list"><a href="EditProfile.php"><div class="circle"></div>Edit Profile</a></li>
 
                                 <li class="account-list"><a href="#"><div class="circle"></div>Log Out</a></li>
                             </ul>
@@ -81,42 +81,7 @@
                                 </div>
                             </label>
     
-                            <!-- <label name="level">Level<br>
-                                <div class="selectWrapper">
-                                    <select class="input-box" name="Level">
-                                        <option></option>
-                                        <option>Beginner</option>
-                                        <option>Intermediate</option>
-                                        <option>Advanced</option>
-                                    </select>
-                                </div>
-                            </label> -->
-
-                            <!-- <label name="date">Date<br>
-                                <div class="selectWrapper">
-                                    <select class="input-box" name="dateSelect">
-
-                                    </select>
-                                </div>
-                            </label> -->
-    
-                            <!-- <label>Duration<br>
-                                <div class="selectWrapper">
-                                    <select class="input-box" name="Duration">
-                                        <option></option>
-                                        <option>10 Minutes</option>
-                                        <option>20 Minutes</option>
-                                        <option>30 Minutes</option>
-                                        <option>60 Minutes</option>
-                                    </select>
-                                </div>
-                            </label>
-    
-                            <label>Date and Time<br>
-                                <div class="selectWrapper">
-                                    <input class="input-box" type="datetime-local">
-                                </div>
-                            </label> -->
+                           
                         </div>
                         <div class="btn-container">
                             <button class="selectWrapper" id="go-btn">Go!</button>
@@ -126,41 +91,12 @@
                 </form>
 
 
-                <?php
-// Include your database connection code here
-
-//if(isset($_GET['language']) && isset($_GET['level'])) {
-    // $language = $_GET['Language'];
-    // $level = $_GET['Level'];
-
-    // // Fetch dates from the database based on the selected language and level
-    // $sql3 = "SELECT DISTINCT date FROM available_times, tutor_languages WHERE Language = '$language' AND Level = '$level' AND tutor_languages.P_ID = available_times.P_ID";
-    // $result3 = mysqli_query($conn, $sql3);
-
-   
-    // if(mysqli_num_rows($result3) > 0) {
-    //     echo "<script>";
-    //     echo "var select = document.getElementById('dateSelect');";
-    //     while($row3 = mysqli_fetch_assoc($result3)) {
-    //         echo "var option = document.createElement('option');";
-    //         echo "option.text = '{$row3['date']}';";
-    //         echo "select.add(option);";
-    //     }
-    //     echo "</script>";
-    // } else {
-    //     echo "<script>";
-    //     echo "var select = document.getElementById('dateSelect');";
-    //     echo "select.innerHTML = '<option>No dates available</option>';";
-    //     echo "</script>";
-    // }
-// else echo"help";
-?>
-
+              
                
 
 
 
-                 <h5> id="result-header">Results</h5>
+                 <h5 id="result-header">Results</h5>
                 <div class="result">
                 <div class="result-carousel">  
                     <!--div class="result-carousel"-->
@@ -276,7 +212,32 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
                 ?>
 
                    
-
+<?php
+           if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Check if the cancel button was clicked
+            if (isset($_POST['cancel'])) {
+                // Retrieve data from the form
+                $p_id = $_POST['p_id'];
+                $l_id = $_POST['l_id'];
+                $time = $_POST['time'];
+                $date = $_POST['date'];
+                
+                // Prepare and execute the SQL statement to delete the request
+                $sql = "DELETE FROM request WHERE P_ID = $p_id AND L_ID = $l_id AND Time = '$time' AND Date = '$date'";
+                if (mysqli_query($conn, $sql)) {
+                    // Success
+                    echo "Request deleted successfully.";
+                } else {
+                    // Error
+                    echo "Error deleting request: " . mysqli_error($conn);
+                }
+            }
+        }
+        
+            
+                
+                
+                ?>
 
 
 
