@@ -199,7 +199,13 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
 
                         
            
-            <button class="cancel" >Cancel</button>
+             <form action="'.$_SERVER['PHP_SELF'].'" method="post">
+           <input type="hidden" name="p_id" value="' .$row2['P_ID'].'">
+           <input type="hidden" name="l_id" value="'. $_SESSION['user_id'].'">
+           <input type="hidden" name="time" value="'.$row2['Time'].'">
+           <input type="hidden" name="date" value="'.$row2['Date'].'">
+           <button class="cancel" type="submit" name="cancel" value="cancel">Cancel</button>
+       </form>
     </div>';
     echo $row2['P_ID'].'<br>';
     echo $_SESSION['user_id'];
