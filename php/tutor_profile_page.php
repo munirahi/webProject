@@ -377,31 +377,35 @@ if(isset($_POST['level']) && isset($_POST['Duration']) && isset($_POST['time']) 
     $level = $_POST['level'];
     $duration = $_POST['Duration'];
     $time = $_POST['time'];
-    $date = $_POST['date'];
+    $date = (int)$_POST['date'];
     $language = $_POST['Language'];
     
-
+    if(empty($level) || empty($duration) || empty($time) || empty($date) || empty($language)){
+      echo "Please fill in all fields.";
+  } else {
     
     $L_ID = $_SESSION['user_id'];
 
     
     $P_ID = $selectedTutorId;
 
-    // Define the SQL query with actual values
-    $sql = "INSERT INTO request (P_ID, L_ID, Time, Date, Duration, Language, Level) 
-            VALUES ($P_ID, $L_ID, '$time', '$date', '$duration', '$language', '$level')";
+    $sql = "INSERT INTO request (P_ID, L_ID, Time, Date, Duration, Language, Level) VALUES ($P_ID, $L_ID, $time, $date, $duration, '$language', '$level')";
 
-    // Execute the query
+    
     $result = mysqli_query($conn, $sql);
 
-    // Check if the query was successful
+    
     if ($result) {
         echo "Request successfully inserted!";
     } else {
         echo "Error inserting request: " . mysqli_error($conn);
     }
+  }} else {
+    echo "All fields are required.";
 }
+
 ?>
+
 
 
 
