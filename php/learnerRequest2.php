@@ -43,7 +43,7 @@
                 <ul id="ul2">
 
                     <li id="acnt li">
-                        <nav id="account-nav"><img src="images/account.jfif" id="account-img">
+                        <nav id="account-nav"><img src="../images/account.jfif" id="account-img">
                             <ul>
 
                                 <li class="account-list"><a href="EditProfile.php"><div class="circle"></div>Edit Profile</a></li>
