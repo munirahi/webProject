@@ -1,7 +1,7 @@
 <?php
     DEFINE('DB_USER','root');
     DEFINE('DB_PSWD','');
-    DEFINE('DB_HOST','localhost:3306');
+    DEFINE('DB_HOST','localhost');
     DEFINE('DB_NAME','linguist');
 
     if (!$conn = mysqli_connect(DB_HOST,DB_USER,DB_PSWD,DB_NAME)) 
@@ -80,7 +80,7 @@
                                 </div>
                             </label>
     
-                            <label name="level">Level<br>
+                            <!-- <label name="level">Level<br>
                                 <div class="selectWrapper">
                                     <select class="input-box" name="Level">
                                         <option></option>
@@ -89,7 +89,15 @@
                                         <option>Advanced</option>
                                     </select>
                                 </div>
-                            </label>
+                            </label> -->
+
+                            <!-- <label name="date">Date<br>
+                                <div class="selectWrapper">
+                                    <select class="input-box" name="dateSelect">
+
+                                    </select>
+                                </div>
+                            </label> -->
     
                             <!-- <label>Duration<br>
                                 <div class="selectWrapper">
@@ -117,8 +125,8 @@
                 </form>
 
 
-
-               
+                <?php
+   
 
 
 
@@ -128,8 +136,8 @@
                     <!--div class="result-carousel"-->
 
                     <?php
- if(isset($_GET['Language']) && isset($_GET['Level']) ) { //&& isset($_GET['Duration'])
-    $sql = "SELECT * FROM tutor, tutor_languages where Language='" .$_GET['Language']. "' AND profLevel='" .$_GET['Level']. "' AND P_ID=ID "; //AND Duration='" .$_GET['Duration']. "' "
+ if(isset($_GET['Language'])  ) { //&& isset($_GET['Duration'])
+    $sql = "SELECT * FROM tutor, tutor_languages where Language='" .$_GET['Language']."' AND P_ID=ID "; //AND Duration='" .$_GET['Duration']. "' "
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) { // $result=="false"
         while($row = mysqli_fetch_assoc($result)) {
@@ -140,20 +148,19 @@
                     '
                     <div class="result-cell"> 
                     <div class="acc-info">  
-                    <img class="result-img" src="images/maleIcon.png" alt="account image">
+                    <img class="result-img" src="../images/'.$row['image'].'" alt="account image">
                      <div class="more-info"><h6>
                     <i class="fa-solid fa-user"></i> '.$row['Firstname']. " "  .$row['Lastname'].' <i class="fa-solid fa-star"></i> 4 <i class="fa-solid fa-dollar-sign"></i> 45</h6>
-                    <h6 id="categories">'.$row['Language'].' | '.$row['profLevel'].'</h6> </div> </div> 
+                    <h6 id="categories">'.$row['Language'].' </h6> </div> </div> 
                     <div class="bio"><p>'./*.$row['bio'].*/'</p></div> 
-                    <div  class="post-req-btn"><button>View Profile</button></div></div> ';
+                    <div  class="post-req-btn"><button><a href="tutor_profile_page.php">View Profile</a></button></div></div> ';
                                                                    
 
                     }}//end while
                     else
                     echo '<h3>No results.</h3>';
              }
-            //  else
-            //  echo 'hiiiiiiiiiiiii';
+            
     ?>
 
 </div> 
@@ -177,7 +184,7 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
    
                echo     '<div class="status-cell">
                         <div class="acc-info">
-                            <img src="images/maleIcon3.png" alt="account image">
+                            <img src="../images/'.$row2['image'].'" alt="account image">
                             <div class="status-info">
                                <h6><i class="fa-solid fa-user"></i> '.$row2['Firstname']. " "  .$row2['Lastname'].'</h6>
                                <h6 class="status" id="'.$row2['Status'].'">'.$row2['Status'].'</h6>
@@ -191,7 +198,7 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
         $status = $row2["Status"];
         echo     '<div class="status-cell">
         <div class="acc-info">
-            <img src="images/maleIcon3.png" alt="account image">
+            <img src="../images/'.$row2['image'].'" alt="account image">
             <div class="status-info">
                <h6><i class="fa-solid fa-user"></i> '.$row2['Firstname']. " "  .$row2['Lastname'].'</h6>
                <h6 class="status" id="pending">'.$row2['Status'].'</h6>
@@ -200,7 +207,7 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
             </div>
            </div>
     </div>';
-    }else echo 'no result2';
+    }
 
 
 }}else echo 'no result';
@@ -209,7 +216,9 @@ if (mysqli_num_rows($result2) > 0) { // $result=="false"
                 ?>
 
                    
-                    
+
+
+
 
                 </div>
                 

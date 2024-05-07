@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 //include("php/learnerhp.php");
-include("php/ratet.php");
+include("ratet.php");
 ?>
    <!DOCTYPE html>
    <html>
@@ -19,11 +19,11 @@ include("php/ratet.php");
    <head>
      <meta charset="UTF-8">
    
-     <link rel="stylesheet" href="css/footer.css">
-     <link rel="stylesheet" href="header_folder/headerPartner.css">
+     <link rel="stylesheet" href="../css/footer.css">
+     <link rel="stylesheet" href="../header_folder/headerPartner.css">
      <script src="https://kit.fontawesome.com/59189109f7.js" crossorigin="anonymous"></script>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-     <link rel="stylesheet" href="css/tutorRate.css">
+     <link rel="stylesheet" href="../css/tutorRate.css">
 
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
@@ -41,6 +41,7 @@ include("php/ratet.php");
             <li class="list1-item"><a href="HomePageLearner.php" class="list1-item">Home</a></li>
             <li class="list1-item"><a href="SESSionLearner.php">Sessions</a></li>
             <li class="list1-item"><a href="learnerRequest2.php">Requests</a></li>
+            <li class="list1-item"><a href="toturRate.php">Rates and Reviews</a></li>
             <li class="list1-item"><a href="Supports.php">Support</a></li>
           </ul>
           <ul id="ul2">
@@ -96,87 +97,61 @@ function getFlagImage($language) {
   }
   ?>
   <?php
-
-
-
-
-function displayallSessions()
-  {
+function displayAllSessions()
+{
     // Include the database connection file
     include("php/connection.php");
-    // Get the current date
-    $currentDate = date('Y-m-d');
-    $endDate =$currentDate;
+
+    // Get the current user ID from the session
     $user_id = $_SESSION['user_id'];
-    $sql = "SELECT * FROM session WHERE T_id='$user_id' AND Date  >= '$endDate';";
-    $sesstions = mysqli_query($conn, $sql);
 
-    // Check if there are any sessions for this week
-    if (mysqli_num_rows($sesstions) > 0) {
+    // Construct the SQL query to retrieve sessions for the tutor with a status of 'previous'
+    $sql = "SELECT s.*, r.starts, r.ReviewText FROM session s LEFT JOIN review r ON s.ID = r.SESSION_ID WHERE s.T_id = '$user_id' AND s.Status = 'previous'";
+    $sessions_result = mysqli_query($conn, $sql);
 
+    // Check if there are any sessions for this tutor
+    if (mysqli_num_rows($sessions_result) > 0) {
+        // Loop through the sessions and display each session card
+        while ($session_row = mysqli_fetch_assoc($sessions_result)) {
+            $starts = $session_row['starts'];
+            $reviewText = $session_row['ReviewText'];
 
-      // Loop through the sessions and display each session card
-      while ($row = mysqli_fetch_assoc($sesstions)) {
-        $tutorId = $row['T_id'];
-        $sql_tutor = "SELECT * FROM review WHERE  P_ID = '$tutorId';";
-        $sesstions = mysqli_query($conn, $sql_tutor);
-        if ($sesstions) {
-          // Fetch the learner's name from the result set
-          $learneRow = mysqli_fetch_assoc($sesstions);
+            // Output the session card HTML
+            echo '<div class="request-card">';
+            echo '<div class="learner-info">';
+            
+            // Output the session details
+            echo '<p class="rating"><i class="fa-solid fa-star"></i> ' . $starts . '</i>' . $reviewText . '</p>';
+            
+            // Output other session information (e.g., day, language, etc.)
+
+            echo '</div>'; // Close the learner-info div
+            echo '</div>'; // Close the request-card div
         }
-
-       
-        echo '<div class="request-card">';
-        echo '<div class="learner-info">';
-        // Output learner's profile picture
-        echo '<div class="day">';
-        // Output learner's name
-        echo '<p class="rating"><i class="fa-solid fa-star"></i> ' . (isset($learneRow['starts'])) . ' </i> ' . (isset($row['ReviewText']) ? $row['ReviewText'] : '') . '</p>';
-        ?><br><?php
-        echo '<h3><strong><i class="fa-solid fa-user"></i>'. $learneRow['ReviewText']. '</strong></h3>';
-
-        // Output the day of the session
-       
-
-        // $flagImage = '<script>getFlagImage("' . $row['language'] . '")</script>' ;
-        // echo '<p class="language"><img class="flag" src="' . $flagImage . '" alt="language image" />' . $row['language'] . '</p>';
-     
-      }
     } else {
-      // If no sessions are found, display a message
-      echo '<h2>No rate found.</h2>';
+        // If no sessions are found, display a message
+        echo '<h2>No ratings found.</h2>';
     }
-  }
+}
+?>
 
-  ?>
-   </header>
-   <div class="backg">
-    
-    
-       
-      
-      
-             <section class="box-content">
-
-    
-
-               <div class="containing-div">
-
-                   <div class="request_div inner-div">
-                     <h1 id="result-header">Your Ratings and Reviews!</h1>
-          <div class="week-sesstoin">
-
-            <div class="result-cell">
-                      
-              <div class="acc-info">
-                  
-              <?php displayallSessions(); ?>
-              </div>
-            </div></div></div></div></section></div>
-
-      </div>     
-     
-        
+ 
+<div class="backg">
+  <section class="box-content">
+    <div class="containing-div">
+      <div class="request_div inner-div">
+        <h1 id="result-header">Your Ratings and Reviews!</h1>
+        <div class="week-sessions">
+          <div class="result-cell">
+            <div class="acc-info">
+              <?php displayAllSessions(); ?>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>  
       
    </main>
 

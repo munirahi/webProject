@@ -43,23 +43,6 @@ if ($result && mysqli_num_rows($result) > 0) {
 }
 
 
-// Check if there are any sessions for the tutor
-if (mysqli_num_rows($learnerSessionsResult) > 0) {
-    // Loop through each session record
-    while ($sessionRow = mysqli_fetch_assoc($learnerSessionsResult)) {
-        // Add the duration of the session to the total hours
-        $totalHours += $sessionRow['Duration'] / 60;
-    }
 
-}
-$tutorLanguages =array();
-
-if ($tutorsLagsResult && mysqli_num_rows($tutorsLagsResult) > 0) {
-    // Fetch the name from the result set
-    while ($tutorsLags = mysqli_fetch_assoc($tutorsLagsResult)) {
-        // Add the language to the array
-        $tutorLanguages[] = $tutorsLags['Language'];
-    }
-}
 
 ?>

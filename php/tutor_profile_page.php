@@ -238,6 +238,7 @@ mysqli_close($conn);
         <link rel="stylesheet" href="../header_folder/headerPartner.css">
         <link rel="stylesheet" href="../css/footer.css">
         <link rel="stylesheet" href="../css/tutor_profile_page.css">
+        <link rel="stylesheet" href="../css/learnerRequest2.css"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
         <link rel="stylesheet" href="css/tutorAvailableTimes.css">
@@ -334,8 +335,102 @@ mysqli_close($conn);
             <button class="view-more-button">View All Reviews</button></a >
                         
                 </section>
-                <h2>Book a Session</h2>
+                  <h2>Book a Session</h2>
+               <form method='POST' action='<?php $_SERVER['PHP_SELF'] ?>'>
+                <fieldset>
+                    <div class="fieldset-container">
+                    <div class="select-container">
+                        <label>Language<br>
+                            <div class="selectWrapper">
+                                <select class="input-box" name="Language">  
+                                    <option></option>
+                                    <option>English</option>
+                                    <option>Spanish</option>
+                                    <option>French</option>
+                                    <option>Arabic</option>
+                                </select>
+                            </div>
+                        </label>
 
+                        <label name="level">Level<br>
+                            <div class="selectWrapper">
+                                <select class="input-box" name="level">
+                                    <option></option>
+                                    <option>Beginner</option>
+                                    <option>Intermediate</option>
+                                    <option>Advanced</option>
+                                </select>
+                            </div>
+                        </label>
+
+                        <label>Duration<br>
+                            <div class="selectWrapper">
+                                <select class="input-box" name="Duration">
+                                    <option></option>
+                                    <option>10 Minutes</option>
+                                    <option>20 Minutes</option>
+                                    <option>30 Minutes</option>
+                                    <option>40 Minutes</option>
+                                    <option>50 Minutes</option>
+                                    <option>60 Minutes</option>
+                                </select>
+                            </div>
+                        </label>
+
+                        <label>Date<br>
+                            <div class="selectWrapper" id="datetimepicker">
+                                <input class="input-box" type="date" name="date">
+                            </div>
+                        </label>
+
+                        <label>Time<br>
+                            <div class="selectWrapper" id="datetimepicker">
+                                <input class="input-box" type="time" name="time">
+                            </div>
+                        </label>
+                    </div>
+                    <div class="btn-container">
+                        <button type="submit" class="selectWrapper" id="go-btn">Go!</button>
+                    </div>
+                </div>
+                </fieldset>
+            </form> 
+
+
+            <?php
+if(isset($_POST['level']) && isset($_POST['Duration']) && isset($_POST['time']) && isset($_POST['date']) && isset($_POST['Language'])){
+    
+    $level = $_POST['level'];
+    $duration = $_POST['Duration'];
+    $time = $_POST['time'];
+    $date = (int)$_POST['date'];
+    $language = $_POST['Language'];
+    
+    if(empty($level) || empty($duration) || empty($time) || empty($date) || empty($language)){
+      echo "Please fill in all fields.";
+  } else {
+    
+    $L_ID = $_SESSION['user_id'];
+
+    
+    $P_ID = $selectedTutorId;
+
+    $sql = "INSERT INTO request (P_ID, L_ID, Time, Date, Duration, Language, Level) VALUES ($P_ID, $L_ID, $time, $date, $duration, '$language', '$level')";
+
+    
+    $result = mysqli_query($conn, $sql);
+
+    
+    if ($result) {
+        echo "Request successfully inserted!";
+    } else {
+        echo "Error inserting request: " . mysqli_error($conn);
+    }
+  }} else {
+    echo "All fields are required.";
+}
+
+?>
 
 
 
