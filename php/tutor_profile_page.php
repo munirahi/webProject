@@ -228,10 +228,18 @@ mysqli_close($conn);
                 <section>
                     <h2>Reviews</h2>
                     <?php displayTutorReviews(); ?>
-                   
-                    <a href="viewtutorreviews.php">
-                        
-                    <a href="viewtutorreviews.php?pid=<?php echo $row['T_ID']; ?>">View Reviews</a>                </section>
+                    <form method='POST' action='viewtutorreviews.php'>
+                <fieldset>
+                    <div class="fieldset-container">
+                      <input type="hidden" name="tutor_id" value="<?php echo $selectedTutorId  ?>">
+                    <div class="btn-container">
+                        <button type="submit" class="view-more-button" id="postReq-btn">View Reviews</button>
+                    </div>
+                </div>
+                </fieldset>
+            </form>
+                                
+                  </section>
                 <h2>Book a Session</h2>
 
                <form method='POST' action='postRequest.php'>

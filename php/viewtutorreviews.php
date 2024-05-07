@@ -6,17 +6,22 @@ header("Expires: 0");
 if (!isset($_SESSION['user_id'])) {
   header("Location: login.php");
   exit(); 
-}
-$pid = isset($_GET['pid']) ? $_GET['pid'] : null;
+}else{
+  if(isset($_POST['tutor_id'])){
+    $_SESSION['tutor_id']=$_POST['tutor_id'];
+  $tutor_id=  $_SESSION['tutor_id'];
 
-if (isset($_GET['pid'])) {
-    $pid = $_GET['pid'];
+}}
+// $pid = isset($_GET['pid']) ? $_GET['pid'] : null;
 
-    // Rest of the code to retrieve and display sessions
-    displayAllSessions($pid);
-} else {
-    echo '<h2>Error: No tutor ID specified.</h2>';
-}
+// if (isset($_GET['pid'])) {
+//     $pid = $_GET['pid'];
+
+//     // Rest of the code to retrieve and display sessions
+//     displayAllSessions($pid);
+// } else {
+//     echo '<h2>Error: No tutor ID specified.</h2>';
+// }
 
 include("ratet.php");
 ?>
@@ -63,10 +68,10 @@ include("ratet.php");
 
 <body>
   <?php
-  function displayAllSessions($pid)
+  function displayAllSessions($tutor_id)
   {
     include("connection.php");
-    $sql = "SELECT starts, ReviewText FROM review WHERE P_id = '$pid' ";
+    $sql = "SELECT starts, ReviewText FROM review WHERE P_id = '$tutor_id' ";
     $sessions_result = mysqli_query($conn, $sql);
 
     // Check if there are any sessions for this tutor
@@ -101,7 +106,7 @@ include("ratet.php");
           <h1 id="result-header">Rate and Review!</h1>
           <div class="week-sessions">
             <?php
-            displayAllSessions($pid);
+            displayAllSessions($tutor_id);
             ?>
           </div>
         </div>
