@@ -23,7 +23,7 @@
       <div id="header-div">
         <nav class="fixed-top" id="main-nav">
           <ul id="ul1">
-            <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo" id="logo-img"></li>
+            <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo" id="logo-img"></li>
             <li class="list1-item"><a href="tutor_Home_page.php" class="list1-item">Home</a></li>
             <li class="list1-item"><a href="SESSionTutor.php">Sessions</a></li>
             <li class="list1-item"><a href="tutorReq.php">Requests</a></li>
