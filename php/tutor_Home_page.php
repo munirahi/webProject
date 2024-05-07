@@ -222,7 +222,7 @@ continue;
                 <span>$<?php echo $totalEarnings?></span>
               </li>
               <li id="Rating">
-                <a href="toturRate.html" id="rating-anchor">
+                <a href="toturRate.php" id="rating-anchor">
                   <i class="fa-solid fa-star"></i>
                   <span>Rating</span>
                   <span><?php echo $averageRating .'('. $totalReviews .'Ratings)'?></span>

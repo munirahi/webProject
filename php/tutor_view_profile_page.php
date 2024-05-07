@@ -145,7 +145,7 @@ include('connection.php');
                     <h2>Reviews</h2>
                     <?php displayTutorReviews(); ?>
                    
-                    <a href="ratet.php">
+                    <a href="toturRate.php">
             <button class="view-more-button">View All Reviews</button></a >
                         
                 </section>
