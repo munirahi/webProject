@@ -151,11 +151,11 @@ if (mysqli_num_rows($result) > 0) {
       // Prepare checkbox values based on user's languages
       $sql_languages = "SELECT Language FROM tutor_languages WHERE P_ID= '$user_id' ";
       $result_languages = mysqli_query($conn, $sql_languages);
-      echo "inlanguages";
+
   $languages = [];
   while ($row = mysqli_fetch_assoc($result_languages)) {
       $languages[] = $row['Language'];
-      echo $row['Language'] . " is added";
+    
   }
   $checked_languages = array_fill_keys($languages, 'checked');
     // Validate 
@@ -412,10 +412,10 @@ function validatePhone(phoneNumber) {
        
         <label for="language">Languages </label> <br><br><br>
       <div class="language-container">
-            <input type="checkbox"  name="languages[]" value="english" <?php echo isset($checked_languages['english']) ? $checked_languages['english'] : ''; ?> > English
-            <input type="checkbox" name="languages[]" value="spanish" <?php echo isset($checked_languages['spanish']) ? $checked_languages['spanish'] : ''; ?>  > Spanish 
-            <input type="checkbox" name="languages[]" value="french" <?php echo isset($checked_languages['french']) ? $checked_languages['french'] : ''; ?> > French 
-            <input type="checkbox" name="languages[]" value="arabic" <?php echo isset($checked_languages['arabic']) ? $checked_languages['arabic'] : ''; ?> > Arabic </div>
+            <input type="checkbox"  name="languages[]" value="english" <?php echo isset($checked_languages['English']) ? $checked_languages['English'] : ''; ?> > English
+            <input type="checkbox" name="languages[]" value="spanish" <?php echo isset($checked_languages['Spanish']) ? $checked_languages['Spanish'] : ''; ?>  > Spanish 
+            <input type="checkbox" name="languages[]" value="french" <?php echo isset($checked_languages['French']) ? $checked_languages['French'] : ''; ?> > French 
+            <input type="checkbox" name="languages[]" value="arabic" <?php echo isset($checked_languages['Arabic']) ? $checked_languages['Arabic'] : ''; ?> > Arabic </div>
    
    
             <label for="education">Education</label>
