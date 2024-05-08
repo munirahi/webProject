@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             else{
                 
                 $newImageName = $fileName;
-                $destination = 'images/' . $newImageName;
+                $destination = '../images/' . $newImageName;
                
               move_uploaded_file($tmpName, $destination);
             }
@@ -64,7 +64,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
                 $error = " Email already exists. Please choose a different email.";
               }else{
-                
+                if(!isset($newImageName) ){
+                    $newImageName ='profile.png';
+                }
 
                  $sql = "INSERT INTO learner (Firstname, Lastname, email, password, city,location,image)
                     VALUES ('$firstname', '$lastname', '$email', '$password', '$city','$location','$newImageName')";
@@ -105,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             else{
                 
                 $newImageName = $fileName;
-                $destination = 'images/' . $newImageName;
+                $destination = '../images/' . $newImageName;
                
               move_uploaded_file($tmpName, $destination);
             }
@@ -157,10 +159,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
            // echo "New record created successfully";
         }elseif($formType === "learner"){
-          // $_SESSION['user_id']= $Id ;
-           // header("Location: .php");
-           // exit();
-            echo "New record created successfully";
+          $_SESSION['user_id']= $Id ;
+           header("Location: HomePageLearner.php");
+           exit();
+           // echo "New record created successfully";
         }
     
         } else {

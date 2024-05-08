@@ -141,7 +141,7 @@ function getFlagImage($language) {
           <nav id="account-nav"><img src="../images/<?php echo $row['image']; ?>" width="25" alt="pic" />
               <ul>
 
-                <li class="account-list"><a href="EditProfile.html">
+                <li class="account-list"><a href="EditProfile.php">
                     <div class="circle"></div>Edit Profile
                   </a></li>
                   <li class="account-list"><a href="logout.php">
@@ -178,7 +178,7 @@ function getFlagImage($language) {
   }
 ?></h2>
 
-          <p id="bio">learning is fun, start today!</p>
+          <p id="bio"></p>
         </div>
 
 
@@ -219,7 +219,7 @@ function getFlagImage($language) {
               <hr>
               <i class="fa-solid fa-user"></i>
               <!-- add icons -->
-              <a id="profile-settings" href="EditProfile.html">Profile Settings</a>
+              <a id="profile-settings" href="EditProfile.php">Profile Settings</a>
             </li>
 
 
