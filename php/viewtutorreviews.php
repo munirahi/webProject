@@ -10,43 +10,7 @@ if (!isset($_SESSION['user_id'])) {
   if(isset($_POST['tutor_id'])){
     $_SESSION['tutor_id']=$_POST['tutor_id'];
   $tutor_id=  $_SESSION['tutor_id'];
-  }
-
-  function displayAllrate()
-  {
-    if(isset($_POST['tutor_id'])){
-      $_SESSION['tutor_id']=$_POST['tutor_id'];
-    $tutor_id=  $_SESSION['tutor_id'];
-    include("connection.php");
-    $sql = "SELECT starts, ReviewText FROM review WHERE P_id = '$tutor_id' ";
-    $sessions_result = mysqli_query($conn, $sql);
-
-    // Check if there are any sessions for this tutor
-    if (mysqli_num_rows($sessions_result) > 0) {
-      // Loop through the sessions and display each session card
-      while ($session_row = mysqli_fetch_assoc($sessions_result)) {
-        $stars = $session_row['starts'];
-        $reviewText = $session_row['ReviewText'];
-
-        // Output the session card HTML
-        echo '<div class="result-cell">';
-        echo ' <div class="acc-info">';
-        // Output the session details
-        echo '<p class="rating"><i class="fa-solid fa-star"></i> ' . $stars . '</p>';
-        echo '<p>' . $reviewText . '</p>';
-        // Output other session information (e.g., day, language, etc.)
-        echo '</div>'; // Close the learner-info div
-        echo '</div>'; // Close the request-card div
-      }
-    } else {
-      // If no sessions are found, display a message
-      echo '<h2>No ratings found.</h2>';
-    }
-  }
-}}
-
-
-include("ratet.php");
+  }}
 ?>
 <!DOCTYPE html>
 <html>
@@ -109,8 +73,43 @@ include("ratet.php");
           <div class="week-sessions">
            <?php
            
-             displayAllrate();
 
+           function displayAllrate()
+           {
+             if(isset($_POST['tutor_id'])){
+               $_SESSION['tutor_id']=$_POST['tutor_id'];
+             $tutor_id=  $_SESSION['tutor_id'];
+             include("connection.php");
+             $sql = "SELECT starts, ReviewText FROM review WHERE P_id = '$tutor_id' ";
+             $sessions_result = mysqli_query($conn, $sql);
+         
+             // Check if there are any sessions for this tutor
+             if (mysqli_num_rows($sessions_result) > 0) {
+               // Loop through the sessions and display each session card
+               while ($session_row = mysqli_fetch_assoc($sessions_result)) {
+                 $stars = $session_row['starts'];
+                 $reviewText = $session_row['ReviewText'];
+         
+                 // Output the session card HTML
+                 echo '<div class="result-cell">';
+                 echo ' <div class="acc-info">';
+                 // Output the session details
+                 echo '<p class="rating"><i class="fa-solid fa-star"></i> ' . $stars . '</p>';
+                 echo '<p>' . $reviewText . '</p>';
+                 // Output other session information (e.g., day, language, etc.)
+                 echo '</div>'; // Close the learner-info div
+                 echo '</div>'; // Close the request-card div
+               }
+             } else {
+               // If no sessions are found, display a message
+               echo '<h2>No ratings found.</h2>';
+             }
+           }
+         }
+         
+         
+         include("ratet.php");
+         
 ?>
           </div>
         </div>
