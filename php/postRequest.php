@@ -154,8 +154,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     
     $level = $_GET['level'];
     $duration = (int)$_GET['Duration'];
-    $time = $_GET['time'];
-    $date = (int)$_GET['date'];
+    $time = date("H:i:s", strtotime($_GET['time']));
+    $date = $_GET['date'];
     $language2 = $_SESSION['language'];
     $tutor_id2= $_SESSION['tutor_id'];
     $Price2 = $_SESSION['Price'];
@@ -165,8 +165,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     
           $L_ID = $_SESSION['user_id'];
 
-          $sql = "INSERT INTO request (P_ID, L_ID, Time, Date, Duration, Language, Level ,Price) 
-                  VALUES ($tutor_id2, $L_ID, $time, $date, $duration, '$language2', '$level', $Price2);";
+          $sql = "INSERT INTO request (P_ID, L_ID, Time, Date, Duration, Language, Level ,Status, Price) 
+                  VALUES ($tutor_id2, $L_ID, '$time', '$date', $duration, '$language2', '$level','pending' ,0);";
 
           // Execute the query
           $result = mysqli_query($conn, $sql);
@@ -176,6 +176,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         echo "Request successfully inserted!";
                     } else {
                         echo "Error inserting request: " . mysqli_error($conn);
+                        //echo $level.'<br>';
+// echo $duration.'<br>';
+// echo $time .'<br>';
+// echo $date .'<br>';
+// echo $language2 .'<br>';
+// echo $tutor_id2.'<br>';
+// echo $Price2.'<br>';
                     }
   }} else{
     echo "here";
@@ -183,6 +190,46 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 }else{
   echo "no GET";
 }
+// echo $level;
+// echo $duration;
+// echo $time ;
+// echo $date ;
+// echo $language2 ;
+// echo $tutor_id2;
+// echo $Price2 ;
+// $tutor_id2 = $_SESSION['tutor_id'];
+// $L_ID = $_SESSION['user_id'];
+// $time = date("H:i:s", strtotime($_GET['time']));
+// $date = $_GET['date'];
+// $duration = (int)$_GET['Duration'];
+// $language2 = $_SESSION['language'];
+// $level = $_GET['level'];
+// $price = $_SESSION['Price'];
+
+// $sql = "UPDATE request 
+//         SET Time = '$time', 
+//             Date = '$date', 
+//             Duration = $duration, 
+//             Language = '$language2', 
+//             Level = '$level', 
+//             Status = 'pending', 
+//             Price = $price 
+//         WHERE P_ID = $tutor_id2 AND L_ID = $L_ID";
+
+// $result = mysqli_query($conn, $sql);
+
+// if ($result) {
+//     echo "Request successfully updated!";
+// } else {
+//     echo "Error updating request: " . mysqli_error($conn);
+// }
+// echo $level;
+// echo $duration;
+// echo $time ;
+// echo $date ;
+// echo $language2 ;
+// echo $tutor_id2;
+// echo $Price2 ;
 ?>
 
 
