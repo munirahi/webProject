@@ -145,12 +145,12 @@ if (!isset($_SESSION['user_id'])) {
          <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-          if(isset($GET['level']) && isset($GET['Duration']) && isset($GET['time']) && isset($GET['date']) && isset($_POST['language']) && isset($_POST['tutor_id'])){
+          if(isset($_GET['level']) && isset($_GET['Duration']) && isset($_GET['time']) && isset($_GET['date']) && isset($_POST['language']) && isset($_POST['tutor_id'])){
     
-    $level = $GET['level'];
-    $duration = $GET['Duration'];
-    $time = $GET['time'];
-    $date = (int)$GET['date'];
+    $level = $_GET['level'];
+    $duration = $_GET['Duration'];
+    $time = $_GET['time'];
+    $date = (int)$_GET['date'];
     $language2 = $_SESSION['language'];
     $tutor_id2= $_SESSION['tutor_id'];
     
