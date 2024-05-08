@@ -285,9 +285,9 @@ function getFlagImage($language) {
             }
             echo '</div>';
             echo '<section class="incard-elements">';
-            echo '<p class="rating"><i class="fa-solid fa-star"></i> ' . (isset($row['starts']) ? $row['starts'] : 'N/A') . ' <i class="fa-solid fa-dollar-sign"></i> ' . (isset($row['ReviewText']) ? $row['ReviewText'] : 'N/A') . '</p>';
+            echo '<p class="rating"><i class="fa-solid fa-star"></i> ' . (isset($row['starts']) ? $row['starts'] : '') . ' <i class="fa-solid fa-dollar-sign"></i> ' . (isset($row['ReviewText']) ? $row['ReviewText'] : '') . '</p>';
             echo '</section>';
-            echo '<div id="part-rec-post"><button>Post Request</button></div>';
+            echo '<div id="part-rec-post"><a href="tutor_view_profile_page.php"><button>view more detailes</button></div></a>';
             echo '</div>';
             
           }
