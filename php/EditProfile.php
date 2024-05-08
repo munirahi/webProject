@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $city = $_POST["city"];
             $location = $_POST["location"];
-            $newImageName=$_POST["image"];
+            // $newImageName=$_POST["image"];
         } else {
             
             echo "Update failed: " . mysqli_error($conn);

@@ -8,6 +8,18 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit(); 
 } else {
+
+  $user_id=$_SESSION['user_id'];
+  $sql = "SELECT * FROM learner WHERE ID = '$user_id';";
+  $result = mysqli_query($conn, $sql);
+  
+  if ($result && mysqli_num_rows($result) > 0) {
+      // Fetch the name from the result set
+      $row = mysqli_fetch_assoc($result);
+        
+      $imageL=$row["image"];
+  
+  }
     // Check if the form has been submitted with a tutor ID
     if(isset($_POST['tutor_id'])) {
         $selectedTutorId =  $_POST['tutor_id'];
@@ -164,7 +176,7 @@ mysqli_close($conn);
             <div id="header-div">
                 <nav class="fixed-top" id="main-nav">
                     <ul id="ul1">
-                        <li><img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
+                        <li><img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img"></li>
                         <li class="list1-item"><a href="HomePageLearner.php" class="list1-item">Home</a></li>
                           <li class="list1-item"><a href="SESSionLearner.php">Sessions</a></li>
                           <li class="list1-item"><a href="learnerRequest2.php">Requests</a></li>
@@ -173,7 +185,7 @@ mysqli_close($conn);
                     <ul id="ul2">
                         
                         <li id="acnt li">
-                            <nav id="account-nav"><img src="../images/<?php echo  $image?>" id="account-img">
+                            <nav id="account-nav"><img src="../images/<?php echo  $imageL?>" id="account-img">
                                 <ul>
                                     
                                     <li class="account-list"><a href="EditProfileP.php"><div class="circle"></div>Edit Profile</a></li>
@@ -240,8 +252,6 @@ mysqli_close($conn);
                 </div>
                 </fieldset>
             </form>
-            <?php echo $selectedTutorId  ?>
-            <?php echo  $selectedLanguage  ?>
                   </section>
                 <h2>Book a Session</h2>
 

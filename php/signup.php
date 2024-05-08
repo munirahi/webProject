@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $gender = $_POST["Gender"];
             $phonenum = mysqli_real_escape_string($conn, $_POST["phonenum"]);
             $bio = mysqli_real_escape_string($conn, $_POST["bio"]);
-            
+            $Price =$_POST['Price'];
             
 
             if (!empty($_FILES["pimage"]["name"])) {
@@ -126,8 +126,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
 
 
-            $sql = "INSERT INTO tutor (Email ,image, Firstname, Lastname,age, gender, password, PhoneNumber, city ,bio)
-                    VALUES ('$email', '$newImageName','$firstname', '$lastname', '$age','$gender','$password', '$phonenum', '$city','$bio')";
+            $sql = "INSERT INTO tutor (Email ,image, Firstname, Lastname,age, gender, password, PhoneNumber, city ,bio, Price)
+                    VALUES ('$email', '$newImageName','$firstname', '$lastname', '$age','$gender','$password', '$phonenum', '$city','$bio', '$Price')";
            
 
 
@@ -259,14 +259,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="password" class="input-field" name="password" placeholder="Password" id="password-partner" required >
                  <input type="text" class="input-field" name="phonenum" id="phonenumber" placeholder="Phone Number" required >
                 <input type="text" class="input-field" name="city" placeholder="City" required >
+                <input type="text" class="input-field" name="Price" placeholder="price" required >
+                
                
         <div class="languages">
         <h5>Languages :</h5>
         <div class="language-container">
-            <input type="checkbox"  name="languages[]" value="english"> English &nbsp;
-            <input type="checkbox" name="languages[]" value="spanish"> Spanish &nbsp;
-            <input type="checkbox" name="languages[]" value="french"> French &nbsp;
-            <input type="checkbox" name="languages[]" value="arabic"> Arabic &nbsp; </div>
+            <input type="checkbox"  name="languages[]" value="English"> English &nbsp;
+            <input type="checkbox" name="languages[]" value="Spanish"> Spanish &nbsp;
+            <input type="checkbox" name="languages[]" value="French"> French &nbsp;
+            <input type="checkbox" name="languages[]" value="Arabic"> Arabic &nbsp; </div>
       
     </div>
                 <textarea rows="3" class="input-field" name="bio" placeholder="Bio"></textarea>

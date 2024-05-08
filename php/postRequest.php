@@ -23,6 +23,18 @@ if (!isset($_SESSION['user_id'])) {
   $_SESSION['language']= $_POST['language'];
   $_SESSION['tutor_id']= $_POST['tutor_id'];
   $_SESSION['Price']= $_POST['Price'];
+  $user_id=$_SESSION['user_id'];
+  $sql = "SELECT * FROM learner WHERE ID = '$user_id';";
+  $result = mysqli_query($conn, $sql);
+  
+  if ($result && mysqli_num_rows($result) > 0) {
+      // Fetch the name from the result set
+      $row = mysqli_fetch_assoc($result);
+        
+      $image=$row["image"];
+  
+  }
+
   }
 }
 ?>
@@ -122,7 +134,6 @@ if (!isset($_SESSION['user_id'])) {
                             </div>
                         </label>
 
-                       <?php echo  $_SESSION['language']. $_SESSION['tutor_id'];?>
                         <label>Date<br>
                             <div class="selectWrapper" id="datetimepicker">
                                 <input class="input-box" type="date" name="date">
@@ -158,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $date = $_GET['date'];
     $language2 = $_SESSION['language'];
     $tutor_id2= $_SESSION['tutor_id'];
-    $Price2 = $_SESSION['Price'];
+    $Price2 = (double)$_SESSION['Price'];
     if(empty($level) || empty($duration) || empty($time) || empty($date) || empty($language2)){
       echo "Please fill in all fields.";
         } else {
@@ -166,7 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
           $L_ID = $_SESSION['user_id'];
 
           $sql = "INSERT INTO request (P_ID, L_ID, Time, Date, Duration, Language, Level ,Status, Price) 
-                  VALUES ($tutor_id2, $L_ID, '$time', '$date', $duration, '$language2', '$level','pending' ,$Price2 );";
+                  VALUES ( '$tutor_id2' , '$L_ID', '$time', '$date', '$duration', '$language2', '$level','pending' , '$Price2' );";
 
           // Execute the query
           $result = mysqli_query($conn, $sql);

@@ -108,7 +108,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $education=$_POST["education"];
             $experience=$_POST["experience"];
             $bio = $_POST["bio"];
-            $newImageName=$_POST["image"];
+           
+            // if(!isset($newImageName)){
+            //   $newImageName ='profile.png';
+            // }else{
+            //   $newImageName=$_POST["image"];
+            // }
+
         } else {
             
             echo "Update failed: " . mysqli_error($conn);
@@ -413,10 +419,10 @@ function validatePhone(phoneNumber) {
        
         <label for="language">Languages </label> <br><br><br>
       <div class="language-container">
-            <input type="checkbox"  name="languages[]" value="english" <?php echo isset($checked_languages['English']) ? $checked_languages['English'] : ''; ?> > English
-            <input type="checkbox" name="languages[]" value="spanish" <?php echo isset($checked_languages['Spanish']) ? $checked_languages['Spanish'] : ''; ?>  > Spanish 
-            <input type="checkbox" name="languages[]" value="french" <?php echo isset($checked_languages['French']) ? $checked_languages['French'] : ''; ?> > French 
-            <input type="checkbox" name="languages[]" value="arabic" <?php echo isset($checked_languages['Arabic']) ? $checked_languages['Arabic'] : ''; ?> > Arabic </div>
+            <input type="checkbox"  name="languages[]" value="English" <?php echo isset($checked_languages['English']) ? $checked_languages['English'] : ''; ?> > English
+            <input type="checkbox" name="languages[]" value="Spanish" <?php echo isset($checked_languages['Spanish']) ? $checked_languages['Spanish'] : ''; ?>  > Spanish 
+            <input type="checkbox" name="languages[]" value="French" <?php echo isset($checked_languages['French']) ? $checked_languages['French'] : ''; ?> > French 
+            <input type="checkbox" name="languages[]" value="Arabic" <?php echo isset($checked_languages['Arabic']) ? $checked_languages['Arabic'] : ''; ?> > Arabic </div>
    
    
             <label for="education">Education</label>

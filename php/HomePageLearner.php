@@ -46,10 +46,10 @@ function getFlagImage($language) {
   // Check if the provided language is in the map
   if (array_key_exists($language, $languageFlags)) {
       // Return the corresponding flag image directory
-      return "images/" . $languageFlags[$language];
+      return "../images/" . $languageFlags[$language];
   } else {
       // If the language is not found, return a default flag image
-      return "images/default-flag.png";
+      return "../images/profile.png";
   }
 }
   $today = date("Y-m-d");
@@ -97,7 +97,7 @@ function getFlagImage($language) {
         echo '<div class="request-card">';
         echo '<div class="learner-info">';
         // Output learner's profile picture
-        echo '<img src="images/' . $learnerRow['image'] . '" alt="profile Picture" />';
+        echo '<img src="../images/' . $learnerRow['image'] . '" alt="profile Picture" />';
 
         echo '<div class="day">';
         // Output learner's name
@@ -108,7 +108,7 @@ function getFlagImage($language) {
         echo '<section class="incard-elements">';
         // Output session details "' . getFlagImage($row['language']) . '"
         $flagImage = getFlagImage($row['language']);
-        echo '<p class="language"><img class="flag" src="' . $flagImage . '" alt="language image" />' . $row['language'] . '</p>';
+        echo '<p class="language"><img class="flag" src="' . $flagImage . '" alt="language" />' . $row['language'] . '</p>';
 
 
         // $flagImage = '<script>getFlagImage("' . $row['language'] . '")</script>' ;
@@ -279,7 +279,19 @@ function getFlagImage($language) {
             $t = mysqli_query($conn, $sql_t);
             if ($t) {
              $r=mysqli_fetch_assoc($t);
-             // $l= mysqli_fetch_assoc($t);
+             $Price = $r["Price"];
+             $tutorsLagsQuery ="SELECT * FROM tutor_languages WHERE P_ID = '$tutorId'";
+             $tutorsLagsResult=mysqli_query($conn, $tutorsLagsQuery);
+             $tutorLanguages =array();
+             
+             if ($tutorsLagsResult && mysqli_num_rows($tutorsLagsResult) > 0) {
+                 // Fetch the name from the result set
+                 while ($tutorsLags = mysqli_fetch_assoc($tutorsLagsResult)) {
+                     // Add the language to the array
+                     $tutorLanguages[] = $tutorsLags['Language'];
+                 }
+             }
+
               echo '<h6><strong><i class="fa-solid fa-user"></i>' . $r['Firstname'] . '</strong></h6>';
             
             }
@@ -287,7 +299,19 @@ function getFlagImage($language) {
             echo '<section class="incard-elements">';
             echo '<p class="rating"><i class="fa-solid fa-star"></i> ' . (isset($row['starts']) ? $row['starts'] : '') . ' <i class="fa-solid fa-dollar-sign"></i> ' . (isset($row['ReviewText']) ? $row['ReviewText'] : '') . '</p>';
             echo '</section>';
-            echo '<div id="part-rec-post"><a href="tutor_view_profile_page.php"><button>view more detailes</button></div></a>';
+            echo ' <form method="POST" action="tutor_profile_page.php">
+            <fieldset>
+                <div class="fieldset-container" id="part-rec-post">
+                  <input type="hidden" name="tutor_id" value="'. $tutorId  .'">
+                  <input type="hidden" name="language" value="'.  $tutorLanguages[0] .' ?>">
+                  <input type="hidden" name="Price" value="'. $Price.  '">
+                <div class="btn-container">
+                    <button type="submit" class="view-more-button" id="postReq-btn">view more detailes</button>
+                </div>
+            </div>
+            </fieldset>
+        </form> ';
+
             echo '</div>';
             
           }

@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/mainStyle.css">
+    <link rel="stylesheet" href="../css/mainStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
     <title>Home</title>
 </head>
 <body>
     <nav class="bar">
-      <img src="images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img">
+      <img src="../images/linguistBlueAndWhite.jpg" alt="LINGUIST logo"  id="logo-img">
         <ul class="links">
             <li><a href="main.html" class="link ">Home</a></li>
             <li><a href="#service" class="link">Services</a></li> 
@@ -31,17 +31,17 @@
 
     <section class="service" id="service">
         <div class="col">
-            <img src="images/explore.png" alt="exploring diffrenet languages">
+            <img src="../images/explore.png" alt="exploring diffrenet languages">
             <h2>Explore</h2>
             <p>our vast array of languages <br> and cultures from around <br> the globe, each waiting <br>to be discovered and embraced.</p>
         </div>
         <div class="col">
-            <img src="images/learn.png" alt="learning diffrenet languages">
+            <img src="../images/learn.png" alt="learning diffrenet languages">
             <h2>Learn</h2>
             <p>at your own pace with interactive lessons, tailored to your proficiency level and learning style, ensuring steady progress on your language journey.</p>
         </div>
         <div class="col">
-            <img src="images/discover.png" alt="discovering diffrenet languages">
+            <img src="../images/discover.png" alt="discovering diffrenet languages">
             <h2>Discover</h2>
             <p>with fellow language enthusiasts, native speakers, and experienced tutors to practice and exchange knowledge, fostering a supportive community dedicated to linguistic excellence.
             </p>
