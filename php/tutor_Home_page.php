@@ -155,8 +155,7 @@ continue;
             echo '</section></div>';
         }
     } else {
-       
-        echo '<h2>No sessions scheduled for this week.</h2>';
+      echo '<h2 class="light">you have no sessions for This week</h2>';
     }
 
 }
@@ -173,11 +172,11 @@ continue;
                         <li class="list1-item"><a href="SESSionTutor.php">Sessions</a></li>
                         <li class="list1-item"><a href="tutorReq.php">Requests</a></li>
                         <li class="list1-item"><a href="toturRate.php">Rates and Reviews</a></li>
-                        <li class="list1-item">  
+                        <!-- <li class="list1-item">  
                            <form action="tutor_profile_page.php" method="post">
-                              <input type="hidden" name="tutor_id" value="<?php echo $user_id; ?>">
+                              <input type="hidden" name="tutor_id" value="<?php // echo $user_id; ?>">
                               <button type="submit" class="list1-item">rrtrtsrhsmlth</button>
-                          </form></li>
+                          </form></li> -->
 
                         <li class="list1-item"><a href="SupportsPartner.php">Support</a></li>
                     </ul>
@@ -225,6 +224,13 @@ continue;
                 <a href="toturRate.php" id="rating-anchor">
                   <i class="fa-solid fa-star"></i>
                   <span>Rating</span>
+                  </a>
+                  <?php
+                  if(!isset($averageRating)){
+                    $averageRating =0;
+                     $totalReviews = 0;
+                  }
+                   ?>
                   <span><?php echo $averageRating .'('. $totalReviews .'Ratings)'?></span>
                 </a>
               </li>

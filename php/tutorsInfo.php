@@ -146,7 +146,9 @@ function getClosestDateRequests() {
         }
         
     } else {
-        echo "No pending requests found.";
+        
+        echo '<h2 class="light">No pending requests found.</h2>';
+      
     }
 }
 
