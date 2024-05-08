@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
     if(isset($_POST['tutor_id'])) {
         $selectedTutorId =  $_POST['tutor_id'];
         $selectedLanguage =$_POST['language'];
-        
+
         // Prepare and execute the SQL query to fetch tutor information
         $sqlT = "SELECT * FROM tutor WHERE ID = '$selectedTutorId'";
         $result =  mysqli_query($conn, $sqlT);
@@ -35,6 +35,7 @@ if (!isset($_SESSION['user_id'])) {
                             $bio = $tutorData['bio'];
                             $experience = $tutorData['experience'];
                             $education = $tutorData['eduction'];
+                            $Price = $tutorData['Price'];
                 
                 // Output other tutor information as needed
             } else {
@@ -201,6 +202,7 @@ mysqli_close($conn);
                     <p id="bio"><?php echo $bio; ?></p>
                     <h2>Languages</h2>
                     <?php displayLanguages() ;?>
+                    <h2> <?php echo $Price; ?>$ Per hour</h2>
                 </section>
                 <section class="Contact_tutor">
                     <h2>Contact</h2>
@@ -238,7 +240,8 @@ mysqli_close($conn);
                 </div>
                 </fieldset>
             </form>
-                                
+            <?php echo $selectedTutorId  ?>
+            <?php echo  $selectedLanguage  ?>
                   </section>
                 <h2>Book a Session</h2>
 
@@ -247,6 +250,7 @@ mysqli_close($conn);
                     <div class="fieldset-container">
                       <input type="hidden" name="tutor_id" value="<?php echo $selectedTutorId  ?>">
                       <input type="hidden" name="language" value="<?php echo  $selectedLanguage  ?>">
+                      <input type="hidden" name="price" value="<?php echo  $Price  ?>">
                     <div class="btn-container">
                         <button type="submit" class="view-more-button" id="postReq-btn">Post A Request</button>
                     </div>

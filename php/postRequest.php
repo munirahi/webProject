@@ -19,8 +19,11 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit(); 
 }else{
+  if(isset($_POST['tutor_id'])) {
   $_SESSION['language']= $_POST['language'];
   $_SESSION['tutor_id']= $_POST['tutor_id'];
+  $_SESSION['Price']= $_POST['Price'];
+  }
 }
 ?>
 
@@ -119,6 +122,7 @@ if (!isset($_SESSION['user_id'])) {
                             </div>
                         </label>
 
+                       <?php echo  $_SESSION['language']. $_SESSION['tutor_id'];?>
                         <label>Date<br>
                             <div class="selectWrapper" id="datetimepicker">
                                 <input class="input-box" type="date" name="date">
@@ -145,23 +149,24 @@ if (!isset($_SESSION['user_id'])) {
          <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-          if(isset($GET['level']) && isset($GET['Duration']) && isset($GET['time']) && isset($GET['date']) && isset($_POST['language']) && isset($_POST['tutor_id'])){
+  echo$_GET['level'] .$_GET['Duration']. $_GET['time'];
+          if(isset($_GET['level']) && isset($_GET['Duration']) && isset($_GET['time']) && isset($_GET['date']) ){
     
-    $level = $GET['level'];
-    $duration = $GET['Duration'];
-    $time = $GET['time'];
-    $date = (int)$GET['date'];
+    $level = $_GET['level'];
+    $duration = (int)$_GET['Duration'];
+    $time = $_GET['time'];
+    $date = (int)$_GET['date'];
     $language2 = $_SESSION['language'];
     $tutor_id2= $_SESSION['tutor_id'];
-    
+    $Price2 = $_SESSION['Price'];
     if(empty($level) || empty($duration) || empty($time) || empty($date) || empty($language2)){
       echo "Please fill in all fields.";
         } else {
     
           $L_ID = $_SESSION['user_id'];
 
-          $sql = "INSERT INTO request (P_ID, L_ID, Time, Date, Duration, Language, Level) 
-                  VALUES ($tutor_id2, $L_ID, $time, $date, $duration, '$language2', '$level')";
+          $sql = "INSERT INTO request (P_ID, L_ID, Time, Date, Duration, Language, Level ,Price) 
+                  VALUES ($tutor_id2, $L_ID, $time, $date, $duration, '$language2', '$level', $Price2);";
 
           // Execute the query
           $result = mysqli_query($conn, $sql);
@@ -172,7 +177,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     } else {
                         echo "Error inserting request: " . mysqli_error($conn);
                     }
-  }} 
+  }} else{
+    echo "here";
+  }
+}else{
+  echo "no GET";
 }
 ?>
 
