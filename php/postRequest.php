@@ -166,7 +166,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
           $L_ID = $_SESSION['user_id'];
 
           $sql = "INSERT INTO request (P_ID, L_ID, Time, Date, Duration, Language, Level ,Status, Price) 
-                  VALUES ($tutor_id2, $L_ID, '$time', '$date', $duration, '$language2', '$level','pending' ,0);";
+                  VALUES ($tutor_id2, $L_ID, '$time', '$date', $duration, '$language2', '$level','pending' ,$Price2 );";
 
           // Execute the query
           $result = mysqli_query($conn, $sql);
