@@ -17,6 +17,20 @@ if (!isset($_SESSION['user_id'])) {
     // Redirect the user to the login page
     header("Location: login.php");
     exit(); // Stop further execution
+
+
+}else{
+    $user_id=$_SESSION['user_id'];
+  $sql = "SELECT * FROM tutor WHERE ID = '$user_id';";
+  $result = mysqli_query($conn, $sql);
+  
+  if ($result && mysqli_num_rows($result) > 0) {
+      // Fetch the name from the result set
+      $row = mysqli_fetch_assoc($result);
+        
+      $imageT=$row["image"];
+  
+  }
 }
 
 ?>
@@ -48,7 +62,7 @@ if (!isset($_SESSION['user_id'])) {
                 <ul id="ul2">
 
                     <li id="acnt li">
-                         <nav id="account-nav"><img src="../images/<?php echo  $image?>" id="account-img">
+                         <nav id="account-nav"><img src="../images/<?php echo  $imageT?>" id="account-img">
                             <ul>
 
                                 <li class="account-list"><a href="EditProfileP.php"><div class="circle"></div>Edit Profile</a></li>
@@ -112,7 +126,7 @@ if (!isset($_SESSION['user_id'])) {
                                 <div class="time specifications">'.date("h:i A", strtotime($row['Time'])).'</div>
                             </div>
                             
-                            <form action="tutorReqNew.php" method="post">
+                            <form action="tutorReq.php" method="post">
                                 <input type="hidden" name="req_date" value="'.$row['Date'].'">
                                 <input type="hidden" name="req_time" value="'.$row['Time'].'">
                                 <div class="req-options">
