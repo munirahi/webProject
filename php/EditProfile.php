@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     else{
         
         $newImageName = $fileName;
-        $destination = '../images' . $newImageName;
+        $destination = '../images/' . $newImageName;
        
       move_uploaded_file($tmpName, $destination);
     }

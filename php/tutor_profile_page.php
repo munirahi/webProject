@@ -250,7 +250,7 @@ mysqli_close($conn);
                     <div class="fieldset-container">
                       <input type="hidden" name="tutor_id" value="<?php echo $selectedTutorId  ?>">
                       <input type="hidden" name="language" value="<?php echo  $selectedLanguage  ?>">
-                      <input type="hidden" name="price" value="<?php echo $Price  ?>">
+                      <input type="hidden" name="Price" value="<?php echo $Price  ?>">
                     <div class="btn-container">
                         <button type="submit" class="view-more-button" id="postReq-btn">Post A Request</button>
                     </div>
